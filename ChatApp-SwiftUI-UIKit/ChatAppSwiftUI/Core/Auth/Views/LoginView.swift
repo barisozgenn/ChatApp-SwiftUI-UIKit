@@ -12,18 +12,15 @@ struct LoginView: View {
     @State private var password = ""
     
     var body: some View {
-        NavigationStack{
-            VStack{
-                headerViews
-                Spacer()
-                loginViews
-                    .padding(.horizontal)
-                Spacer()
-                bottomViews
-            }
-            .padding(.horizontal)
+        VStack{
+            headerViews
+            Spacer()
+            loginViews
+                .padding(.horizontal)
+            Spacer()
+            bottomViews
         }
-        
+        .padding(.horizontal)
     }
 }
 

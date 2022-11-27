@@ -9,7 +9,9 @@ import SwiftUI
 
 struct StatusView: View {
     var body: some View {
-        Color(.blue)
+        ZStack{
+            Color(.blue)
+        }
     }
 }
 

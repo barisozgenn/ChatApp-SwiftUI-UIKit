@@ -6,44 +6,63 @@
 //
 
 import SwiftUI
-
+import Firebase
 struct MainTabBarView: View {
+    @State private var isUserLoggedIn = true
+    @State var selectedTab = "Chats"
+
     var body: some View {
         NavigationStack{
-            TabView{
-                StatusView()
-                    .tabItem {
-                        Image(systemName: "circle.circle")
-                        Text("Status")
-                    }
-                CallsView()
-                    .tabItem {
-                        Image(systemName: "phone")
-                        Text("Calls")
-                    }
-                CommunitiesView()
-                    .tabItem {
-                        Image(systemName: "person.3")
-                        Text("Communities")
-                    }
-                ChatsView()
-                    .tabItem {
-                        Image(systemName: "message")
-                        Text("Chats")
-                    }
-                SettingsView()
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }
-                   
+            if isUserLoggedIn {
+                TabView(selection: $selectedTab){
+                    StatusView()
+                        .tabItem {
+                            Image(systemName: "circle.circle")
+                            Text("Status")
+                        }
+                        .tag("Status")
+                        
+                    CallsView()
+                        .tabItem {
+                            Image(systemName: "phone")
+                            Text("Calls")
+                        }
+                        .tag("Calls")
+                    
+                    CommunitiesView()
+                        .tabItem {
+                            Image(systemName: "person.3")
+                            Text("Communities")
+                        }
+                        .tag("Communities")
+                    
+                    ChatsView()
+                        .tabItem {
+                            Image(systemName: "message")
+                            Text("Chats")
+                        }
+                        .tag("Chats")
+                    
+                    SettingsView()
+                        .tabItem {
+                            Image(systemName: "gear")
+                            Text("Settings")
+                        }
+                        .tag("Settings")
+                }
+                .navigationTitle(selectedTab)
+                .accentColor(Color.theme.buttonColor)
+                .onAppear{
+                    UITabBar.appearance().isTranslucent = false
+                    UITabBar.appearance().backgroundColor = UIColor.theme.tabBarBackgroundColor
+                }
             }
-            .accentColor(Color.theme.buttonColor)
-            .onAppear{
-                UITabBar.appearance().isTranslucent = false
-                UITabBar.appearance().backgroundColor = UIColor.theme.tabBarBackgroundColor
+            else {
+                LoginView()
             }
-    
+        }
+        .onAppear{
+           // isUserLoggedIn = Auth.auth().currentUser == nil ? false : true
         }
     }
 }
