@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CallsVC: UIViewController {
+final class CallsVC: UIViewController {
     
     //MARK: - Properties
     
@@ -16,11 +16,13 @@ class CallsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     //MARK: - Helpers
     
     func setupUI(){
         view.backgroundColor = .purple
+        self.navigationItem.title = navigationController?.title
     }
 }

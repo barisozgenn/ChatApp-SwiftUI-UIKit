@@ -5,7 +5,7 @@
 //  Created by Baris OZGEN on 26.11.2022.
 //
 import UIKit
-class StatusVC: UIViewController {
+final class StatusVC: UIViewController {
     
     //MARK: - Properties
     
@@ -14,11 +14,13 @@ class StatusVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     //MARK: - Helpers
     
     func setupUI(){
         view.backgroundColor = .blue
+        self.navigationItem.title = navigationController?.title
     }
 }

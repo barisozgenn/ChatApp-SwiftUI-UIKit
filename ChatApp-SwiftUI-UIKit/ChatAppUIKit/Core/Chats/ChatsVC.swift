@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatsVC: UIViewController {
+final class ChatsVC: UIViewController {
     
     //MARK: - Properties
     
@@ -16,11 +16,13 @@ class ChatsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     //MARK: - Helpers
     
     func setupUI(){
         view.backgroundColor = .systemGroupedBackground
+        self.navigationItem.title = navigationController?.title
     }
 }

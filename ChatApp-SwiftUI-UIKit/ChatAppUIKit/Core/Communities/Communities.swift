@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CommunitiesVC: UIViewController {
+final class CommunitiesVC: UIViewController {
     
     //MARK: - Properties
     
@@ -16,11 +16,13 @@ class CommunitiesVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
     }
     
     //MARK: - Helpers
     
     func setupUI(){
         view.backgroundColor = .orange
+        self.navigationItem.title = navigationController?.title
     }
 }
