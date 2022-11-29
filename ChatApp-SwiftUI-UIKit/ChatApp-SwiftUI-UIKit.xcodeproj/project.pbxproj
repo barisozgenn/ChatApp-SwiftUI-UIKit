@@ -30,6 +30,14 @@
 		AF9C56B42934EB20004FF281 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B32934EB20004FF281 /* AuthViewModel.swift */; };
 		AF9C56B62934F21C004FF281 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date.swift */; };
 		AF9C56B72934F222004FF281 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date.swift */; };
+		AF9C56B92935ECD5004FF281 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B82935ECD5004FF281 /* MessageView.swift */; };
+		AF9C56BE2935ED01004FF281 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56BD2935ED01004FF281 /* MessageVC.swift */; };
+		AF9C56C12935EF27004FF281 /* MessageRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */; };
+		AF9C56C22935EF27004FF281 /* MessageRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */; };
+		AF9C56C42935EF90004FF281 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C32935EF90004FF281 /* MessageModel.swift */; };
+		AF9C56C52935EF90004FF281 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C32935EF90004FF281 /* MessageModel.swift */; };
+		AF9C56C82935F0E0004FF281 /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */; };
+		AF9C56CB2935F259004FF281 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56CA2935F259004FF281 /* SearchBarView.swift */; };
 		AFE8914E2932054D001262A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914D2932054D001262A8 /* AppDelegate.swift */; };
 		AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914F2932054D001262A8 /* SceneDelegate.swift */; };
 		AFE891572932054E001262A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE891562932054E001262A8 /* Assets.xcassets */; };
@@ -100,6 +108,12 @@
 		AF9C56B12934E96A004FF281 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		AF9C56B32934EB20004FF281 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		AF9C56B52934F21C004FF281 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		AF9C56B82935ECD5004FF281 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		AF9C56BD2935ED01004FF281 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
+		AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomModel.swift; sourceTree = "<group>"; };
+		AF9C56C32935EF90004FF281 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
+		AF9C56CA2935F259004FF281 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		AFE8914A2932054D001262A8 /* ChatAppUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatAppUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE8914D2932054D001262A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFE8914F2932054D001262A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +180,7 @@
 		AF9C5676293367B7004FF281 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				AF9C56C92935F246004FF281 /* Message */,
 				AF9C567729336904004FF281 /* Auth */,
 			);
 			path = Component;
@@ -244,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				AFE891BC29323206001262A8 /* ChatsView.swift */,
+				AF9C56B82935ECD5004FF281 /* MessageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -315,6 +331,7 @@
 		AF9C56AB2934E805004FF281 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				AF9C56C62935F0D3004FF281 /* Message */,
 				AF9C56AC2934E858004FF281 /* Auth */,
 			);
 			path = Component;
@@ -326,6 +343,54 @@
 				AF9C56AD2934E873004FF281 /* CustomTextField.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		AF9C56BA2935ECE1004FF281 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF9C56BB2935ECE6004FF281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AF9C56BC2935ECEC004FF281 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AFE891B229321AB3001262A8 /* ChatsVC.swift */,
+				AF9C56BD2935ED01004FF281 /* MessageVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AF9C56BF2935EF0E004FF281 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */,
+				AF9C56C32935EF90004FF281 /* MessageModel.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		AF9C56C62935F0D3004FF281 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		AF9C56C92935F246004FF281 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				AF9C56CA2935F259004FF281 /* SearchBarView.swift */,
+			);
+			path = Message;
 			sourceTree = "<group>";
 		};
 		AFE8913F2932053F001262A8 = {
@@ -450,6 +515,7 @@
 		AFE8917729320635001262A8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AF9C56BF2935EF0E004FF281 /* Message */,
 				AFE8918F29321052001262A8 /* User */,
 				AFE8919929321158001262A8 /* FirebaseFileType.swift */,
 				AF9C568E2933A8DD004FF281 /* SettingsModel.swift */,
@@ -557,7 +623,9 @@
 		AFE891AB293218FD001262A8 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				AFE891B229321AB3001262A8 /* ChatsVC.swift */,
+				AF9C56BC2935ECEC004FF281 /* Controllers */,
+				AF9C56BB2935ECE6004FF281 /* ViewModel */,
+				AF9C56BA2935ECE1004FF281 /* Views */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -743,6 +811,7 @@
 				AFE8918929320D89001262A8 /* UIApplication.swift in Sources */,
 				AF9C56A52934B6C1004FF281 /* SettingsHeaderView.swift in Sources */,
 				AF9C56AA2934E782004FF281 /* LoginVC.swift in Sources */,
+				AF9C56C42935EF90004FF281 /* MessageModel.swift in Sources */,
 				AF9C568F2933A8DD004FF281 /* SettingsModel.swift in Sources */,
 				AF9C56A32934A3B9004FF281 /* UIView.swift in Sources */,
 				AF9C56B62934F21C004FF281 /* Date.swift in Sources */,
@@ -755,7 +824,9 @@
 				AFE891B329321AB3001262A8 /* ChatsVC.swift in Sources */,
 				AFE8918D2932101F001262A8 /* AuthService.swift in Sources */,
 				AFE891B529321B37001262A8 /* CallsVC.swift in Sources */,
+				AF9C56C12935EF27004FF281 /* MessageRoomModel.swift in Sources */,
 				AFE891B729321B6D001262A8 /* StatusVC.swift in Sources */,
+				AF9C56BE2935ED01004FF281 /* MessageVC.swift in Sources */,
 				AFE8919A29321158001262A8 /* FirebaseFileType.swift in Sources */,
 				AFE891B929321BA4001262A8 /* Communities.swift in Sources */,
 				AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */,
@@ -768,6 +839,7 @@
 				AF9C56B42934EB20004FF281 /* AuthViewModel.swift in Sources */,
 				AFE89197293210E9001262A8 /* Constants.swift in Sources */,
 				AF9C56B02934E8BF004FF281 /* RegisterVC.swift in Sources */,
+				AF9C56C82935F0E0004FF281 /* CustomSearchTextField.swift in Sources */,
 				AF9C56B22934E96A004FF281 /* UIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,11 +866,15 @@
 				AF9C568D2933860D004FF281 /* ImagePicker.swift in Sources */,
 				AFE8919B29321158001262A8 /* FirebaseFileType.swift in Sources */,
 				AFE89198293210E9001262A8 /* Constants.swift in Sources */,
+				AF9C56CB2935F259004FF281 /* SearchBarView.swift in Sources */,
+				AF9C56B92935ECD5004FF281 /* MessageView.swift in Sources */,
 				AFE89195293210A5001262A8 /* AuthCredentials.swift in Sources */,
 				AF9C568629337B70004FF281 /* LoginView.swift in Sources */,
 				AFE891C7293232B6001262A8 /* MainTabBarView.swift in Sources */,
 				AFE891C329323280001262A8 /* CommunitiesView.swift in Sources */,
+				AF9C56C52935EF90004FF281 /* MessageModel.swift in Sources */,
 				AFE891A1293212C0001262A8 /* ImageDownloadService.swift in Sources */,
+				AF9C56C22935EF27004FF281 /* MessageRoomModel.swift in Sources */,
 				AFE8918E2932101F001262A8 /* AuthService.swift in Sources */,
 				AFE8919E293211E2001262A8 /* ImageUploadService.swift in Sources */,
 			);

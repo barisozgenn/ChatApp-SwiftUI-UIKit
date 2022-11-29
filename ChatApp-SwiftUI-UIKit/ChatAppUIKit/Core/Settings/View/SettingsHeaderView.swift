@@ -56,7 +56,7 @@ class SettingsHeaderView : UIView {
         super.init(frame: frame)
         
         
-        backgroundColor = .white
+        backgroundColor =  UIColor.theme.appBackgroundColor
         
         
         addSubview(menuImageView)

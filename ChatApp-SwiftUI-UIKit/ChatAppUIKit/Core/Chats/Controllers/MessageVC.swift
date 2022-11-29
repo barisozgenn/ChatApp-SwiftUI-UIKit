@@ -1,16 +1,17 @@
 //
-//  ChatsVC.swift
+//  MessageVC.swift
 //  ChatAppUIKit
 //
-//  Created by Baris OZGEN on 26.11.2022.
+//  Created by Baris OZGEN on 29.11.2022.
 //
 
 import UIKit
+import RxSwift
 
-final class ChatsVC: UIViewController {
+final class MessageVC: UIViewController {
     
     //MARK: - Properties
-    
+   
     
     //MARK: - LifeCycle
     
@@ -24,5 +25,6 @@ final class ChatsVC: UIViewController {
     func setupUI(){
         view.backgroundColor = .systemGroupedBackground
         self.navigationItem.title = navigationController?.title
+        
     }
 }

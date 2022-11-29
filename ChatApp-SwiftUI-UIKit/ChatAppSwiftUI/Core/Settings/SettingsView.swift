@@ -40,7 +40,7 @@ struct SettingsView: View {
                 }
                 .padding(.horizontal)
                 .padding(.vertical, 7)
-                .background(.white)
+                .background( Color.theme.appBackgroundColor)
                 
                 
                 VStack(spacing: 1){
@@ -120,7 +120,7 @@ struct SettingsView: View {
                         }
                         .padding(.horizontal)
                         .padding(.vertical, 7)
-                        .background(.white)
+                        .background( Color.theme.appBackgroundColor)
                         
                     }
                 }
