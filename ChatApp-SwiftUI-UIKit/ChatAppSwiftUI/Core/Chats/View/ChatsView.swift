@@ -13,11 +13,13 @@ struct ChatsView: View {
         VStack{
             HStack{
                 SearchBarView(searchText: $searchText)
-                Image(systemName: "line.3.horizontal.decrease")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(Color.theme.buttonColor)
-                    .frame(height: 14)
+                NavigationLink(destination: MessageView()) {
+                    Image(systemName: "line.3.horizontal.decrease")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(Color.theme.buttonColor)
+                        .frame(height: 14)
+                }
             }
             Spacer()
         }
