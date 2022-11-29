@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import Firebase
+import Firebase
 
 final class MainTabBarController: UITabBarController {
     
@@ -50,7 +50,7 @@ final class MainTabBarController: UITabBarController {
         nav.navigationBar.barStyle = .default
         nav.navigationBar.prefersLargeTitles = true
         nav.navigationItem.largeTitleDisplayMode = .always
-        nav.navigationBar.backgroundColor = UIColor.theme.tabBarBackgroundColor
+        nav.navigationBar.backgroundColor = UIColor.theme.appBackgroundColor
         return nav
     }
     

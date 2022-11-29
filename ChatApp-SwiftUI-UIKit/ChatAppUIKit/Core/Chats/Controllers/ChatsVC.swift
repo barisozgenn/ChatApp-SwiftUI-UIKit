@@ -37,14 +37,22 @@ final class ChatsVC: UIViewController {
     func setupUI(){
         view.backgroundColor = UIColor.theme.appBackgroundColor
         self.navigationItem.title = navigationController?.title
+        navigationItem.backButtonTitle = "7"
+
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"),
                             style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "camera"),
-                            style: .done, target: self, action: nil)]
+                            style: .done, target: self, action: #selector(didTapEdit))]
         navigationItem.leftBarButtonItem = UIBarButtonItem(systemItem: .edit)
         
         view.addSubview(searchTextField)
         view.addSubview(sortButton)
+    }
+    
+    //MARK: - Actions
+    @objc func didTapEdit(){
+        let viewController = MessageVC()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
