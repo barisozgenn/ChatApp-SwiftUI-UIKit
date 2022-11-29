@@ -10,7 +10,7 @@ import Firebase
 struct MainTabBarView: View {
     @State private var isUserLoggedIn = true
     @State var selectedTab = "Chats"
-
+    
     var body: some View {
         NavigationStack{
             if isUserLoggedIn {
@@ -21,7 +21,7 @@ struct MainTabBarView: View {
                             Text("Status")
                         }
                         .tag("Status")
-                        
+                    
                     CallsView()
                         .tabItem {
                             Image(systemName: "phone")
@@ -51,6 +51,34 @@ struct MainTabBarView: View {
                         .tag("Settings")
                 }
                 .navigationTitle(selectedTab)
+                .toolbar(content: {
+                    switch selectedTab {
+                    case "Chats" :
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                print("tapped")
+                            } label: {
+                                Text("Edit")
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                print("tapped")
+                            } label: {
+                                Image(systemName: "camera")
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                print("tapped")
+                            } label: {
+                                Image(systemName: "square.and.pencil")
+                            }
+                        }
+                    default:
+                        ToolbarItem(placement: .navigationBarTrailing) {}
+                    }
+                })
                 .accentColor(Color.theme.buttonColor)
                 .onAppear{
                     UITabBar.appearance().isTranslucent = false
@@ -62,7 +90,7 @@ struct MainTabBarView: View {
             }
         }
         .onAppear{
-           // isUserLoggedIn = Auth.auth().currentUser == nil ? false : true
+            // isUserLoggedIn = Auth.auth().currentUser == nil ? false : true
         }
     }
 }

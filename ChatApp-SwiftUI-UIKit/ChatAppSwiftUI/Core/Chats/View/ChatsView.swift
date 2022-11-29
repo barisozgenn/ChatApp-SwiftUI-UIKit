@@ -8,8 +8,21 @@
 import SwiftUI
 
 struct ChatsView: View {
+    @State private var searchText = ""
     var body: some View {
-        Color(.black)
+        VStack{
+            HStack{
+                SearchBarView(searchText: $searchText)
+                Image(systemName: "line.3.horizontal.decrease")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(Color.theme.buttonColor)
+                    .frame(height: 14)
+            }
+            Spacer()
+        }
+        .padding(.horizontal)
+        .background(Color.theme.appBackgroundColor)
     }
 }
 

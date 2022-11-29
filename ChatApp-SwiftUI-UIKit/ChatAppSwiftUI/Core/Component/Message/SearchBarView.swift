@@ -38,13 +38,12 @@ struct SearchBarView: View {
                     .textFieldStyle(.plain)
             }
             .font(.headline)
-            .padding()
+            .padding(10)
             .background(
                 RoundedRectangle(cornerRadius: 14)
                     .fill(Color(.systemGroupedBackground))
             )
         }
-        .padding(.horizontal)
         
         
     }
