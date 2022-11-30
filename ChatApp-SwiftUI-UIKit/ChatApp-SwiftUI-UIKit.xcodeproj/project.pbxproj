@@ -48,6 +48,7 @@
 		AF9C56E329378BB6004FF281 /* ChatCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56E229378BB6004FF281 /* ChatCellViewModel.swift */; };
 		AF9C56E529378D17004FF281 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56E429378D17004FF281 /* ChatCell.swift */; };
 		AF9C56E7293792AC004FF281 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56E6293792AC004FF281 /* ChatCell.swift */; };
+		AF9C56EC29379C21004FF281 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56EB29379C21004FF281 /* SearchView.swift */; };
 		AFE8914E2932054D001262A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914D2932054D001262A8 /* AppDelegate.swift */; };
 		AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914F2932054D001262A8 /* SceneDelegate.swift */; };
 		AFE891572932054E001262A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE891562932054E001262A8 /* Assets.xcassets */; };
@@ -135,6 +136,7 @@
 		AF9C56E229378BB6004FF281 /* ChatCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellViewModel.swift; sourceTree = "<group>"; };
 		AF9C56E429378D17004FF281 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		AF9C56E6293792AC004FF281 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		AF9C56EB29379C21004FF281 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		AFE8914A2932054D001262A8 /* ChatAppUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatAppUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE8914D2932054D001262A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFE8914F2932054D001262A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -478,6 +480,30 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		AF9C56E829379B56004FF281 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AF9C56EA29379BBC004FF281 /* ViewModel */,
+				AF9C56E929379BB7004FF281 /* Views */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		AF9C56E929379BB7004FF281 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AF9C56EB29379C21004FF281 /* SearchView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AF9C56EA29379BBC004FF281 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		AFE8913F2932053F001262A8 = {
 			isa = PBXGroup;
 			children = (
@@ -557,6 +583,7 @@
 				AFE891B129321A23001262A8 /* Calls */,
 				AFE891AF29321A21001262A8 /* Status */,
 				AFE891AE29321A20001262A8 /* Communities */,
+				AF9C56E829379B56004FF281 /* Search */,
 				AFE891AD29321A1F001262A8 /* Settings */,
 				AF9C568129337B2E004FF281 /* Auth */,
 			);
@@ -948,6 +975,7 @@
 				AFE8918A29320DA1001262A8 /* UIApplication.swift in Sources */,
 				AF9C56792933691D004FF281 /* PositiveButtonModifier.swift in Sources */,
 				AFE891C12932326C001262A8 /* StatusView.swift in Sources */,
+				AF9C56EC29379C21004FF281 /* SearchView.swift in Sources */,
 				AF9C567B29336B20004FF281 /* PositiveButtonStyle.swift in Sources */,
 				AF9C56B72934F222004FF281 /* Date+TimeStamp.swift in Sources */,
 				AFE891BD29323206001262A8 /* ChatsView.swift in Sources */,
