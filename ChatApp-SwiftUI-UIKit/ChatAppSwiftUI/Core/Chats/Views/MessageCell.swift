@@ -14,7 +14,7 @@ struct MessageCell: View {
     @State var isMine = true
     @State var isLast = true
     @State var isGroup = true
-    
+    @State var isRead = true
     var body: some View {
         VStack {
             HStack(alignment: .bottom) {
@@ -69,6 +69,15 @@ extension MessageCell {
             Text(dateValue)
                 .font(.caption2)
                 .foregroundColor(.gray)
+            
+            if isMine {
+                Image(systemName: "checkmark")
+                    .foregroundColor(isRead ? .green : .gray)
+                Image(systemName: "checkmark")
+                    .foregroundColor(isRead ? .green : .gray)
+                    .padding(.leading, -22)
+            }
+            
         }
         .padding(.horizontal, 7)
     }

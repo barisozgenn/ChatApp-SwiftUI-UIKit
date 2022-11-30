@@ -37,6 +37,13 @@ class MessageCell: UICollectionViewCell{
         return label
     }()
     
+   private lazy var backgroundUIView: UIView = {
+        let uiview = UIView()
+        uiview.backgroundColor = .white
+        uiview.layer.cornerRadius = 14
+        return uiview
+    }()
+    
     private lazy var messageLabel: UILabel = {
         let label = UILabel()
         label.text = "messaga will be shown here".capitalized
@@ -71,9 +78,12 @@ class MessageCell: UICollectionViewCell{
         
         backgroundColor =  UIColor.theme.appBackgroundColor
         
-            
-        
-            
+        addSubview(backgroundUIView)
+        addSubview(imageUserView)
+        addSubview(nameLabel)
+        addSubview(messageLabel)
+        addSubview(dateLabel)
+        addSubview(imageReadView)
     }
     
     required init?(coder: NSCoder) {
@@ -87,18 +97,28 @@ class MessageCell: UICollectionViewCell{
         dateLabel.text = viewModel.dateValue
         nameLabel.text = viewModel.nameValue
         messageLabel.text = viewModel.messageValue
-        imageReadView.tintColor = viewModel.isRead ? UIColor.theme.buttonColor : .gray
+        imageReadView.tintColor = viewModel.isRead ? .green : .gray
         isRead = viewModel.isRead
         isGroup = viewModel.rooomUserCount > 2 ? true : false
         isMine = viewModel.isMine
         
+        backgroundUIView.backgroundColor = isMine ? UIColor.theme.balloonMineColor : UIColor.theme.balloonOtherColor
+        
+        let backgroundUIViewX = isMine ? frame.width - 200 : isGroup ? 36 : 0
+        backgroundUIView.frame = CGRect(x: isMine ? frame.width - 100 : 0 , y: 0, width: frame.width - 100, height: 200)
+        
+        let nameLabelY : CGFloat = isGroup && !isMine ? 32 : 4
+        nameLabel.frame = CGRect(x: backgroundUIView.frame.minX + 4 , y: nameLabelY, width: backgroundUIView.width - 8, height: backgroundUIView.height - 15)
+        
+        
         if !isMine && isGroup {
-            addSubview(imageUserView)
-            imageUserView.frame = CGRect(x: 0, y: frame.height - 32, width: 32, height: 32)
+           
+            imageUserView.frame = CGRect(x: 0, y: backgroundUIView.height - 34, width: 32, height: 32)
         }
         
-        if isMine {
-            
-        }
+        imageReadView.frame = CGRect(x: backgroundUIView.frame.maxX - 18 , y: nameLabel.frame.maxY, width: 15, height: 15)
+       
+        dateLabel.frame = CGRect(x: backgroundUIView.frame.maxX - 90 , y: nameLabel.frame.maxY, width: 75, height: 15)
+        dateLabel.textAlignment = .right
     }
 }
