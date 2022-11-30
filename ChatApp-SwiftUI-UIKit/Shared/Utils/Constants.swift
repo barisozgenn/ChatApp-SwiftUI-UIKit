@@ -6,6 +6,6 @@
 //
 
 import FirebaseFirestore
-
+import FirebaseFirestoreSwift
 let COLLECTION_USER_PROFILE = Firestore.firestore().collection("userProfile")
 let COLLECTION_CHAT = Firestore.firestore().collection("chat")

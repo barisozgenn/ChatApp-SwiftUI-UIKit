@@ -9,16 +9,22 @@ import SwiftUI
 
 struct SearchView: View {
     @Environment(\.dismiss) var dismissEnvironment
-
+    @StateObject private var viewModel = SearchViewModel()
+    
     @State var searchText = ""
-    @State var users: [UserModel] = []
+    @State private var selection : Set<UserModel> = []
+    
     var body: some View {
         VStack{
             headerViews
             SearchBarView(searchText: $searchText)
             
-            ForEach(users) { user in
+            List(viewModel.users, id: \.self, selection: $selection) { user in
                 ChatCell(user: user)
+            }
+            .listStyle(.plain)
+            .toolbar {
+                EditButton()
             }
         }
         .padding()
@@ -42,8 +48,16 @@ extension SearchView {
             Button {
                 dismissEnvironment()
             } label: {
-                Text("Done")
-                    .fontWeight(.bold)
+                if selection.count == 1 {
+                    Text("Start 👤")
+                        .fontWeight(.bold)
+                        .frame(alignment: .bottom)
+                }else if selection.count > 0 {
+                    Text("Start 👥")
+                        .fontWeight(.bold)
+                        .frame(alignment: .bottom)
+                }
+                
             }
 
         }
@@ -52,8 +66,8 @@ extension SearchView {
 }
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date().toTimestamp())
-        let users: [UserModel] = [user,user,user,user,user,user,user,user,user,user]
-        SearchView(users: users)
+       /* let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date().toTimestamp())
+        let users: [UserModel] = [user,user,user,user,user,user,user,user,user,user]*/
+        SearchView()
     }
 }

@@ -24,7 +24,7 @@ struct ChatAppSwiftUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabBarView()
+           MainTabBarView()
         }
     }
 }

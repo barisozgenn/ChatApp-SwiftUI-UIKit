@@ -10,16 +10,20 @@ import SwiftUI
 struct ChatCell: View {
     var user: UserModel
     var room: MessageRoomModel?
+    @State private var profileImage: UIImage =  UIImage(systemName: "circle.circle")!
+    @EnvironmentObject var viewModel: ChatViewModel
     
     var body: some View {
         VStack{
             HStack{
-                Image(systemName: "person.fill")
+          
+                Image(uiImage: profileImage)
+                    .resizable()
+                    .scaledToFill()
                     .fontWeight(.bold)
-                    .frame(width: 44, height: 44)
-                    .padding(4)
+                    .frame(width: 48, height: 48)
                     .foregroundColor(.white)
-                    .background(.gray)
+                    .background(.blue)
                     .clipShape(Circle())
                 
                 VStack (alignment: .leading){
@@ -55,6 +59,14 @@ struct ChatCell: View {
         }
         .padding(.vertical, 7)
         .background(Color.theme.appBackgroundColor)
+        .onAppear{
+            viewModel.downloadImage(imageUrl: user.profileImageUrl) { image in
+                
+                withAnimation(.spring()){
+                    profileImage = image
+                }
+            }
+        }
     }
 }
 
@@ -64,5 +76,6 @@ struct ChatCell_Previews: PreviewProvider {
         let message = MessageModel(senderID: "sda", readers: ["sdasdas"], message: "message test", createdDate: Date().timeIntervalSinceNow)
         let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", messages: [message], lastUpdateDate: Date().timeIntervalSinceNow)
         ChatCell(user: user, room: room)
+            .environmentObject(ChatViewModel())
     }
 }

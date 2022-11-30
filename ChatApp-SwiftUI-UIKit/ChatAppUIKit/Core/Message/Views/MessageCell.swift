@@ -105,7 +105,7 @@ class MessageCell: UICollectionViewCell{
         backgroundUIView.backgroundColor = isMine ? UIColor.theme.balloonMineColor : UIColor.theme.balloonOtherColor
         
         let backgroundUIViewX = isMine ? frame.width - 200 : isGroup ? 36 : 0
-        backgroundUIView.frame = CGRect(x: isMine ? frame.width - 100 : 0 , y: 0, width: frame.width - 100, height: 200)
+        backgroundUIView.frame = CGRect(x: backgroundUIViewX , y: 0, width: frame.width - 100, height: 200)
         
         let nameLabelY : CGFloat = isGroup && !isMine ? 32 : 4
         nameLabel.frame = CGRect(x: backgroundUIView.frame.minX + 4 , y: nameLabelY, width: backgroundUIView.width - 8, height: backgroundUIView.height - 15)

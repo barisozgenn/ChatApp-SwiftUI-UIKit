@@ -10,6 +10,7 @@ import Firebase
 struct MainTabBarView: View {
     @State private var isUserLoggedIn = true
     @State var selectedTab = "Chats"
+    @StateObject var viewModelChat = ChatViewModel()
     
     var body: some View {
         NavigationStack{
@@ -42,6 +43,7 @@ struct MainTabBarView: View {
                             Text("Chats")
                         }
                         .tag("Chats")
+                        .environmentObject(viewModelChat)
                     
                     SettingsView()
                         .tabItem {
@@ -69,8 +71,10 @@ struct MainTabBarView: View {
                             }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                print("tapped")
+
+                            NavigationLink {
+                               SearchView()
+                                    .environmentObject(viewModelChat)
                             } label: {
                                 Image(systemName: "square.and.pencil")
                             }
