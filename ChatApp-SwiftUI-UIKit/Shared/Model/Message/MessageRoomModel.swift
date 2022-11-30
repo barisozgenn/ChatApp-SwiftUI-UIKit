@@ -13,5 +13,5 @@ struct MessageRoomModel: Identifiable, Codable {
     let users: [String]
     let roomName: String?
     let messages: [MessageModel]
-    let lastUpdateDate: Timestamp?
+    let lastUpdateDate: TimeInterval
 }

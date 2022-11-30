@@ -66,7 +66,7 @@ struct SettingsView: View {
                         }
                         .padding(.horizontal)
                         .padding(.vertical, 7)
-                        .background(.white)
+                        .background(Color.theme.appBackgroundColor)
                         
                     }
                 }
@@ -93,7 +93,7 @@ struct SettingsView: View {
                         }
                         .padding(.horizontal)
                         .padding(.vertical, 7)
-                        .background(.white)
+                        .background(Color.theme.appBackgroundColor)
                         
                     }
                 }
