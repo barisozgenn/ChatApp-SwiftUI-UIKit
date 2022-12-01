@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ChatsView: View {
     @State private var searchText = ""
+    @EnvironmentObject var viewModel: ChatViewModel
+    
     var body: some View {
         VStack{
             HStack{
@@ -21,6 +23,18 @@ struct ChatsView: View {
                         .frame(height: 14)
                 }
             }
+            List(viewModel.selectedUserList) { user in
+                NavigationLink {
+                    LazyNavigationView(build:
+                                        MessageView(selectedUserList: viewModel.selectedUserList))
+                     
+                } label: {
+                    ChatCell(user: user)
+                }
+
+               
+            }
+            .listStyle(.plain)
             Spacer()
         }
         .padding(.horizontal)
@@ -31,5 +45,6 @@ struct ChatsView: View {
 struct ChatsView_Previews: PreviewProvider {
     static var previews: some View {
         ChatsView()
+            .environmentObject(ChatViewModel())
     }
 }

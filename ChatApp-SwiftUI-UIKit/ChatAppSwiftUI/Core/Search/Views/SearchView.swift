@@ -11,8 +11,10 @@ struct SearchView: View {
     @Environment(\.dismiss) var dismissEnvironment
     @StateObject private var viewModel = SearchViewModel()
     
-    @State var searchText = ""
+    @State private var searchText = ""
     @State private var selection : Set<UserModel> = []
+    @Binding var selectedUsers : Set<UserModel>?
+    @State private var editMode = EditMode.inactive
     
     var body: some View {
         VStack{
@@ -25,6 +27,16 @@ struct SearchView: View {
             .listStyle(.plain)
             .toolbar {
                 EditButton()
+            }
+            .navigationTitle("People")
+            .navigationBarTitleDisplayMode(.inline)
+            .environment(\.editMode, $editMode)
+            .onChange(of: selection) { newValue in
+                selectedUsers = newValue
+            }
+            .onAppear{
+                selection = []
+                selectedUsers = selection
             }
         }
         .padding()
@@ -48,14 +60,16 @@ extension SearchView {
             Button {
                 dismissEnvironment()
             } label: {
-                if selection.count == 1 {
+                if selectedUsers?.count == 1 {
                     Text("Start 👤")
                         .fontWeight(.bold)
                         .frame(alignment: .bottom)
-                }else if selection.count > 0 {
+                }else if selectedUsers?.count ?? 0 > 1 {
                     Text("Start 👥")
                         .fontWeight(.bold)
                         .frame(alignment: .bottom)
+                }else {
+                    Text("👤")
                 }
                 
             }
@@ -68,6 +82,7 @@ struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
        /* let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date().toTimestamp())
         let users: [UserModel] = [user,user,user,user,user,user,user,user,user,user]*/
-        SearchView()
+        SearchView(selectedUsers: .constant(nil))
+            .environmentObject(SearchViewModel())
     }
 }

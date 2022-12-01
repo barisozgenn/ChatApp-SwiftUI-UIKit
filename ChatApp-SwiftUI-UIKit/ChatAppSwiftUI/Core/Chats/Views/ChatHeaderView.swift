@@ -11,7 +11,10 @@ struct ChatHeaderView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var name: String = "Barış ÖZGEN"
     @State var unread: String = "7"
+    @State var imageUrl: String = "7"
     @State var image: UIImage? = UIImage(systemName: "person")
+    @EnvironmentObject private var viewModel: MessageViewModel
+    
     var body: some View {
             ZStack {
             }
@@ -30,8 +33,10 @@ struct ChatHeaderView: View {
                     HStack {
                         if let image = image {
                             Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
                                 .frame(width: 40, height: 40)
-                                .background(.purple)
+                                .background(.cyan)
                             .clipShape(Circle())
                         }
                        Text(name)
@@ -54,6 +59,13 @@ struct ChatHeaderView: View {
                     }
                 }
             })
+            .onAppear{
+                viewModel.downloadImage(imageUrl: imageUrl) { image in
+                    withAnimation(.spring()){
+                        self.image = image
+                    }
+                }
+            }
     }
 }
 extension ChatHeaderView {
@@ -74,5 +86,6 @@ extension ChatHeaderView {
 struct ChatHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         ChatHeaderView()
+            .environmentObject(MessageViewModel())
     }
 }

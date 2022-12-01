@@ -10,12 +10,17 @@ import Firebase
 struct MainTabBarView: View {
     @State private var isUserLoggedIn = true
     @State var selectedTab = "Chats"
+    @State var selectedUsers : Set<UserModel>? = []
+    @State var selectedUserList : [UserModel] = []
+    @State var userSelected : Bool = false
     @StateObject var viewModelChat = ChatViewModel()
-    
+
     var body: some View {
         NavigationStack{
+            
             if isUserLoggedIn {
                 TabView(selection: $selectedTab){
+                    
                     StatusView()
                         .tabItem {
                             Image(systemName: "circle.circle")
@@ -40,17 +45,21 @@ struct MainTabBarView: View {
                     ChatsView()
                         .tabItem {
                             Image(systemName: "message")
-                            Text("Chats")
+                            if selectedUserList.count > 0 {
+                                Text("Chats \(selectedUserList.count)")
+                            }else {
+                                Text("Chats")
+                            }
                         }
                         .tag("Chats")
                         .environmentObject(viewModelChat)
-                    
                     SettingsView()
                         .tabItem {
                             Image(systemName: "gear")
                             Text("Settings")
                         }
                         .tag("Settings")
+                    
                 }
                 .navigationTitle(selectedTab)
                 .toolbar(content: {
@@ -73,7 +82,7 @@ struct MainTabBarView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
 
                             NavigationLink {
-                               SearchView()
+                               SearchView(selectedUsers: $selectedUsers)
                                     .environmentObject(viewModelChat)
                             } label: {
                                 Image(systemName: "square.and.pencil")
@@ -88,10 +97,17 @@ struct MainTabBarView: View {
                     UITabBar.appearance().isTranslucent = false
                     UITabBar.appearance().backgroundColor = UIColor.theme.tabBarBackgroundColor
                 }
+                .onChange(of: selectedUsers ?? []) { newValue in
+                    selectedUserList = Array(newValue)
+                    userSelected = selectedUserList.count > 0 ? true : false
+                      
+                    // navigate when users are selected to start for chat
+                    viewModelChat.selectedUserList = selectedUserList
+                }
             }
-            else {
-                LoginView()
-            }
+            else {LoginView()}
+            
+            
         }
         .onAppear{
             // isUserLoggedIn = Auth.auth().currentUser == nil ? false : true

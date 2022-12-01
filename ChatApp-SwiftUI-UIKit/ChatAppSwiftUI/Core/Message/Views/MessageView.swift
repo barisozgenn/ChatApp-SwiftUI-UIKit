@@ -9,6 +9,10 @@ import SwiftUI
 struct MessageView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var messageText = ""
+    @State var selectedUserList : [UserModel] = []
+    @State var selectedRoom : MessageRoomModel? = nil
+    @StateObject private var viewModel = MessageViewModel()
+    @State private var headerImage : UIImage? = UIImage(systemName: "circle.circle")
     
     var body: some View {
         ZStack {
@@ -16,17 +20,18 @@ struct MessageView: View {
                 .frame(width: 450,height: 100)
                 .position(x:225, y:50)
                 .ignoresSafeArea()
-            ChatHeaderView(name: "Barış Özgen", unread: "7", image: UIImage(systemName: "person"))
+            
+            headerView
             Image("img-background-seamless")
                 .resizable()
                 .opacity(colorScheme == .light ? 0.7 : 0.2)
                 .ignoresSafeArea()
             VStack{
                 Spacer()
-              
-               bottomView
+                
+                bottomView
             }
-           
+            
         }
         .background(Color.theme.pageBackgroundColor)
     }
@@ -48,7 +53,7 @@ extension MessageView {
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color.theme.buttonColor)
                 .padding(.leading, -48)
-
+            
             Image(systemName: "camera")
                 .resizable()
                 .scaledToFit()
@@ -66,6 +71,15 @@ extension MessageView {
         .padding()
         .background(Color.theme.tabBarBackgroundColor)
     }
+    private var headerView: some View {
+        ChatHeaderView(name: viewModel.setNavigationTitle(selectedRoom: selectedRoom,
+                                                          selectedUsers: selectedUserList),
+                       unread: "7",
+                       imageUrl: viewModel.setNavigationImage(selectedUsers: selectedUserList))
+        .environmentObject(viewModel)
+        
+    }
+    
 }
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
