@@ -31,7 +31,7 @@ struct ChatCell: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                     if let room = room {
-                        Text(room.messages.last?.message ?? "")
+                        Text(room.lastMessage?.message ?? "")
                             .font(.subheadline)
                     }
                    
@@ -46,7 +46,7 @@ struct ChatCell: View {
                             .fontWeight(.semibold)
                             .foregroundColor(Color.theme.buttonColor)
                         
-                        if room.users.count != room.messages.last?.readers.count ?? 0 {
+                        if room.users.count != room.lastMessage?.readers.count ?? 0 {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(Color.theme.buttonColor)
                         }
@@ -73,8 +73,8 @@ struct ChatCell: View {
 struct ChatCell_Previews: PreviewProvider {
     static var previews: some View {
         let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date().toTimestamp())
-        let message = MessageModel(senderID: "sda", readers: ["sdasdas"], message: "message test", createdDate: Date().timeIntervalSinceNow)
-        let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", messages: [message], lastUpdateDate: Date().timeIntervalSinceNow)
+        let message = MessageModel(id: "sda", roomId: "jh", senderId: "sdasdas", readers: ["message readers"], message: "hjjhgjhgjhg", createdDate:  Date().timeIntervalSinceNow)
+        let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", lastMessage: message, lastUpdateDate: Date().timeIntervalSinceNow)
         ChatCell(user: user, room: room)
             .environmentObject(ChatViewModel())
     }

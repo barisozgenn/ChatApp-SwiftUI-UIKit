@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF21C10F293A8F7C0095E4A6 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = AF21C10E293A8F7C0095E4A6 /* FirebaseFunctions */; };
+		AF21C111293A90A50095E4A6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AF21C110293A90A50095E4A6 /* FirebaseDatabase */; };
+		AF21C113293A90C00095E4A6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AF21C112293A90C00095E4A6 /* FirebaseDatabase */; };
+		AF21C115293A91060095E4A6 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = AF21C114293A91060095E4A6 /* FirebaseFunctions */; };
 		AF5E9F552937C9CD00E43C35 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F542937C9CD00E43C35 /* ChatViewModel.swift */; };
 		AF5E9F572938C7B900E43C35 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F562938C7B900E43C35 /* MessageViewModel.swift */; };
 		AF5E9F592938CA0D00E43C35 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F582938CA0D00E43C35 /* LazyNavigationView.swift */; };
@@ -61,7 +65,6 @@
 		AFE8917B29320A00001262A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE891562932054E001262A8 /* Assets.xcassets */; };
 		AFE8917E29320CA1001262A8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFE8917D29320CA1001262A8 /* FirebaseAuth */; };
 		AFE8918029320CA1001262A8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFE8917F29320CA1001262A8 /* FirebaseFirestore */; };
-		AFE8918229320CA1001262A8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AFE8918129320CA1001262A8 /* FirebaseMessaging */; };
 		AFE8918429320CA1001262A8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AFE8918329320CA1001262A8 /* FirebaseStorage */; };
 		AFE8918629320D63001262A8 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918529320D63001262A8 /* Color+UIColor.swift */; };
 		AFE8918729320D67001262A8 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918529320D63001262A8 /* Color+UIColor.swift */; };
@@ -95,7 +98,6 @@
 		AFE891C7293232B6001262A8 /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE891C6293232B6001262A8 /* MainTabBarView.swift */; };
 		AFE891CA293232EE001262A8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AFE891C9293232EE001262A8 /* FirebaseAuth */; };
 		AFE891CC293232EE001262A8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AFE891CB293232EE001262A8 /* FirebaseFirestore */; };
-		AFE891CE293232EE001262A8 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AFE891CD293232EE001262A8 /* FirebaseMessaging */; };
 		AFE891D0293232EE001262A8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = AFE891CF293232EE001262A8 /* FirebaseStorage */; };
 		AFE891D229323520001262A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFE891D129323520001262A8 /* GoogleService-Info.plist */; };
 		AFE891D329323520001262A8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFE891D129323520001262A8 /* GoogleService-Info.plist */; };
@@ -185,10 +187,11 @@
 			files = (
 				AF9C569A2934A1B9004FF281 /* RxCocoa in Frameworks */,
 				AFE891D7293235D4001262A8 /* FirebaseFirestoreSwift in Frameworks */,
-				AFE8918229320CA1001262A8 /* FirebaseMessaging in Frameworks */,
 				AFE8918429320CA1001262A8 /* FirebaseStorage in Frameworks */,
+				AF21C115293A91060095E4A6 /* FirebaseFunctions in Frameworks */,
 				AFE8917E29320CA1001262A8 /* FirebaseAuth in Frameworks */,
 				AFE8918029320CA1001262A8 /* FirebaseFirestore in Frameworks */,
+				AF21C113293A90C00095E4A6 /* FirebaseDatabase in Frameworks */,
 				AF9C569C2934A1B9004FF281 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,9 +201,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE891D5293235CE001262A8 /* FirebaseFirestoreSwift in Frameworks */,
-				AFE891CE293232EE001262A8 /* FirebaseMessaging in Frameworks */,
 				AFE891D0293232EE001262A8 /* FirebaseStorage in Frameworks */,
+				AF21C10F293A8F7C0095E4A6 /* FirebaseFunctions in Frameworks */,
 				AFE891CA293232EE001262A8 /* FirebaseAuth in Frameworks */,
+				AF21C111293A90A50095E4A6 /* FirebaseDatabase in Frameworks */,
 				AFE891CC293232EE001262A8 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -832,11 +836,12 @@
 			packageProductDependencies = (
 				AFE8917D29320CA1001262A8 /* FirebaseAuth */,
 				AFE8917F29320CA1001262A8 /* FirebaseFirestore */,
-				AFE8918129320CA1001262A8 /* FirebaseMessaging */,
 				AFE8918329320CA1001262A8 /* FirebaseStorage */,
 				AFE891D6293235D4001262A8 /* FirebaseFirestoreSwift */,
 				AF9C56992934A1B9004FF281 /* RxCocoa */,
 				AF9C569B2934A1B9004FF281 /* RxSwift */,
+				AF21C112293A90C00095E4A6 /* FirebaseDatabase */,
+				AF21C114293A91060095E4A6 /* FirebaseFunctions */,
 			);
 			productName = ChatAppUIKit;
 			productReference = AFE8914A2932054D001262A8 /* ChatAppUIKit.app */;
@@ -858,9 +863,10 @@
 			packageProductDependencies = (
 				AFE891C9293232EE001262A8 /* FirebaseAuth */,
 				AFE891CB293232EE001262A8 /* FirebaseFirestore */,
-				AFE891CD293232EE001262A8 /* FirebaseMessaging */,
 				AFE891CF293232EE001262A8 /* FirebaseStorage */,
 				AFE891D4293235CE001262A8 /* FirebaseFirestoreSwift */,
+				AF21C10E293A8F7C0095E4A6 /* FirebaseFunctions */,
+				AF21C110293A90A50095E4A6 /* FirebaseDatabase */,
 			);
 			productName = ChatAppSwiftUI;
 			productReference = AFE891632932057B001262A8 /* ChatAppSwiftUI.app */;
@@ -1418,6 +1424,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF21C10E293A8F7C0095E4A6 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		AF21C110293A90A50095E4A6 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		AF21C112293A90C00095E4A6 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		AF21C114293A91060095E4A6 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
 		AF9C56992934A1B9004FF281 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF9C56982934A1B8004FF281 /* XCRemoteSwiftPackageReference "RxSwift" */;
@@ -1438,11 +1464,6 @@
 			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
 		};
-		AFE8918129320CA1001262A8 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
 		AFE8918329320CA1001262A8 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1457,11 +1478,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
-		};
-		AFE891CD293232EE001262A8 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFE8917C29320CA1001262A8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
 		};
 		AFE891CF293232EE001262A8 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;

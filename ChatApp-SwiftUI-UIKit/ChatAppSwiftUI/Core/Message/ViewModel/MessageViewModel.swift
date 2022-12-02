@@ -7,11 +7,12 @@
 
 import SwiftUI
 import Firebase
+import FirebaseStorage
 
 class MessageViewModel: ObservableObject {
     // MARK: - Properties
     private let authService = AuthService.shared
-    private var userProfile: UserModel?
+    @Published var userProfile: UserModel?
     
     @Published var selectedRoom: MessageRoomModel?
     @Published var selectedUsers: [UserModel]?
@@ -20,12 +21,9 @@ class MessageViewModel: ObservableObject {
     init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [UserModel]? = nil){
         self.selectedRoom = selectedRoom
         self.selectedUsers = selectedUsers
-        
-        authService.fetchUserProfile {[weak self] userProfile in
-            self?.userProfile = userProfile
-        }
-        
+    
         fetchData()
+        fetchUserProfiles()
     }
     
     // MARK: - Helpers
@@ -99,7 +97,7 @@ class MessageViewModel: ObservableObject {
             
         query.addSnapshotListener { querySnapshot, _ in
             guard let changes = querySnapshot?.documentChanges.filter({$0.type == .added}) else {return}
-            var message = changes.compactMap{ try? $0.document.data }
+            var message = changes.compactMap{ try? $0.document.data(as: MessageRoomModel.self) }
             self.messages.append(message)
         }
     }
@@ -140,5 +138,25 @@ class MessageViewModel: ObservableObject {
             
             completion(uiImage)
         }
+    }
+    
+    // MARK: user profiles
+    func fetchUserProfiles(){
+        if selectedUsers == nil {
+            guard let selectedRoom = self.selectedRoom else {return}
+            
+            for uid in selectedRoom.users {
+                authService.fetchUserProfileWithUID(uid: uid){[weak self] userProfile in
+                    self?.selectedUsers?.append(userProfile)
+                }
+            }
+            
+        }
+        authService.fetchUserProfile {[weak self] userProfile in
+            self?.userProfile = userProfile
+            self?.selectedUsers?.append(userProfile)
+        }
+        
+        
     }
 }
