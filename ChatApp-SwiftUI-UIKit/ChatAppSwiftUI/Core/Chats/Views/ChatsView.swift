@@ -26,7 +26,7 @@ struct ChatsView: View {
             List(viewModel.selectedUserList) { user in
                 NavigationLink {
                     LazyNavigationView(build:
-                                        MessageView(selectedUserList: viewModel.selectedUserList))
+                                        MessageView().environmentObject(MessageViewModel(selectedUsers: viewModel.selectedUserList)))
                      
                 } label: {
                     ChatCell(user: user)

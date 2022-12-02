@@ -9,9 +9,7 @@ import SwiftUI
 struct MessageView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var messageText = ""
-    @State var selectedUserList : [UserModel] = []
-    @State var selectedRoom : MessageRoomModel? = nil
-    @StateObject private var viewModel = MessageViewModel()
+    @EnvironmentObject private var viewModel : MessageViewModel
     @State private var headerImage : UIImage? = UIImage(systemName: "circle.circle")
     
     var body: some View {
@@ -72,10 +70,9 @@ extension MessageView {
         .background(Color.theme.tabBarBackgroundColor)
     }
     private var headerView: some View {
-        ChatHeaderView(name: viewModel.setNavigationTitle(selectedRoom: selectedRoom,
-                                                          selectedUsers: selectedUserList),
+        ChatHeaderView(name: viewModel.setNavigationTitle(),
                        unread: "7",
-                       imageUrl: viewModel.setNavigationImage(selectedUsers: selectedUserList))
+                       imageUrl: viewModel.setNavigationImage())
         .environmentObject(viewModel)
         
     }

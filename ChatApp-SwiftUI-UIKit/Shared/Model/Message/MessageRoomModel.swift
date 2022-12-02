@@ -12,6 +12,6 @@ struct MessageRoomModel: Identifiable, Codable {
     @DocumentID var id: String?
     let users: [String]
     let roomName: String?
-    let messages: [MessageModel]
+    let lastMessage: MessageModel?
     let lastUpdateDate: TimeInterval
 }

@@ -10,7 +10,8 @@ import FirebaseFirestore
 import Foundation
 struct MessageModel: Identifiable, Codable {
     @DocumentID var id: String?
-    let senderID: String
+    let roomId: String
+    let senderId: String
     let readers: [String]
     let message: String
     let createdDate: TimeInterval?
