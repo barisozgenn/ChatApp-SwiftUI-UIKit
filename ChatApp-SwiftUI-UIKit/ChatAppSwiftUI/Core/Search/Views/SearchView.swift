@@ -57,8 +57,10 @@ extension SearchView {
                     .bold()
             }
             Spacer()
-            Button {
-                dismissEnvironment()
+            NavigationLink {
+                LazyNavigationView(build:
+                                    MessageView().environmentObject(MessageViewModel(selectedUsers: Array(selection))))
+                 
             } label: {
                 if selectedUsers?.count == 1 {
                     Text("Start 👤")
@@ -71,8 +73,23 @@ extension SearchView {
                 }else {
                     Text("👤")
                 }
-                
             }
+            /*Button {
+                dismissEnvironment()
+            } label: {
+               
+                if selectedUsers?.count == 1 {
+                    Text("Start 👤")
+                        .fontWeight(.bold)
+                        .frame(alignment: .bottom)
+                }else if selectedUsers?.count ?? 0 > 1 {
+                    Text("Start 👥")
+                        .fontWeight(.bold)
+                        .frame(alignment: .bottom)
+                }else {
+                    Text("👤")
+                }
+            }*/
 
         }
     }

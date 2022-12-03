@@ -72,9 +72,9 @@ struct ChatCell: View {
 
 struct ChatCell_Previews: PreviewProvider {
     static var previews: some View {
-        let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date().toTimestamp())
-        let message = MessageModel(id: "sda", roomId: "jh", senderId: "sdasdas", readers: ["message readers"], message: "hjjhgjhgjhg", createdDate:  Date().timeIntervalSinceNow)
-        let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", lastMessage: message, lastUpdateDate: Date().timeIntervalSinceNow)
+        let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date())
+        let message = MessageModel(id: "sda", roomId: "jh", senderId: "sdasdas", readers: ["message readers"], message: "hjjhgjhgjhg", createdDate:  Date())
+        let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", lastMessage: message, lastUpdateDate: Date())
         ChatCell(user: user, room: room)
             .environmentObject(ChatViewModel())
     }

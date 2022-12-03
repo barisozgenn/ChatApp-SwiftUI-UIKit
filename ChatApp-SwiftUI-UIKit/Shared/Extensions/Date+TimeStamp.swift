@@ -5,17 +5,11 @@
 //  Created by Baris OZGEN on 28.11.2022.
 //
 
-import Firebase
+import Foundation
 
 extension Date {
-    func toTimestamp() -> Timestamp {
-        return Timestamp(date: self)
-    }
-}
-extension TimeInterval {
     func toHourMinuteString() -> String {
-        let unixTime = Double(self)
-        let date = Date(timeIntervalSince1970: unixTime)
+        let date = Date(timeIntervalSince1970: self.timeIntervalSinceNow)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
         dateFormatter.locale = NSLocale.current

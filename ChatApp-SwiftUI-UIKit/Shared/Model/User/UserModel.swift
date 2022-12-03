@@ -5,13 +5,11 @@
 //  Created by Baris OZGEN on 26.11.2022.
 //
 
-import FirebaseFirestoreSwift
-import FirebaseFirestore
-
+import Foundation
 struct UserModel: Identifiable, Codable, Hashable {
-    @DocumentID var id: String?
+    var id: String?
     let name: String
     let email: String
     let profileImageUrl: String
-    let registerDate: Timestamp?
+    let registerDate: Date
 }

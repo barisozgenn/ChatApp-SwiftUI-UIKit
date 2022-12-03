@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import Firebase
-import FirebaseStorage
-
 struct ImageUploadService {
 
     static func uploadImage(image: UIImage, folderType: FirebaseFileType, completion: @escaping(String, String) -> Void){
@@ -16,19 +13,8 @@ struct ImageUploadService {
         
         let fileName = folderType.createFileName()
         
-        let ref = Storage.storage().reference(withPath: folderType.getFolderPath(fileName: fileName))
+        let ref = folderType.getFolderPath(fileName: fileName)
         
-        ref.putData(imageData) { _, error in
-            if let error = error {
-                print("DEBUG: upload is failed: \(error.localizedDescription)")
-                return
-            }
-            
-            ref.downloadURL { url, _ in
-                guard let imageUrl = url?.absoluteString else {return}
-                completion(imageUrl, fileName)
-            }
-        }
     }
 }
 

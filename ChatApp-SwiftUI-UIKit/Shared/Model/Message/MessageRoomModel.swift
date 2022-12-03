@@ -5,13 +5,11 @@
 //  Created by Baris OZGEN on 29.11.2022.
 //
 
-import FirebaseFirestoreSwift
-import FirebaseFirestore
-
+import Foundation
 struct MessageRoomModel: Identifiable, Codable {
-    @DocumentID var id: String?
+    var id: String?
     let users: [String]
     let roomName: String?
     let lastMessage: MessageModel?
-    let lastUpdateDate: TimeInterval
+    let lastUpdateDate: Date
 }

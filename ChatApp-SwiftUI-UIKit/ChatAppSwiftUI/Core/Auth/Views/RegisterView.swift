@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @EnvironmentObject var viewModel : AuthViewModel
+    
     @Environment(\.dismiss) var dismissEnvironment
     
     @State private var email = ""
@@ -158,5 +160,6 @@ extension RegisterView {
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView()
+            .environmentObject(AuthViewModel())
     }
 }
