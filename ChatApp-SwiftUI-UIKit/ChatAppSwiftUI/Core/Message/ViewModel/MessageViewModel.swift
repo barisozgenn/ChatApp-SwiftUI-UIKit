@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseStorage
+import FirebaseFirestoreSwift
 
 class MessageViewModel: ObservableObject {
     // MARK: - Properties
@@ -21,7 +22,7 @@ class MessageViewModel: ObservableObject {
     init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [UserModel]? = nil){
         self.selectedRoom = selectedRoom
         self.selectedUsers = selectedUsers
-    
+        
         fetchData()
         fetchUserProfiles()
     }
@@ -94,11 +95,31 @@ class MessageViewModel: ObservableObject {
         let query = COLLECTION_MESSAGE
             .whereField("roomId", isEqualTo: roomId)
             .order(by: "createdDate", descending: false)
-            
-        query.addSnapshotListener { querySnapshot, _ in
-            guard let changes = querySnapshot?.documentChanges.filter({$0.type == .added}) else {return}
-            var message = changes.compactMap{ try? $0.document.data(as: MessageRoomModel.self) }
-            self.messages.append(message)
+        
+        query.addSnapshotListener { querySnapshot, error in
+            //let message = changes.compactMap{try? $0.document.data(as: MessageModel.self)}
+            guard let snapshot = querySnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            snapshot.documentChanges.forEach { diff in
+                if (diff.type == .added) {
+                    //print("New message: \(diff.document.data())")
+                    let messageDict = diff.document.data()
+                    
+                    let id = messageDict["id"] as? String ?? ""
+                    let roomId = messageDict["roomId"] as? String ?? ""
+                    let senderId = messageDict["senderId"] as? String ?? ""
+                    let readers = messageDict["readers"] as? [String] ?? []
+                    let message = messageDict["message"] as? String ?? ""
+                    let createdDate = messageDict["createdDate"] as? TimeInterval ?? Date().timeIntervalSinceReferenceDate
+                    
+                    let messageItem = MessageModel(id: id,roomId: roomId, senderId: senderId, readers: readers, message: message, createdDate: createdDate)
+                    
+                    self.messages.append(messageItem)
+                }
+                
+            }
         }
     }
     // MARK: set navigation features
@@ -124,7 +145,7 @@ class MessageViewModel: ObservableObject {
             if selectedUsers.count == 1 {return selectedUsers.first?.profileImageUrl ?? ""}
             else if selectedUsers.count > 1 {return "group.png"}
             else {return "??"}
-        }
+        }else {return "??"}
     }
     
     // MARK: download image
@@ -146,7 +167,7 @@ class MessageViewModel: ObservableObject {
             guard let selectedRoom = self.selectedRoom else {return}
             
             for uid in selectedRoom.users {
-                authService.fetchUserProfileWithUID(uid: uid){[weak self] userProfile in
+                authService.fetchUserProfile(uid: uid){[weak self] userProfile in
                     self?.selectedUsers?.append(userProfile)
                 }
             }

@@ -7,7 +7,7 @@
 
 import FirebaseFirestoreSwift
 import FirebaseFirestore
-import Foundation
+
 struct MessageModel: Identifiable, Codable {
     @DocumentID var id: String?
     let roomId: String

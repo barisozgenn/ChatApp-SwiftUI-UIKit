@@ -20,20 +20,29 @@ struct AuthService {
         try? Auth.auth().signOut()
     }
     
-    func fetchUserProfile(completion: @escaping (_ userProfile: UserModel) -> ()){
-        guard let uid = userSession?.uid else {return}
+    func fetchUserProfile(uid: String? = "", completion: @escaping (_ userProfile: UserModel) -> ()){
+        var userId = ""
         
-        COLLECTION_USER_PROFILE.document(uid).getDocument { snapshot, error in
-            guard let user = snapshot?.data(as: UserModel.self) else {return}
-            completion(user)
-          
-        }
-    }
-    
-    func fetchUserProfileWithUID(uid: String,completion: @escaping (_ userProfile: UserModel) -> ()){
+        if let uid = uid {userId = uid}
+        else if let uid = userSession?.uid {userId = uid}
+        else {return}
         
-        try? COLLECTION_USER_PROFILE.document(uid).getDocument { snapshot, _ in
-            guard let user = try? snapshot?.data(as: UserModel.self) else {return}
+        COLLECTION_USER_PROFILE.document(userId).getDocument { snapshot, error in
+            
+            if let error = error {
+                print("DEBUG: Error fetching document: \(error.localizedDescription)")
+                return
+            }
+            guard let userDict = snapshot?.data() else {return}
+            
+            let id = userDict["id"] as? String ?? ""
+            let name = userDict["name"] as? String ?? ""
+            let email = userDict["email"] as? String ?? ""
+            let profileImageUrl = userDict["profileImageUrl"] as? String ?? ""
+            let registerDate = userDict["registerDate"] as? Timestamp ?? Date().toTimestamp()
+            
+            let user = UserModel(id: id,name: name, email: email, profileImageUrl: profileImageUrl, registerDate: registerDate)
+                    
             completion(user)
           
         }
