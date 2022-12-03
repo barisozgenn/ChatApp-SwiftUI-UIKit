@@ -11,17 +11,29 @@ struct LoginView: View {
     @EnvironmentObject var viewModel : AuthViewModel
     @State private var email = ""
     @State private var password = ""
-    
+    @Binding var isUserNotLogin: Bool
+
     var body: some View {
         VStack{
             headerViews
             Spacer()
+                .frame(height: 92)
+            Image("chat-app-logo-baris-green-border")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 64, height: 64)
+                .padding()
             loginViews
                 .padding(.horizontal)
             Spacer()
             bottomViews
         }
         .padding(.horizontal)
+        .onChange(of: viewModel.isUserNotLogin) { newValue in
+            withAnimation(.spring()){
+                isUserNotLogin = newValue
+            }
+        }
     }
 }
 
@@ -75,7 +87,8 @@ extension LoginView {
     private var bottomViews: some View {
         HStack{
             NavigationLink {
-                RegisterView()
+                RegisterView(isUserNotLogin: $isUserNotLogin)
+                    .environmentObject(viewModel)
             } label: {
                 Text("Don't you have an account? Sign up.".capitalized)
                     .fontWeight(.semibold)
@@ -90,7 +103,7 @@ extension LoginView {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(isUserNotLogin: .constant(true))
             .environmentObject(AuthViewModel())
     }
 }

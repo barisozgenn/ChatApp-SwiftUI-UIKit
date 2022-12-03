@@ -20,6 +20,8 @@ struct RegisterView: View {
 
     @State private var imagePickerPresented = false
     
+    @Binding var isUserNotLogin: Bool
+
     var body: some View {
         VStack{
             headerViews
@@ -33,7 +35,11 @@ struct RegisterView: View {
         }
         .padding(.horizontal)
         .navigationBarBackButtonHidden(true)
-        
+        .onChange(of: viewModel.isUserNotLogin) { newValue in
+            withAnimation(.spring()){
+                isUserNotLogin = newValue
+            }
+        }
     }
 }
 
@@ -63,7 +69,7 @@ extension RegisterView {
             TextFieldSingleLineView(bindText: $password, placeHolderText: "Password", imageSystemName: "lock.fill", isSecure: true)
             
             Button {
-                
+                viewModel.apiRegister(email: email, password: password, name: fullName, image: selectedProfileImage ?? nil)
             } label: {
                 Text("sign up".capitalized)
                     .withPositiveButtonModifier()
@@ -159,7 +165,7 @@ extension RegisterView {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        RegisterView(isUserNotLogin: .constant(true))
             .environmentObject(AuthViewModel())
     }
 }

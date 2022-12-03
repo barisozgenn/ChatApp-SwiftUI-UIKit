@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+
 struct MainTabBarView: View {
-    @State private var isUserLoggedIn = true
+    @State private var isUserNotLogin: Bool = false
     @State var selectedTab = "Chats"
     @State var selectedUsers : Set<UserModel>? = []
     @State var selectedUserList : [UserModel] = []
@@ -16,8 +17,11 @@ struct MainTabBarView: View {
 
     var body: some View {
         NavigationStack{
-            
-            if isUserLoggedIn {
+            if isUserNotLogin {
+                LoginView(isUserNotLogin: $isUserNotLogin)
+                    .environmentObject(AuthViewModel())
+            }
+            else{
                 TabView(selection: $selectedTab){
                     
                     StatusView()
@@ -52,7 +56,7 @@ struct MainTabBarView: View {
                         }
                         .tag("Chats")
                         .environmentObject(viewModelChat)
-                    SettingsView()
+                    SettingsView(isUserNotLogin: $isUserNotLogin)
                         .tabItem {
                             Image(systemName: "gear")
                             Text("Settings")
@@ -96,20 +100,11 @@ struct MainTabBarView: View {
                     UITabBar.appearance().isTranslucent = false
                     UITabBar.appearance().backgroundColor = UIColor.theme.tabBarBackgroundColor
                 }
-               /* .onChange(of: selectedUsers ?? []) { newValue in
-                    selectedUserList = Array(newValue)
-                    userSelected = selectedUserList.count > 0 ? true : false
-                      
-                    // navigate when users are selected to start for chat
-                    viewModelChat.selectedUserList = selectedUserList
-                }*/
             }
-            else {LoginView().environmentObject(AuthViewModel())}
-            
-            
+               
         }
         .onAppear{
-             //isUserLoggedIn = Auth.auth().currentUser == nil ? false : true
+            isUserNotLogin = realmApp.currentUser == nil ? true : false
         }
     }
 }

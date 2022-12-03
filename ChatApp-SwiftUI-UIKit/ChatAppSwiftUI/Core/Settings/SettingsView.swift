@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var section = 0
+    @Binding var isUserNotLogin: Bool
+    
     var body: some View {
         ZStack{
             Color(.systemGroupedBackground).ignoresSafeArea()
@@ -129,11 +131,24 @@ struct SettingsView: View {
             }
             
         }
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    AuthService.shared.signOut()
+                    withAnimation(.spring()){
+                        isUserNotLogin = true
+                    }
+                } label: {
+                    Text("Logout")
+                }
+
+            }
+        }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        SettingsView(isUserNotLogin: .constant(false))
     }
 }

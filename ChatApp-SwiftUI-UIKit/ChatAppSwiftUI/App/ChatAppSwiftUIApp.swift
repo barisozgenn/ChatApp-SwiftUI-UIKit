@@ -8,6 +8,7 @@
 import SwiftUI
 import RealmSwift
 
+//do not forget to active Authentication Providers (email/password) on realm.mongodb
 let realmApp = RealmSwift.App(id: "chat-baris-wshnz")
 
 @main
