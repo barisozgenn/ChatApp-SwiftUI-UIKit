@@ -5,11 +5,19 @@
 //  Created by Baris OZGEN on 29.11.2022.
 //
 import Foundation
-struct MessageModel: Identifiable, Codable {
-    var id: String?
-    let roomId: String
-    let senderId: String
-    let readers: [String]
-    let message: String
-    let createdDate: Date?
+import RealmSwift
+
+class MessageModel: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var  senderId: String
+    @Persisted var  readers: MutableSet<String>
+    @Persisted var  message: String
+    @Persisted var  createdDate = Date()
+    
+    convenience init(senderId: String, readers: MutableSet<String>, message: String) {
+        self.init()
+        self.senderId = senderId
+        self.readers = readers
+        self.message = message
+    }
 }

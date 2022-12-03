@@ -5,11 +5,19 @@
 //  Created by Baris OZGEN on 29.11.2022.
 //
 
+import RealmSwift
 import Foundation
-struct MessageRoomModel: Identifiable, Codable {
-    var id: String?
-    let users: [String]
-    let roomName: String?
-    let lastMessage: MessageModel?
-    let lastUpdateDate: Date
+class MessageRoomModel: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var users: MutableSet<String>
+    @Persisted var roomName: String
+    @Persisted var lastMessage: MutableSet<MessageModel>
+    @Persisted var lastUpdateDate = Date()
+    
+    convenience init(users: MutableSet<String>, roomName: String, lastMessage: MutableSet<MessageModel>) {
+        self.init()
+        self.users = users
+        self.roomName = roomName
+        self.lastMessage = lastMessage
+    }
 }

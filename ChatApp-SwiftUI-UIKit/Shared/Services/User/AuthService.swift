@@ -10,6 +10,7 @@ import Realm
 
 struct AuthService {
     static let shared = AuthService()
+        @ObservedResults(UserModel.self, sortDescriptor: SortDescriptor(keyPath: "name",ascending: true)) var users
     
     init() {
         
@@ -25,11 +26,12 @@ struct AuthService {
         }
     }
     
-    func fetchUserProfile(uid: String? = "", completion: @escaping (_ userProfile: UserModel) -> ()){
-        
+    func fetchUserProfile(uid: ObjectId? = nil, completion: @escaping (_ userProfile: UserModel) -> ()){
+        if let uid = uid {completion(users.first(where: {$0._id == uid})!)}
+      
     }
     
-    func registerUser(withCredential authCredential: AuthCredentials, completion: @escaping(Error?, APIKeyAuth?) -> ()){
+    func registerUser(withCredential authCredential: AuthCredentials, userModel: UserModel,  completion: @escaping(Error?, APIKeyAuth?) -> ()){
         
         realmApp.emailPasswordAuth.registerUser(email: authCredential.email, password: authCredential.password) { (error) in
             guard error == nil else {
@@ -38,6 +40,8 @@ struct AuthService {
                 return
             }
             print("DEBUG: Realm Successfully registered user.")
+            
+            self.$users.append(userModel)
             
             loginUser(withCredential: authCredential) { error, apiKey in
                 completion(error, apiKey)
@@ -64,8 +68,7 @@ struct AuthService {
         
     }
     
-    private func saveUserProfile(user: UserModel, userModel: UserModel){
-        
+    private func saveUserProfile(userModel: UserModel){
     }
     
 }

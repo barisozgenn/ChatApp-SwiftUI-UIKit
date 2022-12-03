@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-
+import RealmSwift
 class ChatViewModel: ObservableObject {
     @Published var selectedUserList : [UserModel] = []
-    @Published var rooms : [MessageRoomModel] = []
     @Published var users: [UserModel]?
     @Published var userProfile: UserModel?
+    
+    @ObservedResults(MessageRoomModel.self, sortDescriptor: SortDescriptor(keyPath: "lastUpdateDate",ascending: true)) var rooms
     
     init() {
         fetchUsersData()
