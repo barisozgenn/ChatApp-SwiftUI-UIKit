@@ -29,7 +29,7 @@ struct ChatsView: View {
                                         MessageView().environmentObject(MessageViewModel(selectedUsers: viewModel.selectedUserList)))
                      
                 } label: {
-                    ChatCell(user: (viewModel.users?.first(where: {$0.id == room.users.first(where: {$0 != viewModel.userProfile?.id} )}))!,
+                    ChatCell(user: (viewModel.users?.first(where: {$0._id == room.users.first(where: {$0 != viewModel.userProfile!._id} )}))!,
                              room: room)
                 }
 

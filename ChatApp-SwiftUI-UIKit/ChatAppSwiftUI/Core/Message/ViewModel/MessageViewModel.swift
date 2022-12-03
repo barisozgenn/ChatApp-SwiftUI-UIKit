@@ -10,13 +10,13 @@ import SwiftUI
 class MessageViewModel: ObservableObject {
     // MARK: - Properties
     private let authService = AuthService.shared
-    @Published var userProfile: UserModel?
+    @Published var userProfile: User?
     
     @Published var selectedRoom: MessageRoomModel?
-    @Published var selectedUsers: [UserModel]? = []
+    @Published var selectedUsers: [User]? = []
     @Published var messages: [MessageModel] = []
     
-    init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [UserModel]? = nil){
+    init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [User]? = nil){
         if let selectedRoom = selectedRoom {self.selectedRoom = selectedRoom}
         if let selectedUsers = selectedUsers {self.selectedUsers = selectedUsers}
         

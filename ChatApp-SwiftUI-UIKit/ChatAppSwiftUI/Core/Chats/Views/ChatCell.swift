@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatCell: View {
-    var user: UserModel
+    var user: User
     var room: MessageRoomModel?
     @State private var profileImage: UIImage =  UIImage(systemName: "circle.circle")!
     @EnvironmentObject var viewModel: ChatViewModel
@@ -31,7 +31,7 @@ struct ChatCell: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                     if let room = room {
-                        Text(room.lastMessage?.message ?? "")
+                        Text(room.messages.last?.message ?? "")
                             .font(.subheadline)
                     }
                    
@@ -46,7 +46,7 @@ struct ChatCell: View {
                             .fontWeight(.semibold)
                             .foregroundColor(Color.theme.buttonColor)
                         
-                        if room.users.count != room.lastMessage?.readers.count ?? 0 {
+                        if room.users.count != room.messages.last?.readers.count ?? 0 {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(Color.theme.buttonColor)
                         }
@@ -69,13 +69,14 @@ struct ChatCell: View {
         }
     }
 }
-
+/*
 struct ChatCell_Previews: PreviewProvider {
     static var previews: some View {
-        let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date())
-        let message = MessageModel(id: "sda", roomId: "jh", senderId: "sdasdas", readers: ["message readers"], message: "hjjhgjhgjhg", createdDate:  Date())
+        let user = User(name: "barış", email: "vsadas@sadas", profileImageUrl: "baris")
+        let message = MessageModel(senderId: "sadasdas", readers: Set<["sadasd"]>, message: "messsage")
         let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", lastMessage: message, lastUpdateDate: Date())
         ChatCell(user: user, room: room)
             .environmentObject(ChatViewModel())
     }
 }
+*/

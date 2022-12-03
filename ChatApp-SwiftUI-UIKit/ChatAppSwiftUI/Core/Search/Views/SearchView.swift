@@ -12,8 +12,8 @@ struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
     
     @State private var searchText = ""
-    @State private var selection : Set<UserModel> = []
-    @Binding var selectedUsers : Set<UserModel>?
+    @State private var selection : Set<User> = []
+    @Binding var selectedUsers : Set<User>?
     @State private var editMode = EditMode.inactive
     
     var body: some View {

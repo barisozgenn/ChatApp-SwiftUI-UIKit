@@ -28,8 +28,8 @@ class RealmAuthService: ObservableObject {
 
         loginPublisher
             .receive(on: DispatchQueue.main)
-            .flatMap { user -> RealmPublishers.AsyncOpenPublisher in
-                self.shouldIndicateActivity = true
+            .flatMap {[weak self] user -> RealmPublishers.AsyncOpenPublisher in
+                self?.shouldIndicateActivity = true
                 let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
                 return Realm.asyncOpen(configuration: realmConfig)
             }
@@ -42,21 +42,21 @@ class RealmAuthService: ObservableObject {
             .store(in: &self.cancellables)
 
         userRealmPublisher
-            .sink(receiveCompletion: { result in
+            .sink(receiveCompletion: {[weak self] result in
                 if case let .failure(error) = result {
-                    self.error = "Failed to log in and open realm: \(error.localizedDescription)"
+                    self?.error = "Failed to log in and open realm: \(error.localizedDescription)"
                 }
-            }, receiveValue: { realm in
+            }, receiveValue: {[weak self] realm in
                 print("Realm User file location: \(realm.configuration.fileURL!.path)")
-                self.user = realm.objects(User.self).first
+                self?.user = realm.objects(User.self).first
             })
             .store(in: &cancellables)
 
         logoutPublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
-            }, receiveValue: { _ in
-                self.user = nil
+            }, receiveValue: {[weak self] _ in
+                self?.user = nil
             })
             .store(in: &cancellables)
     }

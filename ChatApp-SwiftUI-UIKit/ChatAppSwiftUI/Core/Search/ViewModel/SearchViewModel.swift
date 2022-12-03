@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import RealmSwift
 
 class SearchViewModel: ObservableObject {
     
-    @Published var users: [UserModel] = []
+    @ObservedResults(User.self) var users
     
     init(){
         fetchData()
     }
     func fetchData(){
-        //self?.users = documents.compactMap({try? $0.data(as: UserModel.self)})
+      
     }
 }

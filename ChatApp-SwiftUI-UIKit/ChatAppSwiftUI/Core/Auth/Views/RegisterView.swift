@@ -38,6 +38,7 @@ struct RegisterView: View {
         .onChange(of: viewModel.isUserNotLogin) { newValue in
             withAnimation(.spring()){
                 isUserNotLogin = newValue
+                dismissEnvironment()
             }
         }
     }
