@@ -6,20 +6,13 @@
 //
 
 import SwiftUI
+import RealmSwift
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-
-    return true
-  }
-}
+let realmApp = RealmSwift.App(id: "chat-baris-wshnz")
 
 @main
-struct ChatAppSwiftUIApp: App {
-    
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+struct ChatAppSwiftUIApp: SwiftUI.App {
+        
     var body: some Scene {
         WindowGroup {
            MainTabBarView()

@@ -53,6 +53,8 @@
 		AF9C56E7293792AC004FF281 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56E6293792AC004FF281 /* ChatCell.swift */; };
 		AF9C56EC29379C21004FF281 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56EB29379C21004FF281 /* SearchView.swift */; };
 		AFA49CDE293B5524005C247D /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA49CDD293B5524005C247D /* AuthViewModel.swift */; };
+		AFA49CE1293B6647005C247D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AFA49CE0293B6647005C247D /* Realm */; };
+		AFA49CE3293B6647005C247D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFA49CE2293B6647005C247D /* RealmSwift */; };
 		AFE8914E2932054D001262A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914D2932054D001262A8 /* AppDelegate.swift */; };
 		AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914F2932054D001262A8 /* SceneDelegate.swift */; };
 		AFE891572932054E001262A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE891562932054E001262A8 /* Assets.xcassets */; };
@@ -178,6 +180,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA49CE3293B6647005C247D /* RealmSwift in Frameworks */,
+				AFA49CE1293B6647005C247D /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,6 +830,8 @@
 			);
 			name = ChatAppSwiftUI;
 			packageProductDependencies = (
+				AFA49CE0293B6647005C247D /* Realm */,
+				AFA49CE2293B6647005C247D /* RealmSwift */,
 			);
 			productName = ChatAppSwiftUI;
 			productReference = AFE891632932057B001262A8 /* ChatAppSwiftUI.app */;
@@ -860,6 +866,7 @@
 			mainGroup = AFE8913F2932053F001262A8;
 			packageReferences = (
 				AF9C56982934A1B8004FF281 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				AFA49CDF293B6647005C247D /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = AFE8914B2932054D001262A8 /* Products */;
 			projectDirPath = "";
@@ -1368,6 +1375,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		AFA49CDF293B6647005C247D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1380,6 +1395,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF9C56982934A1B8004FF281 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		AFA49CE0293B6647005C247D /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFA49CDF293B6647005C247D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		AFA49CE2293B6647005C247D /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFA49CDF293B6647005C247D /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
