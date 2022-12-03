@@ -23,13 +23,14 @@ struct ChatsView: View {
                         .frame(height: 14)
                 }
             }
-            List(viewModel.selectedUserList) { user in
+            List(viewModel.rooms) { room in
                 NavigationLink {
                     LazyNavigationView(build:
                                         MessageView().environmentObject(MessageViewModel(selectedUsers: viewModel.selectedUserList)))
                      
                 } label: {
-                    ChatCell(user: user)
+                    ChatCell(user: (viewModel.users?.first(where: {$0.id == room.users.first(where: {$0 != viewModel.userProfile?.id} )}))!,
+                             room: room)
                 }
 
                

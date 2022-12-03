@@ -89,6 +89,33 @@ struct AuthService {
             }
         }
     }
+    
+    func fetchUserProfiles(completion: @escaping (_ userProfiles: [UserModel]) -> ()){
+        var users: [UserModel] = []
+        
+        COLLECTION_USER_PROFILE.getDocuments { (snapshot, error) in
+            if let error = error {
+                print("DEBUG: Error writing document: \(error.localizedDescription)")
+                return
+            }
+            guard let documents = snapshot?.documents else {return}
+            
+            for document in documents {
+                guard let userDict = document.data() else {return}
+                
+                let id = userDict["id"] as? String ?? ""
+                let name = userDict["name"] as? String ?? ""
+                let email = userDict["email"] as? String ?? ""
+                let profileImageUrl = userDict["profileImageUrl"] as? String ?? ""
+                let registerDate = userDict["registerDate"] as? Timestamp ?? Date().toTimestamp()
+                
+                let user = UserModel(id: id,name: name, email: email, profileImageUrl: profileImageUrl, registerDate: registerDate)
+                users.append(user)
+            }
+            
+            completion(users)
+        }
+    }
 }
 
 extension Encodable {
