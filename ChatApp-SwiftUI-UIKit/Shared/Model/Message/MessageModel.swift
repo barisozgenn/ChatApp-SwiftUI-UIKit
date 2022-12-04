@@ -10,14 +10,14 @@ import RealmSwift
 class MessageModel: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var  senderId: String
-    @Persisted var  readers: MutableSet<String>
+    @Persisted var  readers = List<String>()
     @Persisted var  message: String
     @Persisted var  createdDate = Date()
     
-    convenience init(senderId: String, readers: MutableSet<String>, message: String) {
+    convenience init(senderId: String, readers: [String], message: String) {
         self.init()
         self.senderId = senderId
-        self.readers = readers
+        self.readers.append(objectsIn: readers)
         self.message = message
     }
 }

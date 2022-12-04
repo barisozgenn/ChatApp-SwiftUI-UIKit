@@ -9,15 +9,15 @@ import RealmSwift
 import Foundation
 class MessageRoomModel: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var users: MutableSet<String>
+    @Persisted var users = List<String>()
     @Persisted var roomName: String
-    @Persisted var messages: MutableSet<MessageModel>
+    @Persisted var messages = List<MessageModel>()
     @Persisted var lastUpdateDate = Date()
     
-    convenience init(users: MutableSet<String>, roomName: String, lastMessage: MutableSet<MessageModel>) {
+    convenience init(users: [String], roomName: String, messages: [MessageModel]) {
         self.init()
-        self.users = users
+        self.users.append(objectsIn: users)
         self.roomName = roomName
-        self.messages = lastMessage
+        self.messages.append(objectsIn: messages)
     }
 }

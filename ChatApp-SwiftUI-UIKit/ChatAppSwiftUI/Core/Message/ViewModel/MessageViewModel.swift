@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 class MessageViewModel: ObservableObject {
     // MARK: - Properties
@@ -15,6 +16,8 @@ class MessageViewModel: ObservableObject {
     @Published var selectedRoom: MessageRoomModel?
     @Published var selectedUsers: [User]? = []
     @Published var messages: [MessageModel] = []
+    
+    @ObservedResults(MessageRoomModel.self, sortDescriptor: SortDescriptor(keyPath: "lastUpdateDate",ascending: true)) var rooms
     
     init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [User]? = nil){
         if let selectedRoom = selectedRoom {self.selectedRoom = selectedRoom}
@@ -35,7 +38,18 @@ class MessageViewModel: ObservableObject {
             
         }else { // MARK:  new room
             
-           
+            guard let selectedUsers = selectedUsers,
+            guard let currentUser = realmApp.currentUser
+            else{return}
+            
+            var userIds = selectedUsers.map { $0._id }
+            userIds.append(currentUser.id)
+            
+            let message = MessageModel(senderId: currentUser.id, readers: [currentUser.id], message: message)
+            
+            let room = MessageRoomModel(users: userIds, roomName: setNavigationTitle() + (currentUser.profile.name ?? ""), messages: [message])
+            
+            $rooms.append(room)
         }
     }
     // MARK: fetch data
@@ -45,7 +59,7 @@ class MessageViewModel: ObservableObject {
     // MARK: set navigation features
     func setNavigationTitle() -> String {
         if let room = selectedRoom {
-            return room.roomName ?? ""
+            return room.roomName
         }else if let selectedUsers = selectedUsers {
             if selectedUsers.count == 1 {
                 return selectedUsers.first?.name ?? ""
