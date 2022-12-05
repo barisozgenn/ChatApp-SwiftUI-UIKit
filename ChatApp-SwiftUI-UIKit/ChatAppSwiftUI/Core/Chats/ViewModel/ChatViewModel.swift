@@ -16,12 +16,15 @@ class ChatViewModel: ObservableObject {
     
     init() {
         fetchUsersData()
-        fetchRoomData()
     }
     
     // MARK: fetch data
-    func fetchRoomData(){
-        
+    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [User] {
+        var selectedUsers: [User] = []
+            for userId in selectedRoom.users {
+                selectedUsers.append(users.first(where: {$0._id == userId})!)
+            }
+            return selectedUsers
     }
     func fetchUsersData(){
         self.userProfile = users.first(where: {$0._id == realmApp.currentUser?.id})

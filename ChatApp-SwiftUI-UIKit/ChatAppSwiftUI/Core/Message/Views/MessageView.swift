@@ -24,9 +24,11 @@ struct MessageView: View {
                 .resizable()
                 .opacity(colorScheme == .light ? 0.7 : 0.2)
                 .ignoresSafeArea()
+            
+            listView
+            
             VStack{
-                listView
-                
+                Spacer()
                 bottomView
             }
             
@@ -79,26 +81,29 @@ extension MessageView {
         
     }
     private var listView: some View {
-        List(viewModel.messages) { message in
-            
-            MessageCell(messageValue: message.message,
-                        dateValue: message.createdDate.toHourMinuteString(),
-                        nameValue: viewModel.selectedUsers?.first(where: {$0._id == message.senderId})?.name ?? "?",
-                        isMine: viewModel.userProfile?._id == message.senderId ? true : false,
-                        isLast:  isLastMessageFromSameUser(message: message),
-                        isGroup: viewModel.selectedUsers?.count ?? 0 > 2 ? true : false,
-                        isRead: viewModel.selectedUsers?.count == message.readers.count ? true : false)
+        ScrollView{
+            ForEach(viewModel.messages){ message in
+                MessageCell(messageValue: message.message,
+                            dateValue: message.createdDate.toHourMinuteString(),
+                            nameValue: viewModel.selectedUsers?.first(where: {$0._id == message.senderId})?.name ?? "?",
+                            isMine: viewModel.userProfile?._id == message.senderId ? true : false,
+                            isLast:  isLastMessageFromSameUser(message: message),
+                            isGroup: viewModel.selectedUsers?.count ?? 0 > 2 ? true : false,
+                            isRead: viewModel.selectedUsers?.count == message.readers.count ? true : false)
+                
+            }
         }
-        .listStyle(.plain)
-        .padding(.bottom, 80)
-        .padding(.vertical, 110)
+        .ignoresSafeArea()
+        .padding(.top, 5)
+        .padding(.bottom, 60)
+        .padding(.horizontal)
     }
     
     func isLastMessageFromSameUser(message: MessageModel) -> Bool {
         if viewModel.messages.last?.id == message.id {return true}
         else {
             //let indexOfMessage = viewModel.messages.firstIndex{$0 === message} // 0
-return false
+            return false
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 extension UIImage {
     func convertToBase64String () -> String {
+        print(self)
         return self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
     }
 }
