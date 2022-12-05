@@ -13,7 +13,7 @@ import RealmSwift
 class AuthViewModel: ObservableObject {
     private let dataService = RealmAuthService()
     private var cancellables = Set<AnyCancellable>()
-    
+
     @Published var isUserNotLogin: Bool = true
     @ObservedResults(User.self) var users
     
