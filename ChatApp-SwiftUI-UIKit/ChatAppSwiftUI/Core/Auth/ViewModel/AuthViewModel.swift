@@ -17,10 +17,12 @@ class AuthViewModel: ObservableObject {
     @Published var isUserNotLogin: Bool = true
     @ObservedResults(User.self) var users
     
-    func apiLogin(email: String, password: String) {
+    @Published var profileImage: UIImage?
+    
+    func apiLogin(email: String, password: String, registeredUser: User? = nil) {
         dataService.error = nil
         let authCreadential = AuthCredentials(email: email, password: password)
-        // baris@test.chatApp.clone
+        // baris@test.chat.app
         realmApp.login(credentials: .emailPassword(email: authCreadential.email, password: authCreadential.password))
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] result in
@@ -35,16 +37,23 @@ class AuthViewModel: ObservableObject {
                 self?.dataService.error = nil
                 self?.dataService.loginPublisher.send(realm)
                 self?.isUserNotLogin = false
+                if let registeredUser = registeredUser {
+                    registeredUser._id = realmApp.currentUser!.id
+                    self?.$users.append(registeredUser)
+                }
             })
             .store(in: &dataService.cancellables)
         
     }
     
     func apiRegister(email: String, password: String, name: String, image: UIImage?){
+        guard let profileImage = profileImage else{return}
+        
         let authCreadential = AuthCredentials(email: email, password: password)
         let user : User = User(name: name,
                                email: email,
-                               profileImageUrl: String(name.split(separator: " ").first!))
+                               profileImageBase64: profileImage.convertToBase64String())
+        
         dataService.error = nil
 
         realmApp.emailPasswordAuth.registerUser(email: authCreadential.email, password: authCreadential.password)
@@ -60,12 +69,11 @@ class AuthViewModel: ObservableObject {
                     },
                           receiveValue: { [weak self] _ in
                         self?.dataService.error = nil
-                        self?.$users.append(user)
-                        self?.apiLogin(email: authCreadential.email, password: authCreadential.password)
+                        
+                        self?.apiLogin(email: authCreadential.email, password: authCreadential.password, registeredUser: user)
                     })
                     .store(in: &dataService.cancellables)
     }
-    
     
     func logout(){
         dataService.shouldIndicateActivity = true

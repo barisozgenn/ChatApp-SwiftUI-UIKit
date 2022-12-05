@@ -17,7 +17,7 @@ class RealmAuthService: ObservableObject {
 
     @Published var shouldIndicateActivity = false
     @Published var error: String?
-
+    
     var user: User?
 
     var loggedIn: Bool {

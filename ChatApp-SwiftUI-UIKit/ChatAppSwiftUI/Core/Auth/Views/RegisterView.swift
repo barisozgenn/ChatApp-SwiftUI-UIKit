@@ -160,6 +160,7 @@ extension RegisterView {
     func loadImage(){
         guard let selectedProfileImage = selectedProfileImage else{return}
         profileImage = Image(uiImage: selectedProfileImage)
+        viewModel.profileImage = selectedProfileImage
     }
 }
 

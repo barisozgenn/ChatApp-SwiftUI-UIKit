@@ -10,7 +10,6 @@ import RealmSwift
 
 class MessageViewModel: ObservableObject {
     // MARK: - Properties
-    private let authService = AuthService.shared
     @Published var userProfile: User?
     
     @Published var selectedRoom: MessageRoomModel?
@@ -18,38 +17,50 @@ class MessageViewModel: ObservableObject {
     @Published var messages: [MessageModel] = []
     
     @ObservedResults(MessageRoomModel.self, sortDescriptor: SortDescriptor(keyPath: "lastUpdateDate",ascending: true)) var rooms
+    @ObservedResults(User.self) var users
     
     init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [User]? = nil){
         if let selectedRoom = selectedRoom {self.selectedRoom = selectedRoom}
         if let selectedUsers = selectedUsers {self.selectedUsers = selectedUsers}
-        
+       
+        if let userProfile = selectedUsers?.first(where: {$0._id == realmApp.currentUser?.id ?? ""}) {
+           print("here a")
+            self.userProfile = userProfile
+        }else if let userProfile = users.first(where: {$0._id == realmApp.currentUser?.id ?? ""}) {
+            print("here b")
+            self.userProfile = userProfile
+        }
         fetchData()
-        fetchUserProfiles()
     }
     
     // MARK: - Helpers
     // MARK: send message
     func sendMessage(_ message: String){
+        print("here 0")
         guard let userProfile = self.userProfile else {return}
-        
+        print("here 1")
         if let selectedRoom = selectedRoom { // MARK: existing room
+            print("here 1 a")
             
-           
             
         }else { // MARK:  new room
-            
-            guard let selectedUsers = selectedUsers,
-            guard let currentUser = realmApp.currentUser
+            print("here 1b")
+            guard let selectedUsers = selectedUsers
             else{return}
-            
+            print("here 2a")
             var userIds = selectedUsers.map { $0._id }
-            userIds.append(currentUser.id)
+            userIds.append(userProfile._id)
             
-            let message = MessageModel(senderId: currentUser.id, readers: [currentUser.id], message: message)
+            let message = MessageModel(senderId: userProfile._id,
+                                       readers: [userProfile._id],
+                                       message: message)
             
-            let room = MessageRoomModel(users: userIds, roomName: setNavigationTitle() + (currentUser.profile.name ?? ""), messages: [message])
+            let room = MessageRoomModel(users: userIds,
+                                        roomName: setNavigationTitle() + (userProfile.name),
+                                        messages: [message])
             
             $rooms.append(room)
+            print(rooms.count)
         }
     }
     // MARK: fetch data
@@ -76,7 +87,7 @@ class MessageViewModel: ObservableObject {
     }
     func setNavigationImage() -> String {
         if let selectedUsers = self.selectedUsers {
-            if selectedUsers.count == 1 {return selectedUsers.first?.profileImageUrl ?? ""}
+            if selectedUsers.count == 1 {return selectedUsers.first?.profileImageBase64 ?? ""}
             else if selectedUsers.count > 1 {return "group.png"}
             else {return "??"}
         }else {return "??"}
@@ -84,12 +95,6 @@ class MessageViewModel: ObservableObject {
     
     // MARK: download image
     func downloadImage(imageUrl: String,completion: @escaping(_ image: UIImage) -> ()) {
-       
-    }
-    
-    // MARK: user profiles
-    func fetchUserProfiles(){
-       
-        
+        completion(imageUrl.convertBase64ToUIImage())
     }
 }

@@ -60,7 +60,7 @@ struct ChatCell: View {
         .padding(.vertical, 7)
         .background(Color.theme.appBackgroundColor)
         .onAppear{
-            viewModel.downloadImage(imageUrl: user.profileImageUrl) { image in
+            viewModel.downloadImage(imageUrl: user.profileImageBase64) { image in
                 
                 withAnimation(.spring()){
                     profileImage = image

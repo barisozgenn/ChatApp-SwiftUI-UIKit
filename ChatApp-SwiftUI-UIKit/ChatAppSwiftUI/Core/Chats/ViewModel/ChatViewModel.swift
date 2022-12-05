@@ -9,10 +9,10 @@ import SwiftUI
 import RealmSwift
 class ChatViewModel: ObservableObject {
     @Published var selectedUserList : [User] = []
-    @Published var users: [User]?
     @Published var userProfile: User?
     
     @ObservedResults(MessageRoomModel.self, sortDescriptor: SortDescriptor(keyPath: "lastUpdateDate",ascending: true)) var rooms
+    @ObservedResults(User.self) var users
     
     init() {
         fetchUsersData()
@@ -24,10 +24,10 @@ class ChatViewModel: ObservableObject {
         
     }
     func fetchUsersData(){
-        
+        self.userProfile = users.first(where: {$0._id == realmApp.currentUser?.id})
     }
     
     func downloadImage(imageUrl: String,completion: @escaping(_ image: UIImage) -> ()) {
-        
+        completion(imageUrl.convertBase64ToUIImage())
     }
 }

@@ -56,6 +56,8 @@
 		AFA49CE1293B6647005C247D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AFA49CE0293B6647005C247D /* Realm */; };
 		AFA49CE3293B6647005C247D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFA49CE2293B6647005C247D /* RealmSwift */; };
 		AFA49CE5293B9F1C005C247D /* RealmAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA49CE4293B9F1C005C247D /* RealmAuthService.swift */; };
+		AFA49CE7293DF699005C247D /* UIImage+Base64String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA49CE6293DF699005C247D /* UIImage+Base64String.swift */; };
+		AFA49CE8293DF69A005C247D /* UIImage+Base64String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA49CE6293DF699005C247D /* UIImage+Base64String.swift */; };
 		AFE8914E2932054D001262A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914D2932054D001262A8 /* AppDelegate.swift */; };
 		AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8914F2932054D001262A8 /* SceneDelegate.swift */; };
 		AFE891572932054E001262A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE891562932054E001262A8 /* Assets.xcassets */; };
@@ -67,18 +69,10 @@
 		AFE8918729320D67001262A8 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918529320D63001262A8 /* Color+UIColor.swift */; };
 		AFE8918929320D89001262A8 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918829320D89001262A8 /* UIApplication.swift */; };
 		AFE8918A29320DA1001262A8 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918829320D89001262A8 /* UIApplication.swift */; };
-		AFE8918D2932101F001262A8 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918C2932101F001262A8 /* AuthService.swift */; };
-		AFE8918E2932101F001262A8 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918C2932101F001262A8 /* AuthService.swift */; };
 		AFE8919129321065001262A8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919029321065001262A8 /* UserModel.swift */; };
 		AFE8919229321065001262A8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919029321065001262A8 /* UserModel.swift */; };
 		AFE89194293210A5001262A8 /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE89193293210A5001262A8 /* AuthCredentials.swift */; };
 		AFE89195293210A5001262A8 /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE89193293210A5001262A8 /* AuthCredentials.swift */; };
-		AFE8919A29321158001262A8 /* FirebaseFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919929321158001262A8 /* FirebaseFileType.swift */; };
-		AFE8919B29321158001262A8 /* FirebaseFileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919929321158001262A8 /* FirebaseFileType.swift */; };
-		AFE8919D293211E2001262A8 /* ImageUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919C293211E2001262A8 /* ImageUploadService.swift */; };
-		AFE8919E293211E2001262A8 /* ImageUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919C293211E2001262A8 /* ImageUploadService.swift */; };
-		AFE891A0293212C0001262A8 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919F293212C0001262A8 /* ImageDownloadService.swift */; };
-		AFE891A1293212C0001262A8 /* ImageDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919F293212C0001262A8 /* ImageDownloadService.swift */; };
 		AFE891A52932160A001262A8 /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE891A42932160A001262A8 /* MainTabbarController.swift */; };
 		AFE891B329321AB3001262A8 /* ChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE891B229321AB3001262A8 /* ChatsVC.swift */; };
 		AFE891B529321B37001262A8 /* CallsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE891B429321B37001262A8 /* CallsVC.swift */; };
@@ -136,6 +130,7 @@
 		AF9C56EB29379C21004FF281 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		AFA49CDD293B5524005C247D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		AFA49CE4293B9F1C005C247D /* RealmAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmAuthService.swift; sourceTree = "<group>"; };
+		AFA49CE6293DF699005C247D /* UIImage+Base64String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Base64String.swift"; sourceTree = "<group>"; };
 		AFE8914A2932054D001262A8 /* ChatAppUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatAppUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE8914D2932054D001262A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AFE8914F2932054D001262A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,12 +142,8 @@
 		AFE8916C2932057B001262A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AFE8918529320D63001262A8 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
 		AFE8918829320D89001262A8 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		AFE8918C2932101F001262A8 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		AFE8919029321065001262A8 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		AFE89193293210A5001262A8 /* AuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCredentials.swift; sourceTree = "<group>"; };
-		AFE8919929321158001262A8 /* FirebaseFileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFileType.swift; sourceTree = "<group>"; };
-		AFE8919C293211E2001262A8 /* ImageUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadService.swift; sourceTree = "<group>"; };
-		AFE8919F293212C0001262A8 /* ImageDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadService.swift; sourceTree = "<group>"; };
 		AFE891A42932160A001262A8 /* MainTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		AFE891B229321AB3001262A8 /* ChatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsVC.swift; sourceTree = "<group>"; };
 		AFE891B429321B37001262A8 /* CallsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsVC.swift; sourceTree = "<group>"; };
@@ -625,7 +616,6 @@
 			children = (
 				AF9C56BF2935EF0E004FF281 /* Message */,
 				AFE8918F29321052001262A8 /* User */,
-				AFE8919929321158001262A8 /* FirebaseFileType.swift */,
 				AF9C568E2933A8DD004FF281 /* SettingsModel.swift */,
 			);
 			path = Model;
@@ -637,6 +627,7 @@
 				AFE8918529320D63001262A8 /* Color+UIColor.swift */,
 				AFE8918829320D89001262A8 /* UIApplication.swift */,
 				AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */,
+				AFA49CE6293DF699005C247D /* UIImage+Base64String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -654,7 +645,6 @@
 			isa = PBXGroup;
 			children = (
 				AFE891A329321373001262A8 /* User */,
-				AFE891A229321366001262A8 /* Image */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -668,19 +658,9 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		AFE891A229321366001262A8 /* Image */ = {
-			isa = PBXGroup;
-			children = (
-				AFE8919C293211E2001262A8 /* ImageUploadService.swift */,
-				AFE8919F293212C0001262A8 /* ImageDownloadService.swift */,
-			);
-			path = Image;
-			sourceTree = "<group>";
-		};
 		AFE891A329321373001262A8 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				AFE8918C2932101F001262A8 /* AuthService.swift */,
 				AFA49CE4293B9F1C005C247D /* RealmAuthService.swift */,
 			);
 			path = User;
@@ -925,22 +905,19 @@
 				AFE891BB29321BF4001262A8 /* SettingsVC.swift in Sources */,
 				AFE89194293210A5001262A8 /* AuthCredentials.swift in Sources */,
 				AFE891B329321AB3001262A8 /* ChatsVC.swift in Sources */,
-				AFE8918D2932101F001262A8 /* AuthService.swift in Sources */,
 				AF9C56D829375956004FF281 /* MessageCell.swift in Sources */,
 				AFE891B529321B37001262A8 /* CallsVC.swift in Sources */,
 				AF9C56C12935EF27004FF281 /* MessageRoomModel.swift in Sources */,
 				AFE891B729321B6D001262A8 /* StatusVC.swift in Sources */,
 				AF9C56E529378D17004FF281 /* ChatCell.swift in Sources */,
 				AF9C56BE2935ED01004FF281 /* MessageVC.swift in Sources */,
-				AFE8919A29321158001262A8 /* FirebaseFileType.swift in Sources */,
 				AFE891B929321BA4001262A8 /* Communities.swift in Sources */,
 				AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */,
 				AF9C56A12934A1FB004FF281 /* SettingsCell.swift in Sources */,
 				AFE8919129321065001262A8 /* UserModel.swift in Sources */,
 				AF9C569E2934A1DC004FF281 /* SettingsViewModel.swift in Sources */,
 				AFE8918629320D63001262A8 /* Color+UIColor.swift in Sources */,
-				AFE891A0293212C0001262A8 /* ImageDownloadService.swift in Sources */,
-				AFE8919D293211E2001262A8 /* ImageUploadService.swift in Sources */,
+				AFA49CE7293DF699005C247D /* UIImage+Base64String.swift in Sources */,
 				AF9C56B42934EB20004FF281 /* AuthViewModel.swift in Sources */,
 				AF9C56B02934E8BF004FF281 /* RegisterVC.swift in Sources */,
 				AF9C56C82935F0E0004FF281 /* CustomSearchTextField.swift in Sources */,
@@ -974,7 +951,6 @@
 				AF9C568829337B84004FF281 /* RegisterView.swift in Sources */,
 				AFE8919229321065001262A8 /* UserModel.swift in Sources */,
 				AF9C568D2933860D004FF281 /* ImagePicker.swift in Sources */,
-				AFE8919B29321158001262A8 /* FirebaseFileType.swift in Sources */,
 				AF9C56D6293742A1004FF281 /* MessageCell.swift in Sources */,
 				AF9C56D2293640FD004FF281 /* MessageBarView.swift in Sources */,
 				AF9C56CB2935F259004FF281 /* SearchBarView.swift in Sources */,
@@ -985,12 +961,10 @@
 				AFE891C7293232B6001262A8 /* MainTabBarView.swift in Sources */,
 				AFE891C329323280001262A8 /* CommunitiesView.swift in Sources */,
 				AF9C56C52935EF90004FF281 /* MessageModel.swift in Sources */,
-				AFE891A1293212C0001262A8 /* ImageDownloadService.swift in Sources */,
+				AFA49CE8293DF69A005C247D /* UIImage+Base64String.swift in Sources */,
 				AFA49CE5293B9F1C005C247D /* RealmAuthService.swift in Sources */,
 				AF9C56C22935EF27004FF281 /* MessageRoomModel.swift in Sources */,
-				AFE8918E2932101F001262A8 /* AuthService.swift in Sources */,
 				AF5E9F552937C9CD00E43C35 /* ChatViewModel.swift in Sources */,
-				AFE8919E293211E2001262A8 /* ImageUploadService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

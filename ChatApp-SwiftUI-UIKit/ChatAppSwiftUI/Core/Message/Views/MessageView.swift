@@ -37,7 +37,9 @@ struct MessageView: View {
 extension MessageView {
     private var bottomView: some View {
         HStack(spacing: 12){
-            Button {} label: {
+            Button {
+                viewModel.sendMessage(messageText)
+            } label: {
                 Image(systemName: "plus")
                     .resizable()
                     .scaledToFit()

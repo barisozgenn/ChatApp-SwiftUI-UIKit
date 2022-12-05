@@ -10,21 +10,23 @@ import SwiftUI
 struct SettingsView: View {
     @State private var section = 0
     @Binding var isUserNotLogin: Bool
+    @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
         ZStack{
             Color(.systemGroupedBackground).ignoresSafeArea()
             VStack(spacing: 14){
                 HStack(spacing: 14){
-                    Image(systemName: "person")
+                    Image(uiImage: viewModel.userProfile!.profileImageBase64.convertBase64ToUIImage())
+                        .resizable()
+                        .scaledToFill()
                         .fontWeight(.bold)
-                        .frame(width: 64, height: 64)
-                        .padding(4)
+                        .frame(width: 68, height: 68)
                         .foregroundColor(.white)
                         .background(.gray)
                         .clipShape(Circle())
                     VStack(alignment: .leading){
-                        Text("Baris Ozgen")
+                        Text("\(viewModel.userProfile?.name ?? "")")
                             .font(.title)
                         Text("Hi there, I'm using ChatApp")
                             .font(.headline)
@@ -126,23 +128,18 @@ struct SettingsView: View {
                         
                     }
                 }
-               
-                Spacer()
-            }
-            
-        }
-        .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    AuthService.shared.signOut()
+                    viewModel.logout()
                     withAnimation(.spring()){
                         isUserNotLogin = true
                     }
                 } label: {
                     Text("Logout")
                 }
-
+                Spacer()
+                
             }
+            
         }
     }
 }
