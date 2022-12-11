@@ -18,7 +18,8 @@ class AuthViewModel: ObservableObject {
     @ObservedResults(User.self) var users
     
     @Published var profileImage: UIImage?
-    
+    let realm = try! Realm()
+
     func apiLogin(email: String, password: String, registeredUser: User? = nil) {
         dataService.error = nil
         let authCreadential = AuthCredentials(email: email, password: password)
@@ -39,7 +40,11 @@ class AuthViewModel: ObservableObject {
                 self?.isUserNotLogin = false
                 if let registeredUser = registeredUser {
                     registeredUser._id = realmApp.currentUser!.id
-                    self?.$users.append(registeredUser)
+                    //self?.$users.append(registeredUser)
+                   
+                    try! self?.realm.write {
+                        self?.realm.add(registeredUser)
+                        }
                 }
             })
             .store(in: &dataService.cancellables)

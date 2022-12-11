@@ -8,8 +8,13 @@
 import RealmSwift
 import SwiftUI
 import Combine
+import Realm
 
-class RealmAuthService: ObservableObject {
+//do not forget to active Authentication Providers (email/password) on realm.mongodb
+var realmApp = RealmSwift.App(id: "chat-baris-wshnz")
+
+@MainActor
+final class RealmAuthService: ObservableObject {
     var loginPublisher = PassthroughSubject<RealmSwift.User, Error>()
     var logoutPublisher = PassthroughSubject<Void, Error>()
     let userRealmPublisher = PassthroughSubject<Realm, Error>()
@@ -30,8 +35,11 @@ class RealmAuthService: ObservableObject {
             .receive(on: DispatchQueue.main)
             .flatMap {[weak self] user -> RealmPublishers.AsyncOpenPublisher in
                 self?.shouldIndicateActivity = true
-                let realmConfig = user.configuration(partitionValue: "user=\(user.id)")
-                return Realm.asyncOpen(configuration: realmConfig)
+                
+                var config = user.flexibleSyncConfiguration()
+                config.objectTypes = [MessageRoomModel.self, User.self]
+                
+                return Realm.asyncOpen(configuration: config)
             }
             .receive(on: DispatchQueue.main)
             .map {
@@ -60,4 +68,7 @@ class RealmAuthService: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    
+    
 }

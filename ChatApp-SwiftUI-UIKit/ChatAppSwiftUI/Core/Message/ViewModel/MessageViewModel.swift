@@ -74,7 +74,10 @@ final class MessageViewModel: ObservableObject {
                                         roomName: setNavigationTitle() + (userProfile.name),
                                         messages: [message])
             
-            $rooms.append(room)
+            //$rooms.append(room)
+            try! realm.write {
+                    realm.add(room)
+                }
         }
     }
     // MARK: set navigation features
