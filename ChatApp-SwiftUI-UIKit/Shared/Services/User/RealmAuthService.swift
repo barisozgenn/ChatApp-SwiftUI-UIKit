@@ -10,11 +10,14 @@ import SwiftUI
 import Combine
 import Realm
 
-//do not forget to active Authentication Providers (email/password) on realm.mongodb
-var realmApp = RealmSwift.App(id: "chat-baris-wshnz")
+let realmApp = RealmSwift.App(id: "chat-baris-wshnz")
 
 @MainActor
 final class RealmAuthService: ObservableObject {
+    
+    //do not forget to active Authentication Providers (email/password) on realm.mongodb
+   
+    
     var loginPublisher = PassthroughSubject<RealmSwift.User, Error>()
     var logoutPublisher = PassthroughSubject<Void, Error>()
     let userRealmPublisher = PassthroughSubject<Realm, Error>()
@@ -28,16 +31,26 @@ final class RealmAuthService: ObservableObject {
     var loggedIn: Bool {
         realmApp.currentUser != nil && realmApp.currentUser?.state == .loggedIn && user != nil
     }
-
+    
+    func realm() async throws -> Realm {
+        let realmUser = realmApp.currentUser
+        
+        var config = realmUser!.flexibleSyncConfiguration()
+        
+        config.objectTypes = [MessageRoomModel.self,  MessageModel.self, User.self]
+        
+        let realm = try await Realm(configuration: config, downloadBeforeOpen: .always)
+        print("Successfully opened realm: \(realm)")
+        return realm
+    }
     init() {
-
         loginPublisher
             .receive(on: DispatchQueue.main)
             .flatMap {[weak self] user -> RealmPublishers.AsyncOpenPublisher in
                 self?.shouldIndicateActivity = true
                 
                 var config = user.flexibleSyncConfiguration()
-                config.objectTypes = [MessageRoomModel.self, User.self]
+                config.objectTypes = [MessageRoomModel.self, MessageModel.self, User.self]
                 
                 return Realm.asyncOpen(configuration: config)
             }

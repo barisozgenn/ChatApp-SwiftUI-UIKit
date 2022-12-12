@@ -40,8 +40,9 @@ class AuthViewModel: ObservableObject {
                 self?.isUserNotLogin = false
                 if let registeredUser = registeredUser {
                     registeredUser._id = realmApp.currentUser!.id
-                    //self?.$users.append(registeredUser)
+                    self?.$users.append(registeredUser)
                    
+                    //self?.saveProfile(registeredUser: registeredUser)
                     try! self?.realm.write {
                         self?.realm.add(registeredUser)
                         }
@@ -91,5 +92,21 @@ class AuthViewModel: ObservableObject {
                 self?.isUserNotLogin = true
             })
             .store(in: &dataService.cancellables)
+    }
+    
+    func saveProfile(registeredUser:User){
+        /*Task {
+            print("task gere")
+            try await dataService.realm().add(registeredUser)
+              
+        }*/
+        let client = realmApp.currentUser!.mongoClient("mongodb-atlas")
+        let database = client.database(named: "ChatBarisMongoDB")
+        let collection = database.collection(withName: "User")
+        let myTaskDoc = Document(_immutableCocoaDictionary: registeredUser)
+
+        collection.insertOne(myTaskDoc, { result in
+            print(result)
+        })
     }
 }

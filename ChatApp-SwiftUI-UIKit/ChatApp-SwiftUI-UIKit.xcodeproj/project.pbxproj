@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF51FBD62947348B00B64AF4 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = AF51FBD52947348B00B64AF4 /* AWSDataStorePlugin */; };
+		AF51FBD82947348B00B64AF4 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = AF51FBD72947348B00B64AF4 /* Amplify */; };
 		AF5E9F552937C9CD00E43C35 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F542937C9CD00E43C35 /* ChatViewModel.swift */; };
 		AF5E9F572938C7B900E43C35 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F562938C7B900E43C35 /* MessageViewModel.swift */; };
 		AF5E9F592938CA0D00E43C35 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F582938CA0D00E43C35 /* LazyNavigationView.swift */; };
@@ -173,6 +175,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF51FBD62947348B00B64AF4 /* AWSDataStorePlugin in Frameworks */,
+				AF51FBD82947348B00B64AF4 /* Amplify in Frameworks */,
 				AFA49CE3293B6647005C247D /* RealmSwift in Frameworks */,
 				AFA49CE1293B6647005C247D /* Realm in Frameworks */,
 			);
@@ -815,6 +819,8 @@
 			packageProductDependencies = (
 				AFA49CE0293B6647005C247D /* Realm */,
 				AFA49CE2293B6647005C247D /* RealmSwift */,
+				AF51FBD52947348B00B64AF4 /* AWSDataStorePlugin */,
+				AF51FBD72947348B00B64AF4 /* Amplify */,
 			);
 			productName = ChatAppSwiftUI;
 			productReference = AFE891632932057B001262A8 /* ChatAppSwiftUI.app */;
@@ -850,6 +856,7 @@
 			packageReferences = (
 				AF9C56982934A1B8004FF281 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				AFA49CDF293B6647005C247D /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */,
 			);
 			productRefGroup = AFE8914B2932054D001262A8 /* Products */;
 			projectDirPath = "";
@@ -1345,6 +1352,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/aws-amplify/amplify-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		AF9C56982934A1B8004FF281 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift";
@@ -1364,6 +1379,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF51FBD52947348B00B64AF4 /* AWSDataStorePlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSDataStorePlugin;
+		};
+		AF51FBD72947348B00B64AF4 /* Amplify */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = Amplify;
+		};
 		AF9C56992934A1B9004FF281 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF9C56982934A1B8004FF281 /* XCRemoteSwiftPackageReference "RxSwift" */;
