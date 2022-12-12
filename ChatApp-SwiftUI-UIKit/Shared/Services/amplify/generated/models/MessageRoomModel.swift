@@ -6,7 +6,7 @@ public struct MessageRoomModel: Model {
   public let id: String
   public var users: [String?]?
   public var roomName: String?
-  public var messages: [String?]?
+  public var messages: [MessageModel?]?
   public var lastUpdateDate: Temporal.DateTime?
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
@@ -14,7 +14,7 @@ public struct MessageRoomModel: Model {
   public init(id: String = UUID().uuidString,
       users: [String?]? = nil,
       roomName: String? = nil,
-      messages: [String?]? = nil,
+      messages: [MessageModel?]? = nil,
       lastUpdateDate: Temporal.DateTime? = nil) {
     self.init(id: id,
       users: users,
@@ -27,7 +27,7 @@ public struct MessageRoomModel: Model {
   internal init(id: String = UUID().uuidString,
       users: [String?]? = nil,
       roomName: String? = nil,
-      messages: [String?]? = nil,
+      messages: [MessageModel?]? = nil,
       lastUpdateDate: Temporal.DateTime? = nil,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {

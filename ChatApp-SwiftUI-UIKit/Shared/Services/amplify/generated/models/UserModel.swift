@@ -8,6 +8,7 @@ public struct UserModel: Model {
   public var email: String?
   public var name: String?
   public var registerDate: Temporal.DateTime?
+  public var realmId: String
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
@@ -15,12 +16,14 @@ public struct UserModel: Model {
       profileImageBase64: String? = nil,
       email: String? = nil,
       name: String? = nil,
-      registerDate: Temporal.DateTime? = nil) {
+      registerDate: Temporal.DateTime? = nil,
+      realmId: String) {
     self.init(id: id,
       profileImageBase64: profileImageBase64,
       email: email,
       name: name,
       registerDate: registerDate,
+      realmId: realmId,
       createdAt: nil,
       updatedAt: nil)
   }
@@ -29,6 +32,7 @@ public struct UserModel: Model {
       email: String? = nil,
       name: String? = nil,
       registerDate: Temporal.DateTime? = nil,
+      realmId: String,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
@@ -36,6 +40,7 @@ public struct UserModel: Model {
       self.email = email
       self.name = name
       self.registerDate = registerDate
+      self.realmId = realmId
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }

@@ -34,7 +34,7 @@ extension MessageRoomModel {
       .field(messageRoomModel.id, is: .required, ofType: .string),
       .field(messageRoomModel.users, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(messageRoomModel.roomName, is: .optional, ofType: .string),
-      .field(messageRoomModel.messages, is: .optional, ofType: .embeddedCollection(of: String.self)),
+      .field(messageRoomModel.messages, is: .optional, ofType: .embeddedCollection(of: MessageModel.self)),
       .field(messageRoomModel.lastUpdateDate, is: .optional, ofType: .dateTime),
       .field(messageRoomModel.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(messageRoomModel.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)

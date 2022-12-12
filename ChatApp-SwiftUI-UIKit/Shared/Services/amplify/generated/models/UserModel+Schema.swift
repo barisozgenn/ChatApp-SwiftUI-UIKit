@@ -10,6 +10,7 @@ extension UserModel {
     case email
     case name
     case registerDate
+    case realmId
     case createdAt
     case updatedAt
   }
@@ -36,6 +37,7 @@ extension UserModel {
       .field(userModel.email, is: .optional, ofType: .string),
       .field(userModel.name, is: .optional, ofType: .string),
       .field(userModel.registerDate, is: .optional, ofType: .dateTime),
+      .field(userModel.realmId, is: .required, ofType: .string),
       .field(userModel.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(userModel.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )

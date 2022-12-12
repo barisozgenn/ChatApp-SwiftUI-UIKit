@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		AF51FBD62947348B00B64AF4 /* AWSDataStorePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = AF51FBD52947348B00B64AF4 /* AWSDataStorePlugin */; };
 		AF51FBD82947348B00B64AF4 /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = AF51FBD72947348B00B64AF4 /* Amplify */; };
+		AF51FBDA29479F3600B64AF4 /* AWSAPIPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = AF51FBD929479F3600B64AF4 /* AWSAPIPlugin */; };
+		AF51FBDC29479F3600B64AF4 /* AWSPluginsCore in Frameworks */ = {isa = PBXBuildFile; productRef = AF51FBDB29479F3600B64AF4 /* AWSPluginsCore */; };
+		AF51FBDE29479FE900B64AF4 /* amplify in Resources */ = {isa = PBXBuildFile; fileRef = AF51FBDD29479FE900B64AF4 /* amplify */; };
+		AF51FBE32947A29700B64AF4 /* AmplifyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51FBDF2947A29700B64AF4 /* AmplifyModels.swift */; };
+		AF51FBE42947A29700B64AF4 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51FBE02947A29700B64AF4 /* UserModel.swift */; };
+		AF51FBE52947A29700B64AF4 /* MessageRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51FBE12947A29700B64AF4 /* MessageRoomModel.swift */; };
+		AF51FBE62947A29700B64AF4 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF51FBE22947A29700B64AF4 /* MessageModel.swift */; };
 		AF5E9F552937C9CD00E43C35 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F542937C9CD00E43C35 /* ChatViewModel.swift */; };
 		AF5E9F572938C7B900E43C35 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F562938C7B900E43C35 /* MessageViewModel.swift */; };
 		AF5E9F592938CA0D00E43C35 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5E9F582938CA0D00E43C35 /* LazyNavigationView.swift */; };
@@ -37,10 +44,6 @@
 		AF9C56B72934F222004FF281 /* Date+TimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */; };
 		AF9C56B92935ECD5004FF281 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B82935ECD5004FF281 /* MessageView.swift */; };
 		AF9C56BE2935ED01004FF281 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56BD2935ED01004FF281 /* MessageVC.swift */; };
-		AF9C56C12935EF27004FF281 /* MessageRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */; };
-		AF9C56C22935EF27004FF281 /* MessageRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */; };
-		AF9C56C42935EF90004FF281 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C32935EF90004FF281 /* MessageModel.swift */; };
-		AF9C56C52935EF90004FF281 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C32935EF90004FF281 /* MessageModel.swift */; };
 		AF9C56C82935F0E0004FF281 /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */; };
 		AF9C56CB2935F259004FF281 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56CA2935F259004FF281 /* SearchBarView.swift */; };
 		AF9C56CE29360B14004FF281 /* MessageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56CD29360B14004FF281 /* MessageHeaderView.swift */; };
@@ -71,8 +74,8 @@
 		AFE8918729320D67001262A8 /* Color+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918529320D63001262A8 /* Color+UIColor.swift */; };
 		AFE8918929320D89001262A8 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918829320D89001262A8 /* UIApplication.swift */; };
 		AFE8918A29320DA1001262A8 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8918829320D89001262A8 /* UIApplication.swift */; };
-		AFE8919129321065001262A8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919029321065001262A8 /* UserModel.swift */; };
-		AFE8919229321065001262A8 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919029321065001262A8 /* UserModel.swift */; };
+		AFE8919129321065001262A8 /* UserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919029321065001262A8 /* UserRealm.swift */; };
+		AFE8919229321065001262A8 /* UserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE8919029321065001262A8 /* UserRealm.swift */; };
 		AFE89194293210A5001262A8 /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE89193293210A5001262A8 /* AuthCredentials.swift */; };
 		AFE89195293210A5001262A8 /* AuthCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE89193293210A5001262A8 /* AuthCredentials.swift */; };
 		AFE891A52932160A001262A8 /* MainTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE891A42932160A001262A8 /* MainTabbarController.swift */; };
@@ -91,6 +94,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF51FBDD29479FE900B64AF4 /* amplify */ = {isa = PBXFileReference; lastKnownFileType = folder; path = amplify; sourceTree = "<group>"; };
+		AF51FBDF2947A29700B64AF4 /* AmplifyModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AmplifyModels.swift; path = Shared/Services/amplify/generated/models/AmplifyModels.swift; sourceTree = SOURCE_ROOT; };
+		AF51FBE02947A29700B64AF4 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = Shared/Services/amplify/generated/models/UserModel.swift; sourceTree = SOURCE_ROOT; };
+		AF51FBE12947A29700B64AF4 /* MessageRoomModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageRoomModel.swift; path = Shared/Services/amplify/generated/models/MessageRoomModel.swift; sourceTree = SOURCE_ROOT; };
+		AF51FBE22947A29700B64AF4 /* MessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageModel.swift; path = Shared/Services/amplify/generated/models/MessageModel.swift; sourceTree = SOURCE_ROOT; };
 		AF5E9F542937C9CD00E43C35 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		AF5E9F562938C7B900E43C35 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		AF5E9F582938CA0D00E43C35 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
@@ -114,8 +122,6 @@
 		AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeStamp.swift"; sourceTree = "<group>"; };
 		AF9C56B82935ECD5004FF281 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		AF9C56BD2935ED01004FF281 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
-		AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRoomModel.swift; sourceTree = "<group>"; };
-		AF9C56C32935EF90004FF281 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		AF9C56CA2935F259004FF281 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		AF9C56CC29360502004FF281 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -144,7 +150,7 @@
 		AFE8916C2932057B001262A8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AFE8918529320D63001262A8 /* Color+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+UIColor.swift"; sourceTree = "<group>"; };
 		AFE8918829320D89001262A8 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
-		AFE8919029321065001262A8 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		AFE8919029321065001262A8 /* UserRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRealm.swift; sourceTree = "<group>"; };
 		AFE89193293210A5001262A8 /* AuthCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCredentials.swift; sourceTree = "<group>"; };
 		AFE891A42932160A001262A8 /* MainTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbarController.swift; sourceTree = "<group>"; };
 		AFE891B229321AB3001262A8 /* ChatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsVC.swift; sourceTree = "<group>"; };
@@ -175,7 +181,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF51FBDA29479F3600B64AF4 /* AWSAPIPlugin in Frameworks */,
 				AF51FBD62947348B00B64AF4 /* AWSDataStorePlugin in Frameworks */,
+				AF51FBDC29479F3600B64AF4 /* AWSPluginsCore in Frameworks */,
 				AF51FBD82947348B00B64AF4 /* Amplify in Frameworks */,
 				AFA49CE3293B6647005C247D /* RealmSwift in Frameworks */,
 				AFA49CE1293B6647005C247D /* Realm in Frameworks */,
@@ -378,15 +386,6 @@
 				AFE891B229321AB3001262A8 /* ChatsVC.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		AF9C56BF2935EF0E004FF281 /* Message */ = {
-			isa = PBXGroup;
-			children = (
-				AF9C56C02935EF27004FF281 /* MessageRoomModel.swift */,
-				AF9C56C32935EF90004FF281 /* MessageModel.swift */,
-			);
-			path = Message;
 			sourceTree = "<group>";
 		};
 		AF9C56C62935F0D3004FF281 /* Message */ = {
@@ -618,7 +617,10 @@
 		AFE8917729320635001262A8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AF9C56BF2935EF0E004FF281 /* Message */,
+				AF51FBDF2947A29700B64AF4 /* AmplifyModels.swift */,
+				AF51FBE22947A29700B64AF4 /* MessageModel.swift */,
+				AF51FBE12947A29700B64AF4 /* MessageRoomModel.swift */,
+				AF51FBE02947A29700B64AF4 /* UserModel.swift */,
 				AFE8918F29321052001262A8 /* User */,
 				AF9C568E2933A8DD004FF281 /* SettingsModel.swift */,
 			);
@@ -648,6 +650,7 @@
 		AFE8918B29320FF1001262A8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AF51FBDD29479FE900B64AF4 /* amplify */,
 				AFE891A329321373001262A8 /* User */,
 			);
 			path = Services;
@@ -656,7 +659,7 @@
 		AFE8918F29321052001262A8 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				AFE8919029321065001262A8 /* UserModel.swift */,
+				AFE8919029321065001262A8 /* UserRealm.swift */,
 				AFE89193293210A5001262A8 /* AuthCredentials.swift */,
 			);
 			path = User;
@@ -821,6 +824,8 @@
 				AFA49CE2293B6647005C247D /* RealmSwift */,
 				AF51FBD52947348B00B64AF4 /* AWSDataStorePlugin */,
 				AF51FBD72947348B00B64AF4 /* Amplify */,
+				AF51FBD929479F3600B64AF4 /* AWSAPIPlugin */,
+				AF51FBDB29479F3600B64AF4 /* AWSPluginsCore */,
 			);
 			productName = ChatAppSwiftUI;
 			productReference = AFE891632932057B001262A8 /* ChatAppSwiftUI.app */;
@@ -882,6 +887,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF51FBDE29479FE900B64AF4 /* amplify in Resources */,
 				AFE8917B29320A00001262A8 /* Assets.xcassets in Resources */,
 				AFE8916D2932057B001262A8 /* Preview Assets.xcassets in Resources */,
 			);
@@ -897,7 +903,6 @@
 				AFE8918929320D89001262A8 /* UIApplication.swift in Sources */,
 				AF9C56A52934B6C1004FF281 /* SettingsHeaderView.swift in Sources */,
 				AF9C56AA2934E782004FF281 /* LoginVC.swift in Sources */,
-				AF9C56C42935EF90004FF281 /* MessageModel.swift in Sources */,
 				AF9C568F2933A8DD004FF281 /* SettingsModel.swift in Sources */,
 				AF9C56A32934A3B9004FF281 /* UIView.swift in Sources */,
 				AF9C56D029361FD9004FF281 /* CustomMessageTextField.swift in Sources */,
@@ -914,14 +919,13 @@
 				AFE891B329321AB3001262A8 /* ChatsVC.swift in Sources */,
 				AF9C56D829375956004FF281 /* MessageCell.swift in Sources */,
 				AFE891B529321B37001262A8 /* CallsVC.swift in Sources */,
-				AF9C56C12935EF27004FF281 /* MessageRoomModel.swift in Sources */,
 				AFE891B729321B6D001262A8 /* StatusVC.swift in Sources */,
 				AF9C56E529378D17004FF281 /* ChatCell.swift in Sources */,
 				AF9C56BE2935ED01004FF281 /* MessageVC.swift in Sources */,
 				AFE891B929321BA4001262A8 /* Communities.swift in Sources */,
 				AFE891502932054D001262A8 /* SceneDelegate.swift in Sources */,
 				AF9C56A12934A1FB004FF281 /* SettingsCell.swift in Sources */,
-				AFE8919129321065001262A8 /* UserModel.swift in Sources */,
+				AFE8919129321065001262A8 /* UserRealm.swift in Sources */,
 				AF9C569E2934A1DC004FF281 /* SettingsViewModel.swift in Sources */,
 				AFE8918629320D63001262A8 /* Color+UIColor.swift in Sources */,
 				AFA49CE7293DF699005C247D /* UIImage+Base64String.swift in Sources */,
@@ -936,6 +940,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF51FBE52947A29700B64AF4 /* MessageRoomModel.swift in Sources */,
 				AF9C56902933A8DD004FF281 /* SettingsModel.swift in Sources */,
 				AFF63CA32937BA0A00709BDF /* SearchViewModel.swift in Sources */,
 				AFE891C529323291001262A8 /* SettingsView.swift in Sources */,
@@ -956,7 +961,8 @@
 				AFE8918729320D67001262A8 /* Color+UIColor.swift in Sources */,
 				AFE891BF29323259001262A8 /* CallsView.swift in Sources */,
 				AF9C568829337B84004FF281 /* RegisterView.swift in Sources */,
-				AFE8919229321065001262A8 /* UserModel.swift in Sources */,
+				AF51FBE32947A29700B64AF4 /* AmplifyModels.swift in Sources */,
+				AFE8919229321065001262A8 /* UserRealm.swift in Sources */,
 				AF9C568D2933860D004FF281 /* ImagePicker.swift in Sources */,
 				AF9C56D6293742A1004FF281 /* MessageCell.swift in Sources */,
 				AF9C56D2293640FD004FF281 /* MessageBarView.swift in Sources */,
@@ -965,12 +971,12 @@
 				AFE89195293210A5001262A8 /* AuthCredentials.swift in Sources */,
 				AF9C568629337B70004FF281 /* LoginView.swift in Sources */,
 				AF9C56D429364659004FF281 /* ChatHeaderView.swift in Sources */,
+				AF51FBE62947A29700B64AF4 /* MessageModel.swift in Sources */,
 				AFE891C7293232B6001262A8 /* MainTabBarView.swift in Sources */,
 				AFE891C329323280001262A8 /* CommunitiesView.swift in Sources */,
-				AF9C56C52935EF90004FF281 /* MessageModel.swift in Sources */,
 				AFA49CE8293DF69A005C247D /* UIImage+Base64String.swift in Sources */,
 				AFA49CE5293B9F1C005C247D /* RealmAuthService.swift in Sources */,
-				AF9C56C22935EF27004FF281 /* MessageRoomModel.swift in Sources */,
+				AF51FBE42947A29700B64AF4 /* UserModel.swift in Sources */,
 				AF5E9F552937C9CD00E43C35 /* ChatViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1388,6 +1394,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */;
 			productName = Amplify;
+		};
+		AF51FBD929479F3600B64AF4 /* AWSAPIPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSAPIPlugin;
+		};
+		AF51FBDB29479F3600B64AF4 /* AWSPluginsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF51FBD42947348A00B64AF4 /* XCRemoteSwiftPackageReference "amplify-ios" */;
+			productName = AWSPluginsCore;
 		};
 		AF9C56992934A1B9004FF281 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,18 +1,17 @@
+type MessageModel {
+  id: String!
+  senderId: String
+  readers: [String]
+  message: String!
+  createdDate: AWSDateTime!
+}
+
 type MessageRoomModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   users: [String]
   roomName: String
-  messages: [AWSJSON]
+  messages: [MessageModel]
   lastUpdateDate: AWSDateTime
-}
-
-type MessageModel @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  senderId: String
-  readers: [String]
-  message: String
-  createdDate: AWSDateTime
-  roomId: String
 }
 
 type UserModel @model @auth(rules: [{allow: public}]) {
@@ -21,4 +20,5 @@ type UserModel @model @auth(rules: [{allow: public}]) {
   email: String
   name: String
   registerDate: AWSDateTime
+  realmId: String!
 }

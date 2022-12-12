@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import RealmSwift
+import Amplify
+
 class ChatViewModel: ObservableObject {
-    @Published var selectedUserList : [User] = []
-    @Published var userProfile: User?
+    @Published var selectedUserList : [UserModel] = []
+    @Published var userProfile: UserModel?
     
-    @ObservedResults(MessageRoomModel.self, sortDescriptor: SortDescriptor(keyPath: "lastUpdateDate",ascending: true)) var rooms
-    @ObservedResults(User.self) var users
+    private var rooms: [MessageRoomModel] = []
+    private var users : [UserModel] = []
     
     init() {
         fetchUsersData()
@@ -20,14 +21,23 @@ class ChatViewModel: ObservableObject {
     
     // MARK: fetch data
     func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [User] {
+       
         var selectedUsers: [User] = []
-            for userId in selectedRoom.users {
-                selectedUsers.append(users.first(where: {$0._id == userId})!)
+            for userId in selectedRoom.users! {
+                selectedUsers.append(users.first(where: {$0.id == userId})!)
             }
             return selectedUsers
     }
     func fetchUsersData(){
-        self.userProfile = users.first(where: {$0._id == realmApp.currentUser?.id})
+        Amplify.DataStore.query(UserModel.self) { [weak self] result in
+            switch result {
+            case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
+            case .success(let users):
+                self?.users = users
+                self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+            }
+        }
+       
     }
     
     func downloadImage(imageUrl: String,completion: @escaping(_ image: UIImage) -> ()) {

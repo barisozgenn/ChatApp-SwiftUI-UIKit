@@ -7,10 +7,30 @@
 
 import SwiftUI
 import RealmSwift
+import Amplify
+import AWSDataStorePlugin
+import AWSAPIPlugin // UNCOMMENT this line once backend is deployed
 
 @main
 struct ChatAppSwiftUIApp: SwiftUI.App {
+    
+    
     @UIApplicationDelegateAdaptor(CustomAppDelegate.self) var delegate
+    
+    public init() {
+        let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
+        //let apiPlugin = AWSAPIPlugin(modelRegistration: AmplifyModels()) // UNCOMMENT this line once backend is deployed
+
+        do {
+            try Amplify.add(plugin: dataStorePlugin)
+            //try Amplify.add(plugin: apiPlugin) // UNCOMMENT this line once backend is deployed
+            try Amplify.configure()
+            print("Initialized Amplify");
+        } catch {
+            print("Could not initialize Amplify: \(error)")
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
             let _ = print("DEBUG: Realm Path: \(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.path())")
@@ -21,18 +41,6 @@ struct ChatAppSwiftUIApp: SwiftUI.App {
 }
 
 class CustomAppDelegate: NSObject, UIApplicationDelegate {
-    
-    func openFlexibleSyncRealm() async throws -> Realm {
-        let app = App(id: "chat-baris-wshnz")
-
-        let user = try await app.login(credentials: Credentials.anonymous)
-        var config = user.flexibleSyncConfiguration()
-        
-        config.objectTypes = [MessageRoomModel.self, User.self]
-        let realm = try await Realm(configuration: config, downloadBeforeOpen: .always)
-        print("Successfully opened realm: \(realm)")
-        return realm
-    }
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
