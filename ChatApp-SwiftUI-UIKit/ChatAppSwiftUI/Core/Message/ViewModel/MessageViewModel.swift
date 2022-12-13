@@ -8,38 +8,37 @@
 import SwiftUI
 import RealmSwift
 import Combine
+import Amplify
 
 final class MessageViewModel: ObservableObject {
     // MARK: - Properties
     
-    let realm = try! Realm()
-    @Published var userProfile: User?
+    @Published var userProfile: UserModel?
     @Published var messages: [MessageModel] = []
     @Published var selectedRoom: MessageRoomModel?
-    @Published var selectedUsers: [User]? = []
+    @Published var selectedUsers: [UserModel]? = []
     
-    @ObservedResults(MessageRoomModel.self, sortDescriptor: SortDescriptor(keyPath: "lastUpdateDate",ascending: true)) var rooms
-    @ObservedResults(User.self) var users
+    private var rooms: [MessageRoomModel] = []
+    private var users : [UserModel] = []
+    
     var cancellables = Set<AnyCancellable>()
 
-    init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [User]? = nil){
+    init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [UserModel]? = nil){
+        
+        fetchRoomsData()
+        fetchUsersData()
+        
         if let selectedRoom = selectedRoom {
-            self.selectedRoom = selectedRoom
-            rooms.objectWillChange
-                .receive(on: DispatchQueue.main)
-                .sink { _ in
-                
-                } receiveValue: { [weak self] _ in
-                    self?.fetchMessages()
-                }
-                .store(in: &cancellables)
-
+            self.selectedRoom = rooms.first(where: {$0.id == selectedRoom.id})
+            if let messages = selectedRoom.messages {
+                self.messages = messages
+            }
         }
         if let selectedUsers = selectedUsers {self.selectedUsers = selectedUsers}
        
-        if let userProfile = selectedUsers?.first(where: {$0._id == realmApp.currentUser?.id ?? ""}) {
+        if let userProfile = selectedUsers?.first(where: {$0.realmId == realmApp.currentUser?.id ?? ""}) {
             self.userProfile = userProfile
-        }else if let userProfile = users.first(where: {$0._id == realmApp.currentUser?.id ?? ""}) {
+        }else if let userProfile = users.first(where: {$0.realmId == realmApp.currentUser?.id ?? ""}) {
             self.userProfile = userProfile
         }
     }
@@ -50,34 +49,39 @@ final class MessageViewModel: ObservableObject {
         guard let userProfile = self.userProfile else {return}
         
         if let selectedRoom = selectedRoom { // MARK: existing room
-            let message = MessageModel(senderId: userProfile._id,
-                                       readers: [userProfile._id],
-                                       message: message)
+            let message = MessageModel(id: UUID().uuidString,
+                                       senderId: userProfile.realmId,
+                                       readers: [userProfile.realmId],
+                                       message: message,
+                                       createdDate: Temporal.DateTime.now())
             
-            let room = realm.objects(MessageRoomModel.self).where{($0._id == selectedRoom._id)}.first!
-            
-            try! realm.write {
-                room.messages.append(message)
+            Amplify.DataStore.save(message, where: QueryPredicate?) { <#Result<Model, DataStoreError>#> in
+                <#code#>
             }
+            
             
         }else { // MARK:  new room
             guard let selectedUsers = selectedUsers
             else{return}
-            var userIds = selectedUsers.map { $0._id }
-            userIds.append(userProfile._id)
+            var userIds = selectedUsers.map { $0.realmId }
+            userIds.append(userProfile.realmId)
             
-            let message = MessageModel(senderId: userProfile._id,
-                                       readers: [userProfile._id],
-                                       message: message)
+            let message = MessageModel(id: UUID().uuidString,
+                                       senderId: userProfile.realmId,
+                                       readers: [userProfile.realmId],
+                                       message: message,
+                                       createdDate: Temporal.DateTime.now())
             
             let room = MessageRoomModel(users: userIds,
-                                        roomName: setNavigationTitle() + (userProfile.name),
+                                        roomName: setNavigationTitle() + (userProfile.name!),
                                         messages: [message])
             
-            //$rooms.append(room)
-            try! realm.write {
-                    realm.add(room)
+            Amplify.DataStore.save(room) { [weak self] result in
+                switch result {
+                case .success(let room): print("DEBUG: success amplify \(room.roomName ?? "empty")")
+                case .failure(let error): print("DEBUG: error amplify \(error.localizedDescription)")
                 }
+            }
         }
     }
     // MARK: set navigation features
@@ -89,7 +93,7 @@ final class MessageViewModel: ObservableObject {
             }else if selectedUsers.count > 2 {
                 var roomName = ""
                 for name in selectedUsers {
-                    roomName += "\(name.name.split(separator: " ", omittingEmptySubsequences: true).first ?? ""), "
+                    roomName += "\(name.name?.split(separator: " ", omittingEmptySubsequences: true).first ?? ""), "
                 }
                 return String(roomName.dropLast(2))
             }
@@ -100,22 +104,32 @@ final class MessageViewModel: ObservableObject {
     func setNavigationImage() -> String {
         if let selectedUsers = self.selectedUsers {
             // you can add group photo here
-            return selectedUsers.first(where: {$0._id != userProfile!._id})!.profileImageBase64
+            return selectedUsers.first(where: {$0.realmId != userProfile!.realmId})!.profileImageBase64 ?? "?"
         }else {return "??"}
     }
     
-    // MARK: - room messages
-    func fetchMessages(){
-        if let selectedRoom = selectedRoom {
-            let room = realm.objects(MessageRoomModel.self).where{($0._id == selectedRoom._id)}.first!
-            let roomMessages = room.messages.map({$0 as MessageModel})
-            for newMessage in roomMessages {
-                if !messages.contains(newMessage) {
-                    messages.append(newMessage)
-                }
+    // MARK: -  apis
+    func fetchUsersData(){
+        Amplify.DataStore.query(UserModel.self) { [weak self] result in
+            switch result {
+            case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
+            case .success(let users):
+                self?.users = users
+                self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+            }
+        }
+       
+    }
+    func fetchRoomsData(){
+        Amplify.DataStore.query(MessageRoomModel.self) { [weak self] result in
+            switch result {
+            case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
+            case .success(let rooms):
+                self?.rooms = rooms
             }
         }
     }
+    
     // MARK: download image
     func downloadImage(imageUrl: String,completion: @escaping(_ image: UIImage) -> ()) {
         completion(imageUrl.convertBase64ToUIImage())

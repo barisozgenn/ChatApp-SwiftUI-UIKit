@@ -7,18 +7,16 @@
 
 import Foundation
 import RealmSwift
+import Amplify
 
 final class SearchViewModel: ObservableObject {
     private let auth = RealmAuthService()
 
-    @ObservedResults(User.self) var users
-    @Published var userProfile: User? = nil
-    
+    @Published var users : [UserModel] = []
+    @Published var userProfile: UserModel?
+
     init(){
-        fetchData()
-    }
-    func fetchData(){
-        self.userProfile = users.first(where: {$0._id == realmApp.currentUser!.id})!
+        fetchUsersData()
     }
     func logout(){
         realmApp.currentUser?.logOut()
@@ -29,5 +27,16 @@ final class SearchViewModel: ObservableObject {
                 self?.auth.logoutPublisher.send(user)
             })
             .store(in: &auth.cancellables)
+    }
+    func fetchUsersData(){
+        Amplify.DataStore.query(UserModel.self) { [weak self] result in
+            switch result {
+            case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
+            case .success(let users):
+                self?.users = users
+                self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+            }
+        }
+       
     }
 }

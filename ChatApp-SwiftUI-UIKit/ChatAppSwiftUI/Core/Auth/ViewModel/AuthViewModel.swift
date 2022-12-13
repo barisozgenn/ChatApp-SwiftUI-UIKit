@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 import RealmSwift
+import Amplify
 
 class AuthViewModel: ObservableObject {
     private let dataService = RealmAuthService()
@@ -43,9 +44,10 @@ class AuthViewModel: ObservableObject {
                     self?.$users.append(registeredUser)
                    
                     //self?.saveProfile(registeredUser: registeredUser)
-                    try! self?.realm.write {
+                    /*try! self?.realm.write {
                         self?.realm.add(registeredUser)
-                        }
+                        }*/
+                    self?.saveProfile(registeredUser: registeredUser)
                 }
             })
             .store(in: &dataService.cancellables)
@@ -95,18 +97,19 @@ class AuthViewModel: ObservableObject {
     }
     
     func saveProfile(registeredUser:User){
-        /*Task {
-            print("task gere")
-            try await dataService.realm().add(registeredUser)
-              
-        }*/
-        let client = realmApp.currentUser!.mongoClient("mongodb-atlas")
-        let database = client.database(named: "ChatBarisMongoDB")
-        let collection = database.collection(withName: "User")
-        let myTaskDoc = Document(_immutableCocoaDictionary: registeredUser)
-
-        collection.insertOne(myTaskDoc, { result in
-            print(result)
-        })
+        let item = UserModel(
+            profileImageBase64: registeredUser.profileImageBase64,
+            email: registeredUser.email,
+            name: registeredUser.name,
+            registerDate: Temporal.DateTime.now(),
+            realmId: registeredUser._id)
+        
+        Amplify.DataStore.save(item) {result in
+            switch result {
+            case .success(let user): print("DEBUG: success amplify \(user.realmId)")
+            case .failure(let error): print("DEBUG: error amplify \(error.localizedDescription)")
+            }
+        }
+        
     }
 }

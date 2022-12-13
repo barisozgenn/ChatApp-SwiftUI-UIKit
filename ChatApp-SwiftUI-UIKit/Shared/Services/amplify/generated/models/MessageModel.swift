@@ -3,6 +3,7 @@ import Amplify
 import Foundation
 
 public struct MessageModel: Embeddable {
+    
   var id: String
   var senderId: String?
   var readers: [String?]?

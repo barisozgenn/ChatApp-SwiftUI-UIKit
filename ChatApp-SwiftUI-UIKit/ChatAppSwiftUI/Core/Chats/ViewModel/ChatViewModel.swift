@@ -16,15 +16,19 @@ class ChatViewModel: ObservableObject {
     private var users : [UserModel] = []
     
     init() {
+        fetchRoomsData()
         fetchUsersData()
     }
     
     // MARK: fetch data
-    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [User] {
+    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [UserModel] {
        
-        var selectedUsers: [User] = []
-            for userId in selectedRoom.users! {
-                selectedUsers.append(users.first(where: {$0.id == userId})!)
+        var selectedUsers: [UserModel] = []
+        guard let selectedRoomUsers = selectedRoom.users else {return []}
+        
+            for userId in selectedRoomUsers {
+                guard let selectedUser = users.first(where: {$0.realmId == userId}) else {return []}
+                selectedUsers.append(selectedUser)
             }
             return selectedUsers
     }
@@ -38,6 +42,15 @@ class ChatViewModel: ObservableObject {
             }
         }
        
+    }
+    func fetchRoomsData(){
+        Amplify.DataStore.query(MessageRoomModel.self) { [weak self] result in
+            switch result {
+            case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
+            case .success(let rooms):
+                self?.rooms = rooms
+            }
+        }
     }
     
     func downloadImage(imageUrl: String,completion: @escaping(_ image: UIImage) -> ()) {
