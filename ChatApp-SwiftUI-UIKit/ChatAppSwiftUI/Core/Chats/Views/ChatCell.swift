@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatCell: View {
-    var user: User
+    var user: UserModel
     var room: MessageRoomModel?
     @State private var profileImage: UIImage =  UIImage(systemName: "circle.circle")!
     @EnvironmentObject var viewModel: ChatViewModel
@@ -27,11 +27,11 @@ struct ChatCell: View {
                     .clipShape(Circle())
                 
                 VStack (alignment: .leading){
-                    Text(user.name)
+                    Text(user.name ?? "")
                         .font(.headline)
                         .fontWeight(.semibold)
                     if let room = room {
-                        Text(room.messages.last?.message ?? "")
+                        Text(room.messages?.last?.message ?? "")
                             .font(.subheadline)
                     }
                    
@@ -41,12 +41,12 @@ struct ChatCell: View {
                 
                 if let room = room {
                     VStack(alignment: .trailing){
-                        Text(room.lastUpdateDate.toHourMinuteString())
+                        Text(room.lastUpdateDate.iso8601String)
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.theme.buttonColor)
                         
-                        if room.users.count != room.messages.last?.readers.count ?? 0 {
+                        if room.users?.count != room.messages?.last?.readers?.count ?? 0 {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(Color.theme.buttonColor)
                         }

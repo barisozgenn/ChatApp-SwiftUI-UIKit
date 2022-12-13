@@ -18,11 +18,11 @@ extension MessageModel {
   public static let schema = defineSchema { model in
     let messageModel = MessageModel.keys
     
-    model.pluralName = "MessageModels"
+    model.syncPluralName = "MessageModels"
     
     model.fields(
       .field(messageModel.id, is: .required, ofType: .string),
-      .field(messageModel.senderId, is: .optional, ofType: .string),
+      .field(messageModel.senderId, is: .required, ofType: .string),
       .field(messageModel.readers, is: .optional, ofType: .embeddedCollection(of: String.self)),
       .field(messageModel.message, is: .required, ofType: .string),
       .field(messageModel.createdDate, is: .required, ofType: .dateTime)

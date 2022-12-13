@@ -48,15 +48,20 @@ final class MessageViewModel: ObservableObject {
     func sendMessage(_ message: String){
         guard let userProfile = self.userProfile else {return}
         
-        if let selectedRoom = selectedRoom { // MARK: existing room
+        if var selectedRoom = selectedRoom { // MARK: existing room
             let message = MessageModel(id: UUID().uuidString,
                                        senderId: userProfile.realmId,
                                        readers: [userProfile.realmId],
                                        message: message,
                                        createdDate: Temporal.DateTime.now())
             
-            Amplify.DataStore.save(message, where: QueryPredicate?) { <#Result<Model, DataStoreError>#> in
-                <#code#>
+            selectedRoom.messages?.append(message)
+            
+            Amplify.DataStore.save(selectedRoom) { result in
+                switch result {
+                case .success(let room): print("DEBUG: add message success amplify \(room.roomName ?? "empty")")
+                case .failure(let error): print("DEBUG: add message error amplify \(error.localizedDescription)")
+                }
             }
             
             
@@ -76,10 +81,10 @@ final class MessageViewModel: ObservableObject {
                                         roomName: setNavigationTitle() + (userProfile.name!),
                                         messages: [message])
             
-            Amplify.DataStore.save(room) { [weak self] result in
+            Amplify.DataStore.save(room) {result in
                 switch result {
-                case .success(let room): print("DEBUG: success amplify \(room.roomName ?? "empty")")
-                case .failure(let error): print("DEBUG: error amplify \(error.localizedDescription)")
+                case .success(let room): print("DEBUG: add room success amplify \(room.roomName ?? "empty")")
+                case .failure(let error): print("DEBUG: add room error amplify \(error.localizedDescription)")
                 }
             }
         }

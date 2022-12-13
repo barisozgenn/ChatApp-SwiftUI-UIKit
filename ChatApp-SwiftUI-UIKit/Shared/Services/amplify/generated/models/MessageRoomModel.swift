@@ -5,17 +5,17 @@ import Foundation
 public struct MessageRoomModel: Model {
   public let id: String
   public var users: [String]?
-  public var roomName: String?
+  public var roomName: String
   public var messages: [MessageModel]?
-  public var lastUpdateDate: Temporal.DateTime?
+  public var lastUpdateDate: Temporal.DateTime
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
   
   public init(id: String = UUID().uuidString,
       users: [String]? = nil,
-      roomName: String? = nil,
+      roomName: String,
       messages: [MessageModel]? = nil,
-      lastUpdateDate: Temporal.DateTime? = nil) {
+      lastUpdateDate: Temporal.DateTime) {
     self.init(id: id,
       users: users,
       roomName: roomName,
@@ -26,9 +26,9 @@ public struct MessageRoomModel: Model {
   }
   internal init(id: String = UUID().uuidString,
       users: [String]? = nil,
-      roomName: String? = nil,
+      roomName: String,
       messages: [MessageModel]? = nil,
-      lastUpdateDate: Temporal.DateTime? = nil,
+      lastUpdateDate: Temporal.DateTime,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id

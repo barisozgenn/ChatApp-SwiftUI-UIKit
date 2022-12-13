@@ -25,7 +25,7 @@ extension UserModel {
       rule(allow: .public, operations: [.create, .update, .delete, .read])
     ]
     
-    model.pluralName = "UserModels"
+    model.syncPluralName = "UserModels"
     
     model.attributes(
       .primaryKey(fields: [userModel.id])

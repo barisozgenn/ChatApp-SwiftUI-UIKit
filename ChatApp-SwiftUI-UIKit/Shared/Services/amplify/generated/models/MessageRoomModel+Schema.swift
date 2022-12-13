@@ -24,7 +24,7 @@ extension MessageRoomModel {
       rule(allow: .public, operations: [.create, .update, .delete, .read])
     ]
     
-    model.pluralName = "MessageRoomModels"
+    model.syncPluralName = "MessageRoomModels"
     
     model.attributes(
       .primaryKey(fields: [messageRoomModel.id])
@@ -33,9 +33,9 @@ extension MessageRoomModel {
     model.fields(
       .field(messageRoomModel.id, is: .required, ofType: .string),
       .field(messageRoomModel.users, is: .optional, ofType: .embeddedCollection(of: String.self)),
-      .field(messageRoomModel.roomName, is: .optional, ofType: .string),
+      .field(messageRoomModel.roomName, is: .required, ofType: .string),
       .field(messageRoomModel.messages, is: .optional, ofType: .embeddedCollection(of: MessageModel.self)),
-      .field(messageRoomModel.lastUpdateDate, is: .optional, ofType: .dateTime),
+      .field(messageRoomModel.lastUpdateDate, is: .required, ofType: .dateTime),
       .field(messageRoomModel.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(messageRoomModel.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)
     )

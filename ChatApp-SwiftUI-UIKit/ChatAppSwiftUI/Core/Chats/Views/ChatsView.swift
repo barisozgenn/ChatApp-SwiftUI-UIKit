@@ -30,7 +30,7 @@ struct ChatsView: View {
                                                                                          selectedUsers: viewModel.fetchSelectedRoomUsers(room))))
                      
                 } label: {
-                    ChatCell(user: (viewModel.users.first(where: {$0._id == room.users.first(where: {$0 != viewModel.userProfile!._id} )}))!,
+                    ChatCell(user: (viewModel.users.first(where: {$0.realmId == room.users.first(where: {$0 != viewModel.userProfile!.realmId} )})),
                              room: room)
                 }
 
