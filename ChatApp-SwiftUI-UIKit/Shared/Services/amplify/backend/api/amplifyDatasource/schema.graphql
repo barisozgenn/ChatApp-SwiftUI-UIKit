@@ -16,9 +16,9 @@ type MessageRoomModel @model @auth(rules: [{allow: public}]) {
 
 type UserModel @model @auth(rules: [{allow: public}]) {
   id: ID!
-  profileImageBase64: String
-  email: String
-  name: String
-  registerDate: AWSDateTime
+  profileImageBase64: String!
+  email: String!
+  name: String!
+  registerDate: AWSDateTime!
   realmId: String!
 }

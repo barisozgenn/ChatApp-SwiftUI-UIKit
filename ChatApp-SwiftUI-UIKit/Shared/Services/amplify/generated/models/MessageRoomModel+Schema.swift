@@ -24,7 +24,7 @@ extension MessageRoomModel {
       rule(allow: .public, operations: [.create, .update, .delete, .read])
     ]
     
-    model.syncPluralName = "MessageRoomModels"
+    model.pluralName = "MessageRoomModels"
     
     model.attributes(
       .primaryKey(fields: [messageRoomModel.id])

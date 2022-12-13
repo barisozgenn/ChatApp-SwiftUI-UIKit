@@ -18,7 +18,7 @@ extension MessageModel {
   public static let schema = defineSchema { model in
     let messageModel = MessageModel.keys
     
-    model.syncPluralName = "MessageModels"
+    model.pluralName = "MessageModels"
     
     model.fields(
       .field(messageModel.id, is: .required, ofType: .string),

@@ -25,7 +25,7 @@ extension UserModel {
       rule(allow: .public, operations: [.create, .update, .delete, .read])
     ]
     
-    model.syncPluralName = "UserModels"
+    model.pluralName = "UserModels"
     
     model.attributes(
       .primaryKey(fields: [userModel.id])
@@ -33,10 +33,10 @@ extension UserModel {
     
     model.fields(
       .field(userModel.id, is: .required, ofType: .string),
-      .field(userModel.profileImageBase64, is: .optional, ofType: .string),
-      .field(userModel.email, is: .optional, ofType: .string),
-      .field(userModel.name, is: .optional, ofType: .string),
-      .field(userModel.registerDate, is: .optional, ofType: .dateTime),
+      .field(userModel.profileImageBase64, is: .required, ofType: .string),
+      .field(userModel.email, is: .required, ofType: .string),
+      .field(userModel.name, is: .required, ofType: .string),
+      .field(userModel.registerDate, is: .required, ofType: .dateTime),
       .field(userModel.realmId, is: .required, ofType: .string),
       .field(userModel.createdAt, is: .optional, isReadOnly: true, ofType: .dateTime),
       .field(userModel.updatedAt, is: .optional, isReadOnly: true, ofType: .dateTime)

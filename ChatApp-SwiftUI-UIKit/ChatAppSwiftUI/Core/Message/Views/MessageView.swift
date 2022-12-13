@@ -84,9 +84,9 @@ extension MessageView {
         ScrollView{
             ForEach(viewModel.messages){ message in
                 MessageCell(messageValue: message.message,
-                            dateValue: message.createdDate.toHourMinuteString(),
-                            nameValue: viewModel.selectedUsers?.first(where: {$0._id == message.senderId})?.name ?? "?",
-                            isMine: viewModel.userProfile?._id == message.senderId ? true : false,
+                            dateValue: message.createdDate.iso8601String,
+                            nameValue: viewModel.selectedUsers?.first(where: {$0.realmId == message.senderId})?.name ?? "?",
+                            isMine: viewModel.userProfile?.realmId == message.senderId ? true : false,
                             isLast:  isLastMessageFromSameUser(message: message),
                             isGroup: viewModel.selectedUsers?.count ?? 0 > 2 ? true : false,
                             isRead: viewModel.selectedUsers?.count == message.readers.count ? true : false)

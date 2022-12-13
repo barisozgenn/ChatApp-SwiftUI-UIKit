@@ -13,8 +13,8 @@ struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
     
     @State private var searchText = ""
-    @State private var selection : Set<UserModel> = []
-    @Binding var selectedUsers : Set<UserModel>?
+    @State private var selection : Set<User> = []
+    @Binding var selectedUsers : Set<User>?
     
     @State private var editMode = EditMode.inactive
     
@@ -97,6 +97,7 @@ extension SearchView {
     }
     
 }
+/*
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
        /* let user = UserModel(name: "Barış Özgen", email: "sdsfdsfds", profileImageUrl: "sddfsdfs", registerDate: Date().toTimestamp())
@@ -104,4 +105,4 @@ struct SearchView_Previews: PreviewProvider {
         SearchView(selectedUsers: .constant(nil))
             .environmentObject(SearchViewModel())
     }
-}
+}*/

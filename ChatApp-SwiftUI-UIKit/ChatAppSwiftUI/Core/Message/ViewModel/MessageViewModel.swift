@@ -59,7 +59,7 @@ final class MessageViewModel: ObservableObject {
             
             Amplify.DataStore.save(selectedRoom) { result in
                 switch result {
-                case .success(let room): print("DEBUG: add message success amplify \(room.roomName ?? "empty")")
+                case .success(let room): print("DEBUG: add message success amplify \(room.roomName)")
                 case .failure(let error): print("DEBUG: add message error amplify \(error.localizedDescription)")
                 }
             }
@@ -78,12 +78,12 @@ final class MessageViewModel: ObservableObject {
                                        createdDate: Temporal.DateTime.now())
             
             let room = MessageRoomModel(users: userIds,
-                                        roomName: setNavigationTitle() + (userProfile.name!),
-                                        messages: [message])
+                                        roomName: setNavigationTitle() + (userProfile.name),
+                                        messages: [message], lastUpdateDate: Temporal.DateTime.now())
             
             Amplify.DataStore.save(room) {result in
                 switch result {
-                case .success(let room): print("DEBUG: add room success amplify \(room.roomName ?? "empty")")
+                case .success(let room): print("DEBUG: add room success amplify \(room.roomName)")
                 case .failure(let error): print("DEBUG: add room error amplify \(error.localizedDescription)")
                 }
             }
@@ -98,7 +98,7 @@ final class MessageViewModel: ObservableObject {
             }else if selectedUsers.count > 2 {
                 var roomName = ""
                 for name in selectedUsers {
-                    roomName += "\(name.name?.split(separator: " ", omittingEmptySubsequences: true).first ?? ""), "
+                    roomName += "\(name.name.split(separator: " ", omittingEmptySubsequences: true).first ?? ""), "
                 }
                 return String(roomName.dropLast(2))
             }
@@ -109,7 +109,7 @@ final class MessageViewModel: ObservableObject {
     func setNavigationImage() -> String {
         if let selectedUsers = self.selectedUsers {
             // you can add group photo here
-            return selectedUsers.first(where: {$0.realmId != userProfile!.realmId})!.profileImageBase64 ?? "?"
+            return selectedUsers.first(where: {$0.realmId != userProfile!.realmId})!.profileImageBase64
         }else {return "??"}
     }
     
