@@ -12,6 +12,7 @@ import Amplify
 final class SearchViewModel: ObservableObject {
     private let auth = RealmAuthService()
 
+    @ObservedResults(User.self) var realmUsers
     @Published var users : [UserModel] = []
     @Published var userProfile: UserModel?
 

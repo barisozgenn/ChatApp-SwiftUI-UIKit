@@ -17,7 +17,7 @@ struct SettingsView: View {
             Color(.systemGroupedBackground).ignoresSafeArea()
             VStack(spacing: 14){
                 HStack(spacing: 14){
-                    Image(uiImage: viewModel.userProfile!.profileImageBase64.convertBase64ToUIImage())
+                    Image(uiImage: viewModel.userProfile?.profileImageBase64.convertBase64ToUIImage() ?? UIImage(systemName: "person.fill")!)
                         .resizable()
                         .scaledToFill()
                         .fontWeight(.bold)

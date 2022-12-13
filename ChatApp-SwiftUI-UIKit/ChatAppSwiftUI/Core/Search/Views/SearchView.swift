@@ -23,8 +23,8 @@ struct SearchView: View {
             headerViews
             SearchBarView(searchText: $searchText)
             
-            List(viewModel.users, id: \.self, selection: $selection) { user in
-                ChatCell(user: user)
+            List(viewModel.realmUsers, id: \.self, selection: $selection) { user in
+                ChatCell(user: viewModel.users.first(where: {$0.realmId == user._id})!)
             }
             .listStyle(.plain)
             .toolbar {
@@ -61,7 +61,7 @@ extension SearchView {
             Spacer()
             NavigationLink {
                 LazyNavigationView(build:
-                                    MessageView().environmentObject(MessageViewModel(selectedUsers: Array(selection))))
+                                    MessageView().environmentObject(MessageViewModel(selectedRealmUsers: Array(selection))))
                  
             } label: {
                 if selectedUsers?.count == 1 {

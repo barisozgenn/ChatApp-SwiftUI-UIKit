@@ -7,30 +7,34 @@
 
 import SwiftUI
 import Amplify
+import RealmSwift
 
 class ChatViewModel: ObservableObject {
     @Published var selectedUserList : [UserModel] = []
     @Published var userProfile: UserModel?
     
-    private var rooms: [MessageRoomModel] = []
-    private var users : [UserModel] = []
-    
+    @Published var rooms: [MessageRoomModel] = []
+    @Published var users : [UserModel] = []
+    @ObservedResults(User.self) var realmUsers
+
     init() {
         fetchRoomsData()
         fetchUsersData()
     }
     
     // MARK: fetch data
-    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [UserModel] {
+    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [User] {
        
         var selectedUsers: [UserModel] = []
+        var selectedRealmUsers: [User] = []
         guard let selectedRoomUsers = selectedRoom.users else {return []}
         
             for userId in selectedRoomUsers {
                 guard let selectedUser = users.first(where: {$0.realmId == userId}) else {return []}
                 selectedUsers.append(selectedUser)
+                selectedRealmUsers.append(realmUsers.first(where: {$0._id == selectedUser.realmId})!)
             }
-            return selectedUsers
+            return selectedRealmUsers
     }
     func fetchUsersData(){
         Amplify.DataStore.query(UserModel.self) { [weak self] result in

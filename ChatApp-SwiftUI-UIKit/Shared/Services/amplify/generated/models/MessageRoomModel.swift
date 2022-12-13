@@ -2,7 +2,7 @@
 import Amplify
 import Foundation
 
-public struct MessageRoomModel: Model {
+public struct MessageRoomModel: Model, Identifiable {
   public let id: String
   public var users: [String]?
   public var roomName: String

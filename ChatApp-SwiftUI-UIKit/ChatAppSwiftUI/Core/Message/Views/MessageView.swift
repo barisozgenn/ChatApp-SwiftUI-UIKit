@@ -89,7 +89,7 @@ extension MessageView {
                             isMine: viewModel.userProfile?.realmId == message.senderId ? true : false,
                             isLast:  isLastMessageFromSameUser(message: message),
                             isGroup: viewModel.selectedUsers?.count ?? 0 > 2 ? true : false,
-                            isRead: viewModel.selectedUsers?.count == message.readers.count ? true : false)
+                            isRead: viewModel.selectedUsers?.count == message.readers?.count ? true : false)
                 
             }
         }

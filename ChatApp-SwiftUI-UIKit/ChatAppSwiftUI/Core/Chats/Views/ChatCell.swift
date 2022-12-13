@@ -27,7 +27,7 @@ struct ChatCell: View {
                     .clipShape(Circle())
                 
                 VStack (alignment: .leading){
-                    Text(user.name ?? "")
+                    Text(user.name)
                         .font(.headline)
                         .fontWeight(.semibold)
                     if let room = room {
