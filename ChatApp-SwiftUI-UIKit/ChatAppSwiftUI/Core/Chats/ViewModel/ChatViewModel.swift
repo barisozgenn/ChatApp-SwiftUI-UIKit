@@ -18,6 +18,7 @@ class ChatViewModel: ObservableObject {
     @ObservedResults(User.self) var realmUsers
 
     init() {
+       
         fetchRoomsData()
         fetchUsersData()
     }
@@ -43,6 +44,8 @@ class ChatViewModel: ObservableObject {
             case .success(let users):
                 self?.users = users
                 self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+                print("realm count: \(self?.realmUsers.count)")
+                print("amplify count: \(self?.users.count)")
             }
         }
        

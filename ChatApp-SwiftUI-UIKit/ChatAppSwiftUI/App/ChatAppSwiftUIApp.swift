@@ -18,12 +18,12 @@ struct ChatAppSwiftUIApp: SwiftUI.App {
     @UIApplicationDelegateAdaptor(CustomAppDelegate.self) var delegate
     
     public init() {
-        let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels())
-        //let apiPlugin = AWSAPIPlugin(modelRegistration: AmplifyModels()) // UNCOMMENT this line once backend is deployed
+        let dataStorePlugin = AWSDataStorePlugin(modelRegistration: AmplifyModels()) // UNCOMMENT this line once backend is NOT deployed
+        let apiPlugin = AWSAPIPlugin(modelRegistration: AmplifyModels()) // UNCOMMENT this line once backend is deployed
 
         do {
-            try Amplify.add(plugin: dataStorePlugin)
-            //try Amplify.add(plugin: apiPlugin) // UNCOMMENT this line once backend is deployed
+            try Amplify.add(plugin: dataStorePlugin) // UNCOMMENT this line once backend is NOT deployed
+            try Amplify.add(plugin: apiPlugin) // UNCOMMENT this line once backend is deployed
             try Amplify.configure()
             print("Initialized Amplify");
         } catch {
