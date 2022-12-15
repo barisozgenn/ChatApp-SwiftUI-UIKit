@@ -41,7 +41,6 @@ class ChatViewModel: ObservableObject {
             case .success(let users):
                 self?.users = users
                 self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
-                print("amplify count: \(self?.users.count)")
             }
         }
        

@@ -95,8 +95,8 @@ final class MessageViewModel: ObservableObject {
     func setNavigationTitle() -> String {
         
         if let selectedUsers = selectedUsers {
-            if selectedUsers.count == 2 {
-                return selectedUsers.first?.name ?? ""
+            if selectedUsers.count <= 2 {
+                return selectedUsers.first(where: {$0.realmId != userProfile?.realmId})?.name ?? "not found"
             }else if selectedUsers.count > 2 {
                 var roomName = ""
                 for name in selectedUsers {
