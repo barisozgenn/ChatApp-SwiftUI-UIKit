@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Amplify
-import RealmSwift
+import Combine
 
 class ChatViewModel: ObservableObject {
     @Published var selectedUserList : [UserModel] = []
@@ -16,9 +16,10 @@ class ChatViewModel: ObservableObject {
     @Published var rooms: [MessageRoomModel] = []
     @Published var users : [UserModel] = []
 
+    // In your type declaration, declare a cancellable to hold onto the subscription
+    var chatsSubscription: AnyCancellable?
+    
     init() {
-       
-        fetchRoomsData()
         fetchUsersData()
     }
     
@@ -41,21 +42,50 @@ class ChatViewModel: ObservableObject {
             case .success(let users):
                 self?.users = users
                 self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+                self?.fetchRoomsData()
             }
         }
        
     }
     func fetchRoomsData(){
-        Amplify.DataStore.query(MessageRoomModel.self) { [weak self] result in
+        let room = MessageRoomModel.keys
+
+        let observeQuery = Amplify.DataStore.observeQuery(for: MessageRoomModel.self,
+                                where: room.users.contains(userProfile?.realmId ?? "?"),
+                                       sort: .ascending(room.createdAt))
+        
+        chatsSubscription = observeQuery
+            .receive(on: DispatchQueue.main)
+            .sink { completed in
+                        switch completed {
+                        case .finished:
+                            print("DEBUG: ObserveQuery finished")
+                        case .failure(let error):
+                            print("DEBUG: Error observeQuery: \(error)")
+                        }
+                    } receiveValue: {[weak self] querySnapshot in
+                        print("[Snapshot] item count: \(querySnapshot.items.count), isSynced: \(querySnapshot.isSynced)")
+                        
+                        self?.rooms.append(contentsOf: querySnapshot.items)
+                    }
+        // without combine
+       /* Amplify.DataStore.query(MessageRoomModel.self,
+                                where: room.users.contains(userProfile?.realmId ?? "?"),
+                                       sort: .ascending(room.createdAt)) { [weak self] result in
             switch result {
             case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
             case .success(let rooms):
                 self?.rooms = rooms
             }
-        }
+        }*/
+    }
+    // Then, when you're finished observing, cancel the subscription
+    func unsubscribeFromChats() {
+        chatsSubscription?.cancel()
     }
     
     func downloadImage(imageUrl: String,completion: @escaping(_ image: UIImage) -> ()) {
         completion(imageUrl.convertBase64ToUIImage())
     }
+    
 }
