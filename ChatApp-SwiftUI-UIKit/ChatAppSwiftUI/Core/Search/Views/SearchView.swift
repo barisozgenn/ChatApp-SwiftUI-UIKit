@@ -13,8 +13,8 @@ struct SearchView: View {
     @StateObject private var viewModel = SearchViewModel()
     
     @State private var searchText = ""
-    @State private var selection : Set<User> = []
-    @Binding var selectedUsers : Set<User>?
+    @State private var selection : Set<UserModel> = []
+    @Binding var selectedUsers : Set<UserModel>?
     
     @State private var editMode = EditMode.inactive
     
@@ -23,8 +23,8 @@ struct SearchView: View {
             headerViews
             SearchBarView(searchText: $searchText)
             
-            List(viewModel.realmUsers, id: \.self, selection: $selection) { user in
-                ChatCell(user: viewModel.users.first(where: {$0.realmId == user._id})!)
+            List(viewModel.users, id: \.self, selection: $selection) { user in
+                ChatCell(user: user)
             }
             .listStyle(.plain)
             .toolbar {
@@ -61,7 +61,7 @@ extension SearchView {
             Spacer()
             NavigationLink {
                 LazyNavigationView(build:
-                                    MessageView().environmentObject(MessageViewModel(selectedRealmUsers: Array(selection))))
+                                    MessageView().environmentObject(MessageViewModel(selectedUsers: Array(selection))))
                  
             } label: {
                 if selectedUsers?.count == 1 {

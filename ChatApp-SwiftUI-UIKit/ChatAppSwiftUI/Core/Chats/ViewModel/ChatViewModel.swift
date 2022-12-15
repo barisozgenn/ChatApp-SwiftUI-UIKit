@@ -15,7 +15,6 @@ class ChatViewModel: ObservableObject {
     
     @Published var rooms: [MessageRoomModel] = []
     @Published var users : [UserModel] = []
-    @ObservedResults(User.self) var realmUsers
 
     init() {
        
@@ -24,18 +23,16 @@ class ChatViewModel: ObservableObject {
     }
     
     // MARK: fetch data
-    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [User] {
+    func fetchSelectedRoomUsers(_ selectedRoom : MessageRoomModel) -> [UserModel] {
        
         var selectedUsers: [UserModel] = []
-        var selectedRealmUsers: [User] = []
         guard let selectedRoomUsers = selectedRoom.users else {return []}
         
             for userId in selectedRoomUsers {
                 guard let selectedUser = users.first(where: {$0.realmId == userId}) else {return []}
                 selectedUsers.append(selectedUser)
-                selectedRealmUsers.append(realmUsers.first(where: {$0._id == selectedUser.realmId})!)
             }
-            return selectedRealmUsers
+            return selectedUsers
     }
     func fetchUsersData(){
         Amplify.DataStore.query(UserModel.self) { [weak self] result in
@@ -44,7 +41,6 @@ class ChatViewModel: ObservableObject {
             case .success(let users):
                 self?.users = users
                 self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
-                print("realm count: \(self?.realmUsers.count)")
                 print("amplify count: \(self?.users.count)")
             }
         }

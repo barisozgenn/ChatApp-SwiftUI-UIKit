@@ -35,7 +35,7 @@ final class SearchViewModel: ObservableObject {
             case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
             case .success(let users):
                 self?.users = users
-                self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+                self?.userProfile = users.first(where: {$0.realmId == realmApp.currentUser!.id})
             }
         }
        

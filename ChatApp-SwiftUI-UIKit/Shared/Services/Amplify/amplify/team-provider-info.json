@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-chatbaris-staging-73614-authRole",
+      "UnauthRoleArn": "arn:aws:iam::252448190337:role/amplify-chatbaris-staging-73614-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::252448190337:role/amplify-chatbaris-staging-73614-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-chatbaris-staging-73614-deployment",
+      "UnauthRoleName": "amplify-chatbaris-staging-73614-unauthRole",
+      "StackName": "amplify-chatbaris-staging-73614",
+      "StackId": "arn:aws:cloudformation:eu-central-1:252448190337:stack/amplify-chatbaris-staging-73614/fd3e0050-7b81-11ed-ac0c-0acf772c5096",
+      "AmplifyAppId": "d2bcp9vrqei0py"
+    }
+  }
+}

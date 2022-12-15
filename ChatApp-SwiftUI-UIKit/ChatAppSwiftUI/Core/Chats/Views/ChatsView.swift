@@ -27,7 +27,7 @@ struct ChatsView: View {
                 NavigationLink {
                     LazyNavigationView(build:
                                         MessageView().environmentObject(MessageViewModel(selectedRoom: room,
-                                                                                         selectedRealmUsers: viewModel.fetchSelectedRoomUsers(room))))
+                                                                                         selectedUsers: viewModel.fetchSelectedRoomUsers(room))))
                      
                 } label: {
                     ChatCell(user: (viewModel.users.first(where: {$0.realmId == room.users!.first(where: {$0 != viewModel.userProfile!.realmId} )}))!,

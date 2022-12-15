@@ -10,8 +10,8 @@ import SwiftUI
 struct MainTabBarView: View {
     @State private var isUserNotLogin: Bool = false
     @State var selectedTab = "Chats"
-    @State var selectedUsers : Set<User>? = []
-    @State var selectedUserList : [User] = []
+    @State var selectedUsers : Set<UserModel>? = []
+    @State var selectedUserList : [UserModel] = []
     @State var userSelected : Bool = false
     @StateObject var viewModelChat = ChatViewModel()
 

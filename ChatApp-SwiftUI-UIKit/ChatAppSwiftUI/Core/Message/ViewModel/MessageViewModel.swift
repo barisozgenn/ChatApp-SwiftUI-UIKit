@@ -16,7 +16,6 @@ final class MessageViewModel: ObservableObject {
     @Published var userProfile: UserModel?
     @Published var messages: [MessageModel] = []
     @Published var selectedRoom: MessageRoomModel?
-    @Published var selectedRealmUsers: [User]? = []
     @Published var selectedUsers: [UserModel]? = []
     
     private var rooms: [MessageRoomModel] = []
@@ -24,7 +23,7 @@ final class MessageViewModel: ObservableObject {
     
     var cancellables = Set<AnyCancellable>()
 
-    init(selectedRoom: MessageRoomModel? = nil, selectedRealmUsers: [User]? = nil){
+    init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [UserModel]? = nil){
         
         fetchRoomsData()
         fetchUsersData()
@@ -35,11 +34,8 @@ final class MessageViewModel: ObservableObject {
                 self.messages = messages
             }
         }
-        if let selectedRealmUsers = selectedRealmUsers {
-            self.selectedRealmUsers = selectedRealmUsers
-            for realmUser in selectedRealmUsers {
-                selectedUsers?.append(users.first(where: {$0.realmId == realmUser._id})!)
-            }
+        if let selectedUsers = selectedUsers {
+            self.selectedUsers = selectedUsers
         }
        
         if let userProfile = selectedUsers?.first(where: {$0.realmId == realmApp.currentUser?.id ?? ""}) {
