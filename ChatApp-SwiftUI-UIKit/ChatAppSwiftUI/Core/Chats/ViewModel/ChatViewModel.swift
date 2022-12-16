@@ -41,7 +41,7 @@ class ChatViewModel: ObservableObject {
             case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
             case .success(let users):
                 self?.users = users
-                self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
+                self?.userProfile = users.first(where: {$0.realmId == realmApp.currentUser!.id})
                 self?.fetchRoomsData()
             }
         }
@@ -49,7 +49,6 @@ class ChatViewModel: ObservableObject {
     }
     func fetchRoomsData(){
         let room = MessageRoomModel.keys
-
         let observeQuery = Amplify.DataStore.observeQuery(for: MessageRoomModel.self,
                                 where: room.users.contains(userProfile?.realmId ?? "?"),
                                        sort: .ascending(room.createdAt))
@@ -69,9 +68,9 @@ class ChatViewModel: ObservableObject {
                         self?.rooms.append(contentsOf: querySnapshot.items)
                     }
         // without combine
-       /* Amplify.DataStore.query(MessageRoomModel.self,
+       /*Amplify.DataStore.query(MessageRoomModel.self,
                                 where: room.users.contains(userProfile?.realmId ?? "?"),
-                                       sort: .ascending(room.createdAt)) { [weak self] result in
+                                       sort: .descending(room.createdAt)) { [weak self] result in
             switch result {
             case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
             case .success(let rooms):

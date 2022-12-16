@@ -66,7 +66,7 @@ extension MessageCell {
     private var dateView: some View {
         HStack{
             Spacer()
-            Text(dateValue)
+            Text(dateValue.toHourMinuteString())
                 .font(.caption2)
                 .foregroundColor(.gray)
             

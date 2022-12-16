@@ -41,6 +41,7 @@ extension MessageView {
         HStack(spacing: 12){
             Button {
                 viewModel.sendMessage(messageText)
+                messageText = ""
             } label: {
                 Image(systemName: "plus")
                     .resizable()

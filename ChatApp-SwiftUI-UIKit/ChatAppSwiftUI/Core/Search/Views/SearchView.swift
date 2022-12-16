@@ -24,7 +24,7 @@ struct SearchView: View {
             SearchBarView(searchText: $searchText)
             
             List(viewModel.users, id: \.self, selection: $selection) { user in
-                ChatCell(user: user)
+                ChatCell(users: [user])
             }
             .listStyle(.plain)
             .toolbar {

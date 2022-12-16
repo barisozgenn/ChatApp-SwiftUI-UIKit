@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatCell: View {
-    var user: UserModel
+    var users: [UserModel]
     var room: MessageRoomModel?
     @State private var profileImage: UIImage =  UIImage(systemName: "circle.circle")!
     @EnvironmentObject var viewModel: ChatViewModel
@@ -16,7 +16,7 @@ struct ChatCell: View {
     var body: some View {
         VStack{
             HStack{
-          
+                
                 Image(uiImage: profileImage)
                     .resizable()
                     .scaledToFill()
@@ -27,21 +27,21 @@ struct ChatCell: View {
                     .clipShape(Circle())
                 
                 VStack (alignment: .leading){
-                    Text(user.name)
+                    Text(roomUsersName())
                         .font(.headline)
                         .fontWeight(.semibold)
+                    
                     if let room = room {
                         Text(room.messages?.last?.message ?? "")
                             .font(.subheadline)
                     }
-                   
                 }
                 
                 Spacer()
                 
                 if let room = room {
                     VStack(alignment: .trailing){
-                        Text(room.lastUpdateDate.iso8601String)
+                        Text(room.lastUpdateDate.iso8601String.toHourMinuteString())
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.theme.buttonColor)
@@ -50,33 +50,52 @@ struct ChatCell: View {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(Color.theme.buttonColor)
                         }
-                       
+                        
                     }
                 }
                 
-               
+                
             }
         }
         .padding(.vertical, 7)
         .background(Color.theme.appBackgroundColor)
         .onAppear{
-            viewModel.downloadImage(imageUrl: user.profileImageBase64) { image in
-                
-                withAnimation(.spring()){
-                    profileImage = image
+            if users.count > 2 {
+                profileImage = UIImage(named: "group-simpson")!
+            }else{
+                viewModel.downloadImage(imageUrl: users.first!.profileImageBase64) { image in
+                    
+                    withAnimation(.spring()){
+                        profileImage = image
+                    }
                 }
             }
+            
         }
+    }
+    func roomUsersName() -> String{
+        let roomUsers = users.filter({$0.realmId != viewModel.userProfile?.realmId})
+        var userNames = ""
+        for user in roomUsers {
+            if roomUsers.count > 1 {
+                userNames += user.name.split(separator: " ").first! + ", "
+            }
+            else {
+                userNames += user.name + ", "
+            }
+        }
+        
+        return String(userNames.dropLast(2))
     }
 }
 /*
-struct ChatCell_Previews: PreviewProvider {
-    static var previews: some View {
-        let user = User(name: "barış", email: "vsadas@sadas", profileImageUrl: "baris")
-        let message = MessageModel(senderId: "sadasdas", readers: Set<["sadasd"]>, message: "messsage")
-        let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", lastMessage: message, lastUpdateDate: Date())
-        ChatCell(user: user, room: room)
-            .environmentObject(ChatViewModel())
-    }
-}
-*/
+ struct ChatCell_Previews: PreviewProvider {
+ static var previews: some View {
+ let user = User(name: "barış", email: "vsadas@sadas", profileImageUrl: "baris")
+ let message = MessageModel(senderId: "sadasdas", readers: Set<["sadasd"]>, message: "messsage")
+ let room = MessageRoomModel(users: ["sdasdasd"], roomName: "sadsadas", lastMessage: message, lastUpdateDate: Date())
+ ChatCell(user: user, room: room)
+ .environmentObject(ChatViewModel())
+ }
+ }
+ */

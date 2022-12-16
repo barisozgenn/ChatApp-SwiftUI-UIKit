@@ -18,3 +18,9 @@ extension Date {
         return strDate
     }
 }
+extension String {
+    func toHourMinuteString() -> String {
+        let strDate = self.split(separator: "T").last
+        return "\(strDate?.prefix(5) ?? "?")"
+    }
+}

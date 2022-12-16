@@ -22,7 +22,10 @@ final class MessageViewModel: ObservableObject {
     private var users : [UserModel] = []
     
     var cancellables = Set<AnyCancellable>()
-
+    
+    // In your type declaration, declare a cancellable to hold onto the subscription
+    var chatsSubscription: AnyCancellable?
+    
     init(selectedRoom: MessageRoomModel? = nil, selectedUsers: [UserModel]? = nil){
         
         fetchRoomsData()
@@ -37,7 +40,7 @@ final class MessageViewModel: ObservableObject {
         if let selectedUsers = selectedUsers {
             self.selectedUsers = selectedUsers
         }
-       
+        
         if let userProfile = selectedUsers?.first(where: {$0.realmId == realmApp.currentUser?.id ?? ""}) {
             self.userProfile = userProfile
         }else if let userProfile = users.first(where: {$0.realmId == realmApp.currentUser?.id ?? ""}) {
@@ -80,7 +83,7 @@ final class MessageViewModel: ObservableObject {
                                        createdDate: Temporal.DateTime.now())
             
             let room = MessageRoomModel(users: userIds,
-                                        roomName: setNavigationTitle() + (userProfile.name),
+                                        roomName: "\(setNavigationTitle()),  \(userProfile.name.split(separator: " ", omittingEmptySubsequences: true).first ?? "")",
                                         messages: [message], lastUpdateDate: Temporal.DateTime.now())
             
             Amplify.DataStore.save(room) {result in
@@ -99,8 +102,8 @@ final class MessageViewModel: ObservableObject {
                 return selectedUsers.first(where: {$0.realmId != userProfile?.realmId})?.name ?? "not found"
             }else if selectedUsers.count >= 2 {
                 var roomName = ""
-                for name in selectedUsers {
-                    roomName += "\(name.name.split(separator: " ", omittingEmptySubsequences: true).first ?? ""), "
+                for user in selectedUsers {
+                    roomName += "\(user.name.split(separator: " ", omittingEmptySubsequences: true).first ?? ""), "
                 }
                 return String(roomName.dropLast(2))
             }
@@ -125,16 +128,35 @@ final class MessageViewModel: ObservableObject {
                 self?.userProfile = users.first(where: {$0.id == realmApp.currentUser!.id})
             }
         }
-       
+        
     }
     func fetchRoomsData(){
-        Amplify.DataStore.query(MessageRoomModel.self) { [weak self] result in
-            switch result {
-            case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
-            case .success(let rooms):
-                self?.rooms = rooms
+        /*Amplify.DataStore.query(MessageRoomModel.self) { [weak self] result in
+         switch result {
+         case .failure(let error): print("DEBUG: error: \(error.localizedDescription)")
+         case .success(let rooms):
+         self?.rooms = rooms
+         }
+         }*/
+        let room = MessageRoomModel.keys
+        let observeQuery = Amplify.DataStore.observeQuery(for: MessageRoomModel.self,
+                                                          where: room.id == selectedRoom?.id,
+                                                          sort: .ascending(room.createdAt))
+        
+        chatsSubscription = observeQuery
+            .receive(on: DispatchQueue.main)
+            .sink { completed in
+                switch completed {
+                case .finished:
+                    print("DEBUG: ObserveQuery finished")
+                case .failure(let error):
+                    print("DEBUG: Error observeQuery: \(error)")
+                }
+            } receiveValue: {[weak self] querySnapshot in
+                print("[Snapshot] item count: \(querySnapshot.items.count), isSynced: \(querySnapshot.isSynced)")
+                
+                self?.rooms.append(contentsOf: querySnapshot.items)
             }
-        }
     }
     
     // MARK: download image

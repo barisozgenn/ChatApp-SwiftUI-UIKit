@@ -45,8 +45,8 @@
 		AF9C56B02934E8BF004FF281 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56AF2934E8BF004FF281 /* RegisterVC.swift */; };
 		AF9C56B22934E96A004FF281 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B12934E96A004FF281 /* UIButton.swift */; };
 		AF9C56B42934EB20004FF281 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B32934EB20004FF281 /* AuthViewModel.swift */; };
-		AF9C56B62934F21C004FF281 /* Date+TimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */; };
-		AF9C56B72934F222004FF281 /* Date+TimeStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */; };
+		AF9C56B62934F21C004FF281 /* Date+iso8601String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date+iso8601String.swift */; };
+		AF9C56B72934F222004FF281 /* Date+iso8601String.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B52934F21C004FF281 /* Date+iso8601String.swift */; };
 		AF9C56B92935ECD5004FF281 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56B82935ECD5004FF281 /* MessageView.swift */; };
 		AF9C56BE2935ED01004FF281 /* MessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56BD2935ED01004FF281 /* MessageVC.swift */; };
 		AF9C56C82935F0E0004FF281 /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */; };
@@ -129,7 +129,7 @@
 		AF9C56AF2934E8BF004FF281 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		AF9C56B12934E96A004FF281 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		AF9C56B32934EB20004FF281 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeStamp.swift"; sourceTree = "<group>"; };
+		AF9C56B52934F21C004FF281 /* Date+iso8601String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+iso8601String.swift"; sourceTree = "<group>"; };
 		AF9C56B82935ECD5004FF281 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		AF9C56BD2935ED01004FF281 /* MessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageVC.swift; sourceTree = "<group>"; };
 		AF9C56C72935F0E0004FF281 /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
@@ -663,7 +663,7 @@
 			children = (
 				AFE8918529320D63001262A8 /* Color+UIColor.swift */,
 				AFE8918829320D89001262A8 /* UIApplication.swift */,
-				AF9C56B52934F21C004FF281 /* Date+TimeStamp.swift */,
+				AF9C56B52934F21C004FF281 /* Date+iso8601String.swift */,
 				AFA49CE6293DF699005C247D /* UIImage+Base64String.swift */,
 			);
 			path = Extensions;
@@ -939,7 +939,7 @@
 				AF9C568F2933A8DD004FF281 /* SettingsModel.swift in Sources */,
 				AF9C56A32934A3B9004FF281 /* UIView.swift in Sources */,
 				AF9C56D029361FD9004FF281 /* CustomMessageTextField.swift in Sources */,
-				AF9C56B62934F21C004FF281 /* Date+TimeStamp.swift in Sources */,
+				AF9C56B62934F21C004FF281 /* Date+iso8601String.swift in Sources */,
 				AFE8914E2932054D001262A8 /* AppDelegate.swift in Sources */,
 				AFE891A52932160A001262A8 /* MainTabbarController.swift in Sources */,
 				AF9C56CE29360B14004FF281 /* MessageHeaderView.swift in Sources */,
@@ -985,7 +985,7 @@
 				AFE891C12932326C001262A8 /* StatusView.swift in Sources */,
 				AF9C56EC29379C21004FF281 /* SearchView.swift in Sources */,
 				AF9C567B29336B20004FF281 /* PositiveButtonStyle.swift in Sources */,
-				AF9C56B72934F222004FF281 /* Date+TimeStamp.swift in Sources */,
+				AF9C56B72934F222004FF281 /* Date+iso8601String.swift in Sources */,
 				AFA49CDE293B5524005C247D /* AuthViewModel.swift in Sources */,
 				AFE891BD29323206001262A8 /* ChatsView.swift in Sources */,
 				AF9C5680293372E2004FF281 /* TextFieldSingleLineView.swift in Sources */,
