@@ -49,7 +49,7 @@ class ChatViewModel: ObservableObject {
     }
     func fetchRoomsData(){
         let room = MessageRoomModel.keys
-        let observeQuery = Amplify.DataStore.observeQuery(for: MessageRoomModel.self,
+        /*let observeQuery = Amplify.DataStore.observeQuery(for: MessageRoomModel.self,
                                 where: room.users.contains(userProfile?.realmId ?? "?"),
                                        sort: .ascending(room.createdAt))
         
@@ -66,9 +66,9 @@ class ChatViewModel: ObservableObject {
                         print("[Snapshot] item count: \(querySnapshot.items.count), isSynced: \(querySnapshot.isSynced)")
                         
                         self?.rooms.append(contentsOf: querySnapshot.items)
-                    }
+                    }*/
         // without combine
-       /*Amplify.DataStore.query(MessageRoomModel.self,
+       Amplify.DataStore.query(MessageRoomModel.self,
                                 where: room.users.contains(userProfile?.realmId ?? "?"),
                                        sort: .descending(room.createdAt)) { [weak self] result in
             switch result {
@@ -76,7 +76,7 @@ class ChatViewModel: ObservableObject {
             case .success(let rooms):
                 self?.rooms = rooms
             }
-        }*/
+        }
     }
     // Then, when you're finished observing, cancel the subscription
     func unsubscribeFromChats() {

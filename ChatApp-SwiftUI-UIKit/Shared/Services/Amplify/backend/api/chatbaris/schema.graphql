@@ -1,16 +1,17 @@
-type MessageModel {
-  id: String!
+type MessageModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
   senderId: String!
   readers: [String!]
   message: String!
   createdDate: AWSDateTime!
+  roomId: String!
 }
 
 type MessageRoomModel @model @auth(rules: [{allow: public}]) {
   id: ID!
   users: [String!]
   roomName: String!
-  messages: [MessageModel!]
+  lastMessageId: String!
   lastUpdateDate: AWSDateTime!
 }
 

@@ -1,6 +1,0 @@
-{
-  "AppSyncApiName": "chatbaris",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-12-14T07:49:29.271Z"
-}

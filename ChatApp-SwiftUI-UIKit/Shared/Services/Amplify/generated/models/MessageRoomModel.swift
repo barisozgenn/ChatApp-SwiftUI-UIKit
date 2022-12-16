@@ -2,11 +2,11 @@
 import Amplify
 import Foundation
 
-public struct MessageRoomModel: Model, Identifiable {
+public struct MessageRoomModel: Model {
   public let id: String
   public var users: [String]?
   public var roomName: String
-  public var messages: [MessageModel]?
+  public var lastMessageId: String
   public var lastUpdateDate: Temporal.DateTime
   public var createdAt: Temporal.DateTime?
   public var updatedAt: Temporal.DateTime?
@@ -14,12 +14,12 @@ public struct MessageRoomModel: Model, Identifiable {
   public init(id: String = UUID().uuidString,
       users: [String]? = nil,
       roomName: String,
-      messages: [MessageModel]? = nil,
+      lastMessageId: String,
       lastUpdateDate: Temporal.DateTime) {
     self.init(id: id,
       users: users,
       roomName: roomName,
-      messages: messages,
+      lastMessageId: lastMessageId,
       lastUpdateDate: lastUpdateDate,
       createdAt: nil,
       updatedAt: nil)
@@ -27,14 +27,14 @@ public struct MessageRoomModel: Model, Identifiable {
   internal init(id: String = UUID().uuidString,
       users: [String]? = nil,
       roomName: String,
-      messages: [MessageModel]? = nil,
+      lastMessageId: String,
       lastUpdateDate: Temporal.DateTime,
       createdAt: Temporal.DateTime? = nil,
       updatedAt: Temporal.DateTime? = nil) {
       self.id = id
       self.users = users
       self.roomName = roomName
-      self.messages = messages
+      self.lastMessageId = lastMessageId
       self.lastUpdateDate = lastUpdateDate
       self.createdAt = createdAt
       self.updatedAt = updatedAt

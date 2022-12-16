@@ -2,8 +2,7 @@
 import Amplify
 import Foundation
 
-public struct UserModel: Model, Hashable {
-   
+public struct UserModel: Model {
   public let id: String
   public var profileImageBase64: String
   public var email: String
@@ -45,12 +44,4 @@ public struct UserModel: Model, Hashable {
       self.createdAt = createdAt
       self.updatedAt = updatedAt
   }
-    
-    public func hash(into hasher: inout Hasher) {
-           hasher.combine(name)
-       }
-       
-    public static func == (lhs: UserModel, rhs: UserModel) -> Bool {
-           return lhs.name == rhs.name && lhs.name == rhs.name
-       }
 }
