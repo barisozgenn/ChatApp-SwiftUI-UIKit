@@ -1,0 +1,26 @@
+type MessageModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  senderId: String!
+  readers: [String!]
+  message: String!
+  createdDate: AWSDateTime!
+  roomId: String!
+}
+
+type MessageRoomModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  users: [String!]
+  roomName: String!
+  lastMessageId: String!
+  lastUpdateDate: AWSDateTime!
+}
+
+type UserModel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  profileImageBase64: String!
+  email: String!
+  name: String!
+  registerDate: AWSDateTime!
+  realmId: String!
+}
+ 

@@ -31,22 +31,24 @@ struct ChatCell: View {
                         .font(.headline)
                         .fontWeight(.semibold)
                     
-                    if let room = room {
-                        Text(room.messages?.last?.message ?? "")
+                    if let room = room,
+                        let lastMessage = viewModel.messages.first(where: {$0.id == room.lastMessageId}) {
+                        Text(lastMessage.message)
                             .font(.subheadline)
                     }
                 }
                 
                 Spacer()
                 
-                if let room = room {
+                if let room = room,
+                   let lastMessage = viewModel.messages.first(where: {$0.id == room.lastMessageId}) {
                     VStack(alignment: .trailing){
                         Text(room.lastUpdateDate.iso8601String.toHourMinuteString())
                             .font(.caption)
                             .fontWeight(.semibold)
                             .foregroundColor(Color.theme.buttonColor)
                         
-                        if room.users?.count != room.messages?.last?.readers?.count ?? 0 {
+                        if room.users?.count != lastMessage.readers?.count ?? 0 {
                             Image(systemName: "circle.fill")
                                 .foregroundColor(Color.theme.buttonColor)
                         }

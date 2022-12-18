@@ -14,6 +14,8 @@ class ChatViewModel: ObservableObject {
     @Published var userProfile: UserModel?
     
     @Published var rooms: [MessageRoomModel] = []
+    @Published var messages: [MessageModel] = []
+
     @Published var users : [UserModel] = []
 
     // In your type declaration, declare a cancellable to hold onto the subscription
@@ -21,6 +23,7 @@ class ChatViewModel: ObservableObject {
     
     init() {
         fetchUsersData()
+        fetchMessagessData()
     }
     
     // MARK: fetch data
@@ -78,6 +81,27 @@ class ChatViewModel: ObservableObject {
             }
         }
     }
+    func fetchMessagessData(){
+        let messages = MessageModel.keys
+        let observeQuery = Amplify.DataStore.observeQuery(for: MessageModel.self,
+                                                          sort: .ascending(messages.createdAt))
+        
+        chatsSubscription = observeQuery
+            .receive(on: DispatchQueue.main)
+            .sink { completed in
+                switch completed {
+                case .finished:
+                    print("DEBUG: ObserveQuery finished")
+                case .failure(let error):
+                    print("DEBUG: Error observeQuery: \(error)")
+                }
+            } receiveValue: {[weak self] querySnapshot in
+                print("[Snapshot] item count: \(querySnapshot.items.count), isSynced: \(querySnapshot.isSynced)")
+                
+                self?.messages.append(contentsOf: querySnapshot.items)
+            }
+    }
+    
     // Then, when you're finished observing, cancel the subscription
     func unsubscribeFromChats() {
         chatsSubscription?.cancel()

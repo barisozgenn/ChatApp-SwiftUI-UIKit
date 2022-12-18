@@ -30,13 +30,8 @@ final class MessageViewModel: ObservableObject {
         
         fetchRoomsData()
         fetchUsersData()
+        fetchMessagessData()
         
-        if let selectedRoom = selectedRoom {
-            self.selectedRoom = rooms.first(where: {$0.id == selectedRoom.id})
-            if let messages = selectedRoom.messages {
-                self.messages = messages
-            }
-        }
         if let selectedUsers = selectedUsers {
             self.selectedUsers = selectedUsers
         }
@@ -53,21 +48,34 @@ final class MessageViewModel: ObservableObject {
     func sendMessage(_ message: String){
         guard let userProfile = self.userProfile else {return}
         
-        if var selectedRoom = selectedRoom { // MARK: existing room
-            let message = MessageModel(id: UUID().uuidString,
-                                       senderId: userProfile.realmId,
+        if let selectedRoom = selectedRoom { // MARK: existing room
+            let message = MessageModel(senderId: userProfile.realmId,
                                        readers: [userProfile.realmId],
                                        message: message,
-                                       createdDate: Temporal.DateTime.now())
+                                       createdDate: Temporal.DateTime.now(),
+                                       roomId: selectedRoom.id)
             
-            selectedRoom.messages?.append(message)
-            
-            Amplify.DataStore.save(selectedRoom) { result in
+            Amplify.DataStore.save(message) {[weak self] result in
                 switch result {
-                case .success(let room): print("DEBUG: add message success amplify \(room.roomName)")
+                case .success(let message):
+                    print("DEBUG: add message success amplify \(message.message)")
+                    self?.selectedRoom?.lastMessageId = message.id
+                    let room = MessageRoomModel.keys
+                    
+                    Amplify.DataStore.save(selectedRoom, where: room.id == selectedRoom.id){ resultRoom in
+                        switch resultRoom {
+                        case .success(let room):
+                            print("DEBUG: update room success amplify \(room.lastMessageId)")
+                        case .failure(let error): print("DEBUG: add room error amplify \(error.localizedDescription)")
+                        }
+                        
+                    }
+                    
                 case .failure(let error): print("DEBUG: add message error amplify \(error.localizedDescription)")
                 }
             }
+            
+            
             
             
         }else { // MARK:  new room
@@ -76,19 +84,17 @@ final class MessageViewModel: ObservableObject {
             var userIds = selectedUsers.map { $0.realmId }
             userIds.append(userProfile.realmId)
             
-            let message = MessageModel(id: UUID().uuidString,
-                                       senderId: userProfile.realmId,
-                                       readers: [userProfile.realmId],
-                                       message: message,
-                                       createdDate: Temporal.DateTime.now())
-            
             let room = MessageRoomModel(users: userIds,
                                         roomName: "\(setNavigationTitle()),  \(userProfile.name.split(separator: " ", omittingEmptySubsequences: true).first ?? "")",
-                                        messages: [message], lastUpdateDate: Temporal.DateTime.now())
+                                        lastMessageId: "",
+                                        lastUpdateDate: Temporal.DateTime.now())
             
-            Amplify.DataStore.save(room) {result in
+            Amplify.DataStore.save(room) {[weak self] result in
                 switch result {
-                case .success(let room): print("DEBUG: add room success amplify \(room.roomName)")
+                case .success(let room):
+                    print("DEBUG: add room success amplify \(room.roomName)")
+                    self?.selectedRoom = room
+                    self?.sendMessage(message)
                 case .failure(let error): print("DEBUG: add room error amplify \(error.localizedDescription)")
                 }
             }
@@ -156,6 +162,27 @@ final class MessageViewModel: ObservableObject {
                 print("[Snapshot] item count: \(querySnapshot.items.count), isSynced: \(querySnapshot.isSynced)")
                 
                 self?.rooms.append(contentsOf: querySnapshot.items)
+            }
+    }
+    func fetchMessagessData(){
+        let messages = MessageModel.keys
+        let observeQuery = Amplify.DataStore.observeQuery(for: MessageModel.self,
+                                                          where: messages.roomId == selectedRoom?.id,
+                                                          sort: .ascending(messages.createdAt))
+        
+        chatsSubscription = observeQuery
+            .receive(on: DispatchQueue.main)
+            .sink { completed in
+                switch completed {
+                case .finished:
+                    print("DEBUG: ObserveQuery finished")
+                case .failure(let error):
+                    print("DEBUG: Error observeQuery: \(error)")
+                }
+            } receiveValue: {[weak self] querySnapshot in
+                print("[Snapshot] item count: \(querySnapshot.items.count), isSynced: \(querySnapshot.isSynced)")
+                
+                self?.messages.append(contentsOf: querySnapshot.items)
             }
     }
     
